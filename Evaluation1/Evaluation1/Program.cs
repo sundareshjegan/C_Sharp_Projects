@@ -168,6 +168,7 @@ namespace Evaluation1
                         string id1 = Console.ReadLine().ToUpper();
                         Console.Write("Enter region-2 ID : ");
                         string id2 = Console.ReadLine().ToUpper();
+                        regs[id1].Intersect(regs[id2]);
                         break;
 
                 }
