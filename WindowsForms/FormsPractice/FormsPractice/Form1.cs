@@ -116,14 +116,14 @@ namespace FormsPractice
             int labelWidth = canvasPanel.Width / cols;
             int labelHeight = canvasPanel.Height / rows;
             //progressBar.Value = rows * cols;
-            int i = 0, j = 0;
+            int i = 0, j = 0,counter=0;
             foreach (Label label in labels)
             {
                 label.Location = new Point(j * (labelWidth + distance), i * (labelHeight + distance));
                 label.Size = new Size(labelWidth, labelHeight);
                 canvasPanel.Controls.Add(label);
                 j++;
-                label.Text = (j) + "";
+                label.Text = (++counter) + "";
                 if (j == cols)
                 {
                     i++;
