@@ -12,79 +12,125 @@ namespace FormsPractice
 {
     public partial class Form1 : Form
     {
+        List<Label> labels = new List<Label>();
+        int distance = 1;
+        int rows=1, cols=1;
         public Form1()
         {
             InitializeComponent();
+            Event event1 = new Event();
+            event1.Event4 += Event1_Event4;
+            event1.Event5 += Event1_Event5;
         }
 
-        private void BigLabel(object sender, EventArgs e)
+        private int Event1_Event4(int a, int b)
+        {
+            return -1;
+        }
+
+        private void Event1_Event5(int a, int b)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void Event1_Event1(object sender, int e)
         {
-
+            
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OnNumericUpDownColsChanged(object sender, EventArgs e)
-        {
-            OnCreateButtonClicked(sender, e);
-        }
-        private void OnNumbericUpDownRowsChanged(object sender, EventArgs e)
-        {
-            OnCreateButtonClicked(sender, e);
-        }
         private void OnCreateButtonClicked(object sender, EventArgs e)
         {
-            canvasPanel.Controls.Clear();
-            int rows = (int)rowsTB.Value;
-            int cols = (int)colsTB.Value;
-            
-            int panelWidth = canvasPanel.Width/cols;
-            int panelHeight = canvasPanel.Height/rows;
-            int distance = 2;
-
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    Panel panel = new Panel
-                    {
-                        Size = new Size(panelWidth, panelHeight),
-                        Location = new Point(j * (panelWidth + distance), i * (panelHeight + distance)),
-                        BorderStyle = BorderStyle.FixedSingle
-                    };
-                    canvasPanel.Controls.Add(panel);
-                }
-            }
-        }
-
-        private void OnLabel1Clicked(object sender, EventArgs e)
-        {
-
+            CreateLabels();
         }
 
         private void OnClearButtonClicked(object sender, EventArgs e)
         {
+            progressBar.Value = 0;
+            //rowsTB.Value = 1;
+            //colsTB.Value = 1;
             canvasPanel.Controls.Clear();
         }
 
-        
+        private void OnFormResized(object sender, EventArgs e)
+        { 
+            int labelWidth = canvasPanel.Width / cols;
+            int labelHeight = canvasPanel.Height / rows;
+            int count = 0;
+            foreach (Label label in labels)
+            {                
+                label.Size = new Size(labelWidth, labelHeight);
+                label.Location = new Point((count % cols) * (labelWidth + distance), (count / cols) * (labelHeight + distance));
+                count++;
+            }
+        }
+
+        private void OnLableClick(object sender, EventArgs e)
+        {
+            Label label = sender as Label;
+            MouseEventArgs mouseEvent = e as MouseEventArgs;
+            if (label == null || mouseEvent.Button != MouseButtons.Left) return;
+
+            foreach(Label l in labels)
+            {
+                if (l != label)
+                {
+                    l.BackColor = Color.White;
+                }
+            }
+            label.BackColor = Color.Black;
+            label.ForeColor = Color.White;
+            //MessageBox.Show(label.Text);
+        }
+
+        private void CreateLabels()
+        {
+            canvasPanel.Controls.Clear();
+           // labels.Clear();
+            rows = (int)rowsTB.Value;
+            cols = (int)colsTB.Value;
+            int currentTotal = rows * cols;
+            int existingTotal = labels.Count;
+            int diff = existingTotal - currentTotal;
+            if(diff > 0 )
+            {
+                while(diff -- > 0)
+                {
+                    Label label = labels[labels.Count - 1];
+                    label.Click -= OnLableClick;
+                    labels.Remove(label);
+                }
+            }
+            else
+            {
+                while(diff++ < 0)
+                {
+                    Label label = new Label()
+                    {
+                        BorderStyle = BorderStyle.FixedSingle,
+                        Font = new Font(Font.FontFamily, 14),
+                    };
+                    label.Click += OnLableClick;
+                    labels.Add(label);
+                }
+            }
+            int labelWidth = canvasPanel.Width / cols;
+            int labelHeight = canvasPanel.Height / rows;
+            //progressBar.Value = rows * cols;
+            int i = 0, j = 0;
+            foreach (Label label in labels)
+            {
+                label.Location = new Point(j * (labelWidth + distance), i * (labelHeight + distance));
+                label.Size = new Size(labelWidth, labelHeight);
+                canvasPanel.Controls.Add(label);
+                j++;
+                label.Text = (j) + "";
+                if (j == cols)
+                {
+                    i++;
+                    j = 0;
+                }
+            }
+
+        }
     }
 }
