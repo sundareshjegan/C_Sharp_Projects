@@ -42,18 +42,23 @@ namespace FormsPractice
 
         }
 
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        private void OnNumericUpDownColsChanged(object sender, EventArgs e)
         {
-
+            OnCreateButtonClicked(sender, e);
         }
-
+        private void OnNumbericUpDownRowsChanged(object sender, EventArgs e)
+        {
+            OnCreateButtonClicked(sender, e);
+        }
         private void OnCreateButtonClicked(object sender, EventArgs e)
         {
+            canvasPanel.Controls.Clear();
             int rows = (int)rowsTB.Value;
             int cols = (int)colsTB.Value;
-            int panelWidth = canvasPanel.Width/rows;
-            int panelHeight = canvasPanel.Height/cols;
-            int distance = 1;
+            
+            int panelWidth = canvasPanel.Width/cols;
+            int panelHeight = canvasPanel.Height/rows;
+            int distance = 2;
 
             for (int i = 0; i < rows; i++)
             {
@@ -65,15 +70,21 @@ namespace FormsPractice
                         Location = new Point(j * (panelWidth + distance), i * (panelHeight + distance)),
                         BorderStyle = BorderStyle.FixedSingle
                     };
-
                     canvasPanel.Controls.Add(panel);
                 }
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void OnLabel1Clicked(object sender, EventArgs e)
         {
 
         }
+
+        private void OnClearButtonClicked(object sender, EventArgs e)
+        {
+            canvasPanel.Controls.Clear();
+        }
+
+        
     }
 }
