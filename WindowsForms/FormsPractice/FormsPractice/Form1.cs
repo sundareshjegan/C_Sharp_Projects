@@ -69,17 +69,30 @@ namespace FormsPractice
             Label label = sender as Label;
             MouseEventArgs mouseEvent = e as MouseEventArgs;
             if (label == null || mouseEvent.Button != MouseButtons.Left) return;
-
-            foreach(Label l in labels)
+            if (label.BackColor == Color.Black)
             {
-                if (l != label)
-                {
-                    l.BackColor = Color.White;
-                }
+                label.BackColor = Color.White;
             }
-            label.BackColor = Color.Black;
-            label.ForeColor = Color.White;
+            else
+            {
+                label.BackColor = Color.Black;
+            }
+
+            //foreach (Label l in labels)
+            //{
+            //    if (l != label)
+            //    {
+            //        l.BackColor = Color.White;
+            //    }
+            //}
+            //label.BackColor = Color.Black;
+            //label.ForeColor = Color.White;
             //MessageBox.Show(label.Text);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void CreateLabels()
