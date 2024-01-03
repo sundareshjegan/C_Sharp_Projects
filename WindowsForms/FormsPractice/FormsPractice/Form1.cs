@@ -70,16 +70,35 @@ namespace FormsPractice
             MouseEventArgs mouseEvent = e as MouseEventArgs;
             if (label == null || mouseEvent.Button != MouseButtons.Left) return;
 
-            foreach(Label l in labels)
+            //if (label.BackColor == Color.Black)
+            //{
+            //    label.BackColor = Color.White;
+            //}
+            //else
+            //{
+            //    label.BackColor = Color.Black;
+            //}
+            foreach (Label l in labels)
             {
                 if (l != label)
                 {
                     l.BackColor = Color.White;
+                    l.ForeColor = Color.Black;
                 }
             }
             label.BackColor = Color.Black;
             label.ForeColor = Color.White;
             //MessageBox.Show(label.Text);
+        }
+
+        private void rowsTB_ValueChanged(object sender, EventArgs e)
+        {
+            CreateLabels();
+        }
+
+        private void colsTB_ValueChanged(object sender, EventArgs e)
+        {
+            CreateLabels();
         }
 
         private void CreateLabels()
