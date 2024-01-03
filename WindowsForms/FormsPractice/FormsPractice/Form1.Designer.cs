@@ -55,18 +55,16 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(420, 1055);
+            this.panel1.Size = new System.Drawing.Size(316, 495);
             this.panel1.TabIndex = 0;
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(5, 416);
-            this.progressBar.Margin = new System.Windows.Forms.Padding(4);
+            this.progressBar.Location = new System.Drawing.Point(4, 338);
             this.progressBar.Maximum = 900;
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(407, 34);
+            this.progressBar.Size = new System.Drawing.Size(305, 28);
             this.progressBar.TabIndex = 0;
             this.progressBar.Value = 3;
             this.progressBar.Click += new System.EventHandler(this.OnLableClick);
@@ -76,10 +74,10 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(113, 284);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Location = new System.Drawing.Point(90, 276);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 59);
+            this.button1.Size = new System.Drawing.Size(116, 48);
             this.button1.TabIndex = 5;
             this.button1.Text = "Delete Panels";
             this.button1.UseVisualStyleBackColor = false;
@@ -88,23 +86,20 @@
             // createPanelButton
             // 
             this.createPanelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createPanelButton.Location = new System.Drawing.Point(113, 349);
-            this.createPanelButton.Margin = new System.Windows.Forms.Padding(4);
+            this.createPanelButton.Location = new System.Drawing.Point(90, 232);
             this.createPanelButton.Name = "createPanelButton";
-            this.createPanelButton.Size = new System.Drawing.Size(155, 59);
+            this.createPanelButton.Size = new System.Drawing.Size(116, 30);
             this.createPanelButton.TabIndex = 4;
             this.createPanelButton.Text = "Create Panels";
             this.createPanelButton.UseVisualStyleBackColor = true;
-            this.createPanelButton.Visible = false;
             this.createPanelButton.Click += new System.EventHandler(this.OnCreateButtonClicked);
             // 
             // colsTB
             // 
             this.colsTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colsTB.Location = new System.Drawing.Point(55, 215);
-            this.colsTB.Margin = new System.Windows.Forms.Padding(4);
+            this.colsTB.Location = new System.Drawing.Point(41, 175);
             this.colsTB.Maximum = new decimal(new int[] {
-            30,
+            40,
             0,
             0,
             0});
@@ -114,7 +109,7 @@
             0,
             0});
             this.colsTB.Name = "colsTB";
-            this.colsTB.Size = new System.Drawing.Size(292, 37);
+            this.colsTB.Size = new System.Drawing.Size(219, 31);
             this.colsTB.TabIndex = 3;
             this.colsTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.colsTB.Value = new decimal(new int[] {
@@ -129,21 +124,19 @@
             this.label2.AutoEllipsis = true;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(113, 155);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(85, 126);
             this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(7, 6, 7, 0);
-            this.label2.Size = new System.Drawing.Size(155, 37);
+            this.label2.Padding = new System.Windows.Forms.Padding(5, 5, 5, 0);
+            this.label2.Size = new System.Drawing.Size(122, 30);
             this.label2.TabIndex = 2;
             this.label2.Text = "Enter Cols";
             // 
             // rowsTB
             // 
             this.rowsTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rowsTB.Location = new System.Drawing.Point(55, 71);
-            this.rowsTB.Margin = new System.Windows.Forms.Padding(4);
+            this.rowsTB.Location = new System.Drawing.Point(41, 58);
             this.rowsTB.Maximum = new decimal(new int[] {
-            30,
+            40,
             0,
             0,
             0});
@@ -153,7 +146,7 @@
             0,
             0});
             this.rowsTB.Name = "rowsTB";
-            this.rowsTB.Size = new System.Drawing.Size(292, 37);
+            this.rowsTB.Size = new System.Drawing.Size(219, 31);
             this.rowsTB.TabIndex = 1;
             this.rowsTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.rowsTB.Value = new decimal(new int[] {
@@ -168,11 +161,10 @@
             this.label1.AutoEllipsis = true;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(113, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(85, 9);
             this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(7, 6, 7, 0);
-            this.label1.Size = new System.Drawing.Size(169, 37);
+            this.label1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 0);
+            this.label1.Size = new System.Drawing.Size(132, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "Enter Rows";
             // 
@@ -180,21 +172,19 @@
             // 
             this.canvasPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasPanel.Location = new System.Drawing.Point(420, 0);
-            this.canvasPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.canvasPanel.Location = new System.Drawing.Point(316, 0);
             this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(692, 1055);
+            this.canvasPanel.Size = new System.Drawing.Size(495, 495);
             this.canvasPanel.TabIndex = 1;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1112, 1055);
+            this.ClientSize = new System.Drawing.Size(811, 495);
             this.Controls.Add(this.canvasPanel);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
