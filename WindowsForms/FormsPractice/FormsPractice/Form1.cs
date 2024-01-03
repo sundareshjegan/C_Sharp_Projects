@@ -69,9 +69,28 @@ namespace FormsPractice
             Label label = sender as Label;
             MouseEventArgs mouseEvent = e as MouseEventArgs;
             if (label == null || mouseEvent.Button != MouseButtons.Left) return;
+<<<<<<< HEAD
             if (label.BackColor == Color.Black)
             {
                 label.BackColor = Color.White;
+=======
+
+            //if (label.BackColor == Color.Black)
+            //{
+            //    label.BackColor = Color.White;
+            //}
+            //else
+            //{
+            //    label.BackColor = Color.Black;
+            //}
+            foreach (Label l in labels)
+            {
+                if (l != label)
+                {
+                    l.BackColor = Color.White;
+                    l.ForeColor = Color.Black;
+                }
+>>>>>>> 545a73288dbd482c06480c33c99a37a32a474404
             }
             else
             {
@@ -90,15 +109,25 @@ namespace FormsPractice
             //MessageBox.Show(label.Text);
         }
 
+<<<<<<< HEAD
         private void Form1_Load(object sender, EventArgs e)
         {
 
+=======
+        private void rowsTB_ValueChanged(object sender, EventArgs e)
+        {
+            CreateLabels();
+        }
+
+        private void colsTB_ValueChanged(object sender, EventArgs e)
+        {
+            CreateLabels();
+>>>>>>> 545a73288dbd482c06480c33c99a37a32a474404
         }
 
         private void CreateLabels()
         {
             canvasPanel.Controls.Clear();
-           // labels.Clear();
             rows = (int)rowsTB.Value;
             cols = (int)colsTB.Value;
             int currentTotal = rows * cols;
@@ -128,7 +157,6 @@ namespace FormsPractice
             }
             int labelWidth = canvasPanel.Width / cols;
             int labelHeight = canvasPanel.Height / rows;
-            //progressBar.Value = rows * cols;
             int i = 0, j = 0,counter=0;
             foreach (Label label in labels)
             {
