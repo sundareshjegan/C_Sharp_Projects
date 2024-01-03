@@ -104,7 +104,6 @@ namespace FormsPractice
         private void CreateLabels()
         {
             canvasPanel.Controls.Clear();
-           // labels.Clear();
             rows = (int)rowsTB.Value;
             cols = (int)colsTB.Value;
             int currentTotal = rows * cols;
@@ -134,7 +133,6 @@ namespace FormsPractice
             }
             int labelWidth = canvasPanel.Width / cols;
             int labelHeight = canvasPanel.Height / rows;
-            //progressBar.Value = rows * cols;
             int i = 0, j = 0,counter=0;
             foreach (Label label in labels)
             {
