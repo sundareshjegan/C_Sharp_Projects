@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace Calculator
@@ -17,8 +19,6 @@ namespace Calculator
         public Form1()
         {
             InitializeComponent();
-            KeyDown += OnKeyPressed ;
-            this.KeyPreview = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -49,11 +49,7 @@ namespace Calculator
             buttons.Add(btDiv);
             OnFormResized(sender, e);
         }
-
-        private void OnButtonPanelResized(object sender, EventArgs e)
-        {
-            
-        }
+               
         private void OnFormResized(object sender, EventArgs e)
         {
             int formHeight = ClientSize.Height;
@@ -65,9 +61,9 @@ namespace Calculator
             buttonPanel.Location = new Point(0, displayPanelHeight);
 
             float buttonFontSize = (float)(formHeight * 0.028);
-            float displayFontSize = (float)(formHeight * 0.06);
-            Font newButtonFont = new Font("Xenara", buttonFontSize, FontStyle.Bold);
-            Font newDisplayFont = new Font("Xenara", displayFontSize, FontStyle.Bold);
+            float displayFontSize = (float)(formHeight * 0.05);
+            Font newButtonFont = new Font("Verdana", buttonFontSize);
+            Font newDisplayFont = new Font("Verdana", displayFontSize, FontStyle.Bold);
 
             int buttonWidth = buttonPanel.Width / 4;
             int buttonHeight = buttonPanel.Height / 6;
@@ -96,11 +92,13 @@ namespace Calculator
             input += button.Text;
             displayBox.Text = input;
         }
+
         private void OnClearButtonClicked(object sender, EventArgs e)
         {
             displayBox.Text = "";
             input = "";
         }
+
         private void OnBackslashButtonClicked(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(input))
@@ -109,21 +107,30 @@ namespace Calculator
                 displayBox.Text = input;
             }
         }
-
+ 
         private void OnEqualsButtonClicked(object sender, EventArgs e)
         {
             try
-            { 
+            {
+                input = input.Replace("x", "*");
+                input = input.Replace("÷", "/");
                 var result = EvaluateExpressionWithBrackets(input);
                 displayBox.Text = result.ToString();
                 input = result.ToString();
+                // Set the cursor to the end of the text
+                displayBox.SelectionStart = displayBox.Text.Length;
+                //displayBox.SelectionLength = 0;
             }
+
             catch (Exception ex)
             {
                 displayBox.Text = "Error";
-                input = "";
+                //displayBox.Text = ex.Message;
+                //Thread.Sleep(500);
+               // OnClearButtonClicked(sender, e);
             }
         }
+
         private double EvaluateExpressionWithBrackets(string expression)
         {
             Stack<double> numbers = new Stack<double>();
@@ -172,7 +179,6 @@ namespace Calculator
                         double result = ApplyOperator(operand1, operand2, op);
                         numbers.Push(result);
                     }
-
                     operators.Push(currentChar);
                 }
                 else if (currentChar == '-')
@@ -213,7 +219,7 @@ namespace Calculator
 
         private bool IsOperator(char c)
         {
-            return c == '+' || c == '-' || c == '*' || c == '/';
+            return c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '^';
         }
 
         private int Precedence(char op)
@@ -225,7 +231,10 @@ namespace Calculator
                     return 1;
                 case '*':
                 case '/':
+                case '%':
                     return 2;
+                case '^':
+                    return 3;
                 default:
                     return 0;
             }
@@ -250,28 +259,59 @@ namespace Calculator
                     {
                         throw new DivideByZeroException("Cannot divide by zero.");
                     }
+                case '%':
+                    return operand1 % operand2;
+                case '^':
+                    return Math.Pow(operand1, operand2);
                 default:
                     throw new ArgumentException($"Unsupported operator: {op}");
             }
         }
 
-        private void displayBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void OnKeyPressed(object sender, KeyPressEventArgs e)
         {
-            
-        }
-
-        private void displayBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OnKeyPressed(object sender, KeyEventArgs e)
-        {
-            if ((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || e.KeyCode == Keys.Decimal)
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                input += e.KeyCode.ToString().Last();
-                displayBox.Text = input;
+                e.Handled = false;
+                OnEqualsButtonClicked(sender, e);
             }
+            else if (e.KeyChar == (char)Keys.Escape)
+            {
+                e.Handled = false;
+                OnClearButtonClicked(sender, e);
+            }
+            else if (!char.IsDigit(e.KeyChar) && e.KeyChar != '+' && e.KeyChar != '-' && e.KeyChar != '*' && e.KeyChar != '/' && e.KeyChar != '.' && e.KeyChar != '%' && e.KeyChar != '^' && e.KeyChar != '(' && e.KeyChar != ')' && e.KeyChar != '\b')
+            {
+                //MessageBox.Show(input);
+                e.Handled = true;
+            }
+            else
+            {
+                input += e.KeyChar;
+                e.Handled = false;
+            }
+        }
+
+        private void OnMouseEnter(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.Tag = button.BackColor; // Store the original color in the Tag property
+            button.BackColor = Color.Salmon; // Set the hover color
+
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer(); // Use the fully qualified name
+            timer.Interval = 2000; // 2000 milliseconds = 2 seconds
+            timer.Tick += (s, args) =>
+            {
+                timer.Stop();
+                button.BackColor = (Color)button.Tag; // Restore the original color
+            };
+            timer.Start();
+        }
+
+        private void OnMouseLeave(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackColor = Color.White;
         }
     }
 }
