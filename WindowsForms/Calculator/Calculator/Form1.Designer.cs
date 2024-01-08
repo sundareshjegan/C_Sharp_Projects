@@ -131,7 +131,6 @@
             // 
             // bt7
             // 
-            this.bt7.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.bt7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt7.Location = new System.Drawing.Point(13, 153);
             this.bt7.Name = "bt7";
@@ -155,7 +154,6 @@
             // 
             // bt9
             // 
-            this.bt9.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.bt9.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt9.Location = new System.Drawing.Point(178, 151);
             this.bt9.Name = "bt9";
@@ -167,7 +165,6 @@
             // 
             // bt8
             // 
-            this.bt8.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.bt8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt8.Location = new System.Drawing.Point(98, 153);
             this.bt8.Name = "bt8";
@@ -179,7 +176,6 @@
             // 
             // bt4
             // 
-            this.bt4.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.bt4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt4.Location = new System.Drawing.Point(13, 209);
             this.bt4.Name = "bt4";
@@ -191,8 +187,7 @@
             // 
             // bt1
             // 
-            this.bt1.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.bt1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.bt1.BackColor = System.Drawing.SystemColors.HighlightText;
             this.bt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt1.Location = new System.Drawing.Point(13, 265);
             this.bt1.Name = "bt1";
@@ -228,7 +223,6 @@
             // 
             // bt6
             // 
-            this.bt6.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.bt6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt6.Location = new System.Drawing.Point(178, 207);
             this.bt6.Name = "bt6";
@@ -240,7 +234,6 @@
             // 
             // bt3
             // 
-            this.bt3.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.bt3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt3.Location = new System.Drawing.Point(178, 265);
             this.bt3.Name = "bt3";
@@ -264,7 +257,6 @@
             // 
             // bt5
             // 
-            this.bt5.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.bt5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt5.Location = new System.Drawing.Point(98, 209);
             this.bt5.Name = "bt5";
@@ -288,7 +280,6 @@
             // 
             // bt2
             // 
-            this.bt2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.bt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt2.Location = new System.Drawing.Point(98, 265);
             this.bt2.Name = "bt2";

@@ -125,9 +125,7 @@ namespace Calculator
             catch (Exception ex)
             {
                 displayBox.Text = "Error";
-                //displayBox.Text = ex.Message;
-                //Thread.Sleep(500);
-               // OnClearButtonClicked(sender, e);
+                //MessageBox.Show(ex.Message);
             }
         }
 
@@ -186,7 +184,17 @@ namespace Calculator
                     // Handle unary minus
                     if (i == 0 || expression[i - 1] == '(')
                     {
-                        operators.Push('~'); // '~' is used to represent unary minus
+                        i++;
+                        StringBuilder numberBuilder = new StringBuilder();
+                        numberBuilder.Append('-');
+                        while (i < expression.Length && (char.IsDigit(expression[i]) || expression[i] == '.'))
+                        {
+                            numberBuilder.Append(expression[i]);
+                            i++;
+                        }
+                        i--; // Move back one position after parsing the number
+                        double number = double.Parse(numberBuilder.ToString());
+                        numbers.Push(number);
                     }
                     else
                     {
@@ -216,6 +224,7 @@ namespace Calculator
 
             return numbers.Pop();
         }
+
 
         private bool IsOperator(char c)
         {
@@ -289,23 +298,38 @@ namespace Calculator
             {
                 input += e.KeyChar;
                 e.Handled = false;
+
+                Button correspondingButton = FindButtonByKey(e.KeyChar);
+
+                if (correspondingButton != null)
+                {
+                    System.Windows.Forms.Timer hoverTimer = new System.Windows.Forms.Timer();
+                    hoverTimer.Interval = 500;
+
+                    hoverTimer.Tick += (s, args) =>
+                    {
+                        hoverTimer.Stop();
+                        correspondingButton.BackColor = Color.White; 
+                    };
+                    correspondingButton.BackColor = Color.Salmon; 
+                    hoverTimer.Start();
+                }
             }
         }
-
+        private Button FindButtonByKey(char key)
+        {
+            foreach (Button button in buttons)
+            {
+                if (button.Text.Length == 1 && char.ToUpper(button.Text[0]) == char.ToUpper(key))
+                    return button;
+            }
+            return null;
+        }
         private void OnMouseEnter(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            button.Tag = button.BackColor; // Store the original color in the Tag property
-            button.BackColor = Color.Salmon; // Set the hover color
-
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer(); // Use the fully qualified name
-            timer.Interval = 2000; // 2000 milliseconds = 2 seconds
-            timer.Tick += (s, args) =>
-            {
-                timer.Stop();
-                button.BackColor = (Color)button.Tag; // Restore the original color
-            };
-            timer.Start();
+            button.Tag = button.BackColor; 
+            button.BackColor = Color.Salmon;
         }
 
         private void OnMouseLeave(object sender, EventArgs e)
