@@ -15,14 +15,13 @@ namespace SpinBox
         public SpinBoxUserControl()
         {
             InitializeComponent();
-            valueTextBox.TextChanged += ValueTextBoxTextChanged;
             valueTextBox.KeyPress += OnEnterKeyPress;
             valueTextBox.Multiline = true;
         }
 
 
         private int value = 0;
-        private int min = - 5;
+        private int min = - 10;
         private int max = 100;
 
         private bool isMouseDown = false;
@@ -31,18 +30,13 @@ namespace SpinBox
 
         TextBox valueTextBox = new TextBox();
 
-        
-
-        private void ValueTextBoxTextChanged(object sender, EventArgs e)
-        {
-            if (int.TryParse(valueTextBox.Text, out int n)) value = n;
-            else if(n > max) value = max;
-            else value = min;
-            Update();
-        }
-
         private void Update()
         {
+            if (int.TryParse(valueTextBox.Text, out int n))
+            {
+                if (n > max) value = max;
+                else if (n < min) value = min;
+            }
             valueLabel.Text = value.ToString();
             valueTextBox.Text = value.ToString();
         }
@@ -62,12 +56,12 @@ namespace SpinBox
             valueTextBox.Text = valueLabel.Text;
             valueTextBox.Location = valueLabel.Location;
             valueTextBox.Font = valueLabel.Font;
-            valueTextBox.Focus();
             valueTextBox.Dock = DockStyle.Fill;
 
             valueLabel.Visible = false;
             valueTextBox.Visible = true;
             Controls.Add(valueTextBox);
+            valueTextBox.Focus();
         }
 
         private void OnSpinBoxUserControlMouseDown(object sender, MouseEventArgs e)
@@ -86,9 +80,9 @@ namespace SpinBox
         private void SpinBoxUserControl_MouseMove(object sender, MouseEventArgs e)
         {
             if (!isMouseDown) return;
-            if (value >= max)
+            if (value > max && value<=min)
             {
-                value -= 1;
+                value--;
             }
             if (previousMouseX <= e.X)
             {
@@ -116,10 +110,10 @@ namespace SpinBox
         {
             if (e.KeyChar == '\r')
             {
-                value = max;
                 valueTextBox.Visible = false;
                 valueLabel.Visible = true;
                 valueLabel.Text = value.ToString();
+                Update();
             }
         }
     }

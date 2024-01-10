@@ -34,22 +34,20 @@
             // spinBoxUserControl1
             // 
             this.spinBoxUserControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.spinBoxUserControl1.Location = new System.Drawing.Point(12, 15);
-            this.spinBoxUserControl1.Margin = new System.Windows.Forms.Padding(5);
+            this.spinBoxUserControl1.Location = new System.Drawing.Point(12, 12);
             this.spinBoxUserControl1.Name = "spinBoxUserControl1";
-            this.spinBoxUserControl1.Size = new System.Drawing.Size(438, 81);
+            this.spinBoxUserControl1.Size = new System.Drawing.Size(324, 66);
             this.spinBoxUserControl1.TabIndex = 0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 96);
+            this.ClientSize = new System.Drawing.Size(350, 84);
             this.Controls.Add(this.spinBoxUserControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(482, 143);
-            this.MinimumSize = new System.Drawing.Size(482, 143);
+            this.MaximumSize = new System.Drawing.Size(366, 123);
+            this.MinimumSize = new System.Drawing.Size(366, 123);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
