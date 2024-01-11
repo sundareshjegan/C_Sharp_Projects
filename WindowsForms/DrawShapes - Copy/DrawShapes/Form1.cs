@@ -38,7 +38,6 @@ namespace DrawShapes
             panel.MouseUp += OnPanelMouseUp;
             panel.MouseMove += OnPanelMouseMove;
             panel.DoubleClick += OnPanelDoubleClicked;
-            panel.MouseWheel += OnPanelMouseWheel;
         }
 
         private void OnCanvasPanelMouseDown(object sender, MouseEventArgs e)
@@ -152,15 +151,6 @@ namespace DrawShapes
             }
         }
 
-        private void OnHelpButtonClicked(object sender, EventArgs e)
-        {
-            string helpText = "Steps:\n-----\n1. Select the image you want to add from the below buttons.";
-            helpText += "\n2. To Draw the select simply click and drag in the white area";
-            helpText += "\n3. Use mouse wheel to increase or decrease the size of the image";
-            helpText += "\n4. To delete, select the shape and click the delete button in right bottom";
-            MessageBox.Show(helpText);
-        }
-
         private void OnPanelMouseMove(object sender, MouseEventArgs e)
         {
             if (isMouseDown)
@@ -174,19 +164,6 @@ namespace DrawShapes
         private void OnPanelMouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
-        }
-
-        private void OnPanelMouseWheel(object sender, MouseEventArgs e)
-        {
-            Panel currentPanel = sender as Panel;
-
-            if (currentPanel != null)
-            {
-                int delta = e.Delta/5;
-                int newWidth = Math.Max(currentPanel.Width + delta, 10);
-                int newHeight = Math.Max(currentPanel.Height + delta, 10);
-                currentPanel.Size = new Size(newWidth, newHeight);
-            }
         }
 
         private void OnDeleteButtonClicked(object sender, EventArgs e)
