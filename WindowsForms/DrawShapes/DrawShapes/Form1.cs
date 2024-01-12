@@ -16,6 +16,12 @@ namespace DrawShapes
         {
             InitializeComponent();
         }
+        private enum shapeType
+        {
+            Rectangle,
+            Circle,
+            Triangle
+        }
         private Panel panel;
         private Panel prevPanel = null;
        // private List<Panel> shapes = new List<Panel>();
@@ -25,7 +31,7 @@ namespace DrawShapes
         private bool isMouseDown = false, isButtonSelected = false;
 
         private Image shapeImage = null;
-        private string currentImageName = "";        
+        private shapeType currentImageName;        
         
         private void CreatePanel()
         {
@@ -38,7 +44,6 @@ namespace DrawShapes
             panel.MouseUp += OnPanelMouseUp;
             panel.MouseMove += OnPanelMouseMove;
             panel.DoubleClick += OnPanelDoubleClicked;
-            panel.MouseWheel += OnPanelMouseWheel;
         }
 
         private void OnCanvasPanelMouseDown(object sender, MouseEventArgs e)
@@ -70,7 +75,7 @@ namespace DrawShapes
             }
             else
             {
-                int id = currentImageName == "Rectangle" ? (++rectangleId) : currentImageName == "Circle" ? (++circleId) : (++triangleId);
+                int id = currentImageName == shapeType.Rectangle ? (++rectangleId) : currentImageName == shapeType.Circle ? (++circleId) : (++triangleId);
                 panel.Name = currentImageName + " : " + id;
             }
         }
@@ -105,15 +110,15 @@ namespace DrawShapes
                 {
                     case "Rectangle":
                         shapeImage = Properties.Resources.rectangle;
-                        currentImageName = b.Text;
+                        currentImageName = shapeType.Rectangle;
                         break;
                     case "Circle":
                         shapeImage = Properties.Resources.circle;
-                        currentImageName = b.Text;
+                        currentImageName = shapeType.Circle;
                         break;
                     case "Triangle":
                         shapeImage = Properties.Resources.triangle;
-                        currentImageName = b.Text;
+                        currentImageName = shapeType.Triangle;
                         break;
                     default:
                         break;
@@ -124,14 +129,17 @@ namespace DrawShapes
         private void OnPanelClicked(object sender, EventArgs e)
         {
             Panel currentPanel = sender as Panel;
+           
             MouseEventArgs mouseEvent = e as MouseEventArgs;
             if (currentPanel == null || mouseEvent.Button != MouseButtons.Left) return;
-
             if (prevPanel != null)
             {
                 prevPanel.BorderStyle = BorderStyle.None;
+                prevPanel.MouseWheel -= OnPanelMouseWheel;
             }
             currentPanel.BorderStyle = BorderStyle.FixedSingle;
+            currentPanel.MouseWheel += OnPanelMouseWheel;
+
             prevPanel = currentPanel;
             propertyLabel.Text = currentPanel.Name.ToString();
         }
@@ -182,7 +190,7 @@ namespace DrawShapes
 
             if (currentPanel != null)
             {
-                int delta = e.Delta/5;
+                int delta = e.Delta/10;
                 int newWidth = Math.Max(currentPanel.Width + delta, 10);
                 int newHeight = Math.Max(currentPanel.Height + delta, 10);
                 currentPanel.Size = new Size(newWidth, newHeight);
