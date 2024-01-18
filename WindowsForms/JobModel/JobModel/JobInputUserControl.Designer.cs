@@ -1,6 +1,6 @@
 ﻿namespace JobModel
 {
-    partial class JobInputUserControl
+    partial class JobModelUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,15 +32,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.RNameLabel = new System.Windows.Forms.Label();
+            this.ModelLabel = new System.Windows.Forms.Label();
             this.NameTB = new System.Windows.Forms.TextBox();
             this.ModelTB = new System.Windows.Forms.TextBox();
             this.RNameTB = new System.Windows.Forms.TextBox();
             this.RowTB = new System.Windows.Forms.NumericUpDown();
             this.ColTB = new System.Windows.Forms.NumericUpDown();
             this.PriceTB = new System.Windows.Forms.NumericUpDown();
-            this.JobSubmit = new System.Windows.Forms.Button();
+            this.SubmitButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.RowTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriceTB)).BeginInit();
@@ -86,25 +86,25 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Price";
             // 
-            // label5
+            // RNameLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(37, 271);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 24);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "R Name";
+            this.RNameLabel.AutoSize = true;
+            this.RNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RNameLabel.Location = new System.Drawing.Point(37, 271);
+            this.RNameLabel.Name = "RNameLabel";
+            this.RNameLabel.Size = new System.Drawing.Size(79, 24);
+            this.RNameLabel.TabIndex = 0;
+            this.RNameLabel.Text = "R Name";
             // 
-            // label6
+            // ModelLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(37, 223);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(119, 24);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Model Name";
+            this.ModelLabel.AutoSize = true;
+            this.ModelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ModelLabel.Location = new System.Drawing.Point(37, 223);
+            this.ModelLabel.Name = "ModelLabel";
+            this.ModelLabel.Size = new System.Drawing.Size(119, 24);
+            this.ModelLabel.TabIndex = 0;
+            this.ModelLabel.Text = "Model Name";
             // 
             // NameTB
             // 
@@ -154,36 +154,37 @@
             this.PriceTB.Size = new System.Drawing.Size(201, 24);
             this.PriceTB.TabIndex = 2;
             // 
-            // JobSubmit
+            // SubmitButton
             // 
-            this.JobSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JobSubmit.Location = new System.Drawing.Point(165, 324);
-            this.JobSubmit.Name = "JobSubmit";
-            this.JobSubmit.Size = new System.Drawing.Size(104, 38);
-            this.JobSubmit.TabIndex = 3;
-            this.JobSubmit.Text = "submit";
-            this.JobSubmit.UseVisualStyleBackColor = true;
-            this.JobSubmit.Click += new System.EventHandler(this.OnSubmitButtonClicked);
+            this.SubmitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SubmitButton.Location = new System.Drawing.Point(178, 321);
+            this.SubmitButton.Name = "SubmitButton";
+            this.SubmitButton.Size = new System.Drawing.Size(104, 38);
+            this.SubmitButton.TabIndex = 3;
+            this.SubmitButton.Text = "submit";
+            this.SubmitButton.UseVisualStyleBackColor = true;
+            this.SubmitButton.Click += new System.EventHandler(this.OnSubmitButtonClicked);
             // 
             // JobInputUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.JobSubmit);
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.PriceTB);
             this.Controls.Add(this.ColTB);
             this.Controls.Add(this.RowTB);
             this.Controls.Add(this.RNameTB);
             this.Controls.Add(this.ModelTB);
             this.Controls.Add(this.NameTB);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.ModelLabel);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.RNameLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "JobInputUserControl";
-            this.Size = new System.Drawing.Size(434, 397);
+           // this.NameValue = "JobInputUserControl";
+            this.Size = new System.Drawing.Size(432, 395);
             ((System.ComponentModel.ISupportInitialize)(this.RowTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriceTB)).EndInit();
@@ -198,14 +199,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label RNameLabel;
+        private System.Windows.Forms.Label ModelLabel;
         private System.Windows.Forms.TextBox NameTB;
         private System.Windows.Forms.TextBox ModelTB;
         private System.Windows.Forms.TextBox RNameTB;
         private System.Windows.Forms.NumericUpDown RowTB;
         private System.Windows.Forms.NumericUpDown ColTB;
         private System.Windows.Forms.NumericUpDown PriceTB;
-        private System.Windows.Forms.Button JobSubmit;
+        private System.Windows.Forms.Button SubmitButton;
     }
 }
