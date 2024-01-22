@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DrawShapes.Properties
+namespace ClickAndDraw.Properties
 {
 
 

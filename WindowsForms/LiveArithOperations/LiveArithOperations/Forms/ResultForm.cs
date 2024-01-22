@@ -30,9 +30,9 @@ namespace LiveArithOperations
                 inp.CalculateResult(r.Text);
             }
         }
-        private void UpdateResult(object s, float result)
+        private void UpdateResult(object s, string result)
         {
-            ResultLabel.Text = result.ToString();
+            ResultLabel.Text = result;
         }
     }
 }

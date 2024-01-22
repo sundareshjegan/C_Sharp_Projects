@@ -38,6 +38,7 @@
             // 
             // num1TB
             // 
+            this.num1TB.DecimalPlaces = 2;
             this.num1TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num1TB.Location = new System.Drawing.Point(160, 123);
             this.num1TB.Maximum = new decimal(new int[] {
@@ -77,6 +78,7 @@
             // 
             // num2TB
             // 
+            this.num2TB.DecimalPlaces = 2;
             this.num2TB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num2TB.Location = new System.Drawing.Point(160, 170);
             this.num2TB.Maximum = new decimal(new int[] {
@@ -98,11 +100,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 450);
+            this.ClientSize = new System.Drawing.Size(369, 432);
+            this.ControlBox = false;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.num2TB);
             this.Controls.Add(this.num1TB);
+            this.HelpButton = true;
             this.Location = new System.Drawing.Point(550, 250);
             this.Name = "InputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

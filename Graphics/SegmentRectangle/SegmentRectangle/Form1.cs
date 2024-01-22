@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DrawShapes
+namespace SegmentRectangle
 {
-    public partial class ControlsForm : Form
+    public partial class Form1 : Form
     {
-        public ControlsForm()
+        public Form1()
         {
             InitializeComponent();
         }

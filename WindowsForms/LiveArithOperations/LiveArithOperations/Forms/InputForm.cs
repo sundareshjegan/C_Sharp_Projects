@@ -17,17 +17,18 @@ namespace LiveArithOperations
             InitializeComponent();
         }
 
-        private float result;
-        private int num1, num2;
+        private string result;
+        private float num1, num2;
         private string op = "+";
-        public event EventHandler<float> OnResultSent;
+
+        public event EventHandler<string> OnResultSent;
 
         private void OnInputValueChanged(object sender, EventArgs e)
         {
             CalculateResult(op);
         }
 
-        public void CalculateResult(string op)
+        internal void CalculateResult(string op)
         {
             this.op = op;
             num1 = (int)num1TB.Value;
@@ -35,18 +36,19 @@ namespace LiveArithOperations
             switch (this.op)
             {
                 case "+":
-                    result = num1 + num2;
+                    result = (num1 + num2).ToString();
                     break;
                 case "-":
-                    result = num1 - num2;
+                    result = (num1 - num2).ToString();
                     break;
                 case "x":
-                    result = num1 * num2;
+                    result = (num1 * num2).ToString();
                     break;
                 case "÷":
-                    if(num2!=0)
-                    result = num2 / num2;
+                    if (num2 == 0) result = "Cannot Divide By Zero";
+                    else result = (num1 / num2).ToString();
                     break;
+                    
             }
             OnResultSent?.Invoke(this, result);
         }

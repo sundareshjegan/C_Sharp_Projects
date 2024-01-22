@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 15 for Windows Desktop
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawShapes", "DrawShapes\DrawShapes.csproj", "{14D24D65-F4B7-4789-B442-FE40A2C59A55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickAndDraw", "ClickAndDraw\ClickAndDraw.csproj", "{86138DA8-FD28-486E-B866-7A8C8CDCB915}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{14D24D65-F4B7-4789-B442-FE40A2C59A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14D24D65-F4B7-4789-B442-FE40A2C59A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14D24D65-F4B7-4789-B442-FE40A2C59A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14D24D65-F4B7-4789-B442-FE40A2C59A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86138DA8-FD28-486E-B866-7A8C8CDCB915}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86138DA8-FD28-486E-B866-7A8C8CDCB915}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86138DA8-FD28-486E-B866-7A8C8CDCB915}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86138DA8-FD28-486E-B866-7A8C8CDCB915}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D0D03506-F846-4DC6-A551-9E8988DDB97A}
+		SolutionGuid = {FFC15F5D-8052-4C75-A9D0-7C8893275D41}
 	EndGlobalSection
 EndGlobal

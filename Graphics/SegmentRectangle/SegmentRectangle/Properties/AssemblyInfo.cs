@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DrawShapes")]
+[assembly: AssemblyTitle("SegmentRectangle")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DrawShapes")]
+[assembly: AssemblyProduct("SegmentRectangle")]
 [assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("14d24d65-f4b7-4789-b442-fe40a2c59a55")]
+[assembly: Guid("3745d5df-7803-4668-a235-a22beecdd13d")]
 
 // Version information for an assembly consists of the following four values:
 //

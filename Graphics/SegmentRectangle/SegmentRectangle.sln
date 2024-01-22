@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 15 for Windows Desktop
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evaluation1New", "Evaluation1New\Evaluation1New.csproj", "{527C78B1-8683-4195-B09D-28EBD10529CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SegmentRectangle", "SegmentRectangle\SegmentRectangle.csproj", "{3745D5DF-7803-4668-A235-A22BEECDD13D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{527C78B1-8683-4195-B09D-28EBD10529CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{527C78B1-8683-4195-B09D-28EBD10529CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{527C78B1-8683-4195-B09D-28EBD10529CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{527C78B1-8683-4195-B09D-28EBD10529CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3745D5DF-7803-4668-A235-A22BEECDD13D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3745D5DF-7803-4668-A235-A22BEECDD13D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3745D5DF-7803-4668-A235-A22BEECDD13D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3745D5DF-7803-4668-A235-A22BEECDD13D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {56FA260C-4BEE-41C7-80A9-78A5F367EBA2}
+		SolutionGuid = {56C969C0-34DB-4010-AEEA-B9B0A95167B2}
 	EndGlobalSection
 EndGlobal
