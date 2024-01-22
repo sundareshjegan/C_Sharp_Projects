@@ -17,20 +17,20 @@ namespace LiveArithOperations
         {
             InitializeComponent();
             inp = new InputForm();
+            inp.OnResultSent += UpdateResult;
             inp.Show();
         }
+
         private InputForm inp;
-        public delegate void SendOperator(string op);
-        public event SendOperator OnOperatorSent;
 
         private void OnRadioButtonClicked(object sender, EventArgs e)
         {
-            inp.OnResultSent += UpdateResult;
-            if (sender is RadioButton r){
-                OnOperatorSent?.Invoke(r.Text);
+            if (sender is RadioButton r)
+            {
+                inp.CalculateResult(r.Text);
             }
         }
-        private void UpdateResult(object s,float result) 
+        private void UpdateResult(object s, float result)
         {
             ResultLabel.Text = result.ToString();
         }

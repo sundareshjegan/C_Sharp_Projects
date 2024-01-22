@@ -53,7 +53,7 @@
             this.num1TB.Name = "num1TB";
             this.num1TB.Size = new System.Drawing.Size(120, 26);
             this.num1TB.TabIndex = 1;
-            
+            this.num1TB.ValueChanged += new System.EventHandler(this.OnInputValueChanged);
             // 
             // label1
             // 
@@ -92,6 +92,7 @@
             this.num2TB.Name = "num2TB";
             this.num2TB.Size = new System.Drawing.Size(120, 26);
             this.num2TB.TabIndex = 1;
+            this.num2TB.ValueChanged += new System.EventHandler(this.OnInputValueChanged);
             // 
             // InputForm
             // 

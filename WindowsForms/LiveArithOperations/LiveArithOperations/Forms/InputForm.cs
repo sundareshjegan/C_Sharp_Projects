@@ -15,38 +15,40 @@ namespace LiveArithOperations
         public InputForm()
         {
             InitializeComponent();
-            
-            num1 = (int)num1TB.Value;
-            num2 = (int) num2TB.Value;
-            //r = 
-            //r.Show();
-
         }
-        
+
         private float result;
-        private int num1,num2;
-        
+        private int num1, num2;
+        private string op = "+";
         public event EventHandler<float> OnResultSent;
-        private void CalculateResult(string op)
+
+        private void OnInputValueChanged(object sender, EventArgs e)
         {
-            ResultForm r = new ResultForm();-+
-            r.OnOperatorSent += CalculateResult;
-            switch (op)
+            CalculateResult(op);
+        }
+
+        public void CalculateResult(string op)
+        {
+            this.op = op;
+            num1 = (int)num1TB.Value;
+            num2 = (int)num2TB.Value;
+            switch (this.op)
             {
                 case "+":
-                    result = num1+ num2;
+                    result = num1 + num2;
                     break;
                 case "-":
-                    result = num1- num2;
+                    result = num1 - num2;
                     break;
                 case "x":
-                    result = num1* num2;
+                    result = num1 * num2;
                     break;
                 case "÷":
-                    result = num2/ num2;
+                    if(num2!=0)
+                    result = num2 / num2;
                     break;
             }
-            OnResultSent?.Invoke(this,result);
+            OnResultSent?.Invoke(this, result);
         }
     }
 }
