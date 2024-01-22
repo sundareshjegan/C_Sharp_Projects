@@ -16,7 +16,7 @@ namespace LiveArithOperations
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InputForm());
+            Application.Run(new ResultForm());
         }
     }
 }
