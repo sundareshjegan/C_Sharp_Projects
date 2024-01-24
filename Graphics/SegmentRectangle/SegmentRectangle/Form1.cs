@@ -15,11 +15,12 @@ namespace SegmentRectangle
         public Form1()
         {
             InitializeComponent();
+            DoubleBuffered = true;
         }
 
         private bool isMouseDown = false;
-
-        private int segments = 1;
+        private bool isSegmentsCreated = false;
+        private int segments = 1, segmentIndex = 0;
         private int commonWidth, commonHeight;
         private int rectWidth = 0, rectHeight = 0, rectX = 0, rectY = 0;
         private int minWidth = 200, minHeight = 100;
@@ -36,79 +37,88 @@ namespace SegmentRectangle
 
         private void OnSegmentNumericUpDownValueChanged(object sender, EventArgs e)
         {
+            if (rect.Width<minWidth)
+            {
+                MessageBox.Show("Draw Rectangle and then Select Segments..!");
+                return;
+            }
+            isSegmentsCreated = true;
             segments = (int)SegmentNumericUpDown.Value;
             SegmentsComboBox.Items.Clear();
             for (int i = 1; i <= segments; i++)
             {
-                rectangles.Clear();
                 SegmentsComboBox.Items.Add(i.ToString());
-                if (IsHorizontalCheckBox.Checked)
-                {
-                    commonHeight = rectHeight / segments;
-                    rectangles.Add(new Rectangle(rectX, rectY, rectWidth, commonHeight));
-                    int y = rectY + commonHeight;
-                    for(int j = 1; j < segments-1; j++)
-                    {
-                        rectangles.Add(new Rectangle(rectX, y, rectWidth, commonHeight));
-                        y += commonHeight;
-                    }
-                }
-                else
-                {
-                    rectangles.Clear();
-                    commonWidth = rectWidth / segments;
-                    rectangles.Add(new Rectangle(rectX, rectY, commonWidth, rectHeight));
-                    int x = rectX + commonWidth;
-                    for (int j = 1; j < segments-1; j++)
-                    {
-                        rectangles.Add(new Rectangle(x, rectY, commonWidth, rectHeight));
-                        x += commonWidth;
-                    }
-                }
             }
-            CanvasPanel.Invalidate();
-        }
-
-        private void IsFillCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void OnHorizontalCheckBoxCheckChanged(object sender, EventArgs e)
-        {
-            
+            CreateSegments();
         }
 
         private void OnSegmentComboBoxSelectedValueChanged(object sender, EventArgs e)
         {
-            
+            segmentIndex = int.Parse(SegmentsComboBox.SelectedItem.ToString());
+            CanvasPanel.Invalidate();
         }
+
+        #region Check Box Events
+
+        private void OnAllCheckBoxCheckChanged(object sender, EventArgs e)
+        {
+            SegmentsComboBox.Enabled = !AllCheckBox.Checked;
+            CanvasPanel.Invalidate();
+        }
+
+        private void OnFillCheckBoxChanged(object sender, EventArgs e)
+        {
+            CanvasPanel.Invalidate();
+        }
+
+        private void OnHorizontalCheckBoxCheckChanged(object sender, EventArgs e)
+        {
+            CreateSegments();
+        }
+
+        #endregion
+
 
         #region CanvasPanelEvents
         private void OnCanvasPanelPaint(object sender, PaintEventArgs e)
         {
             pen = new Pen(Color.Black, 2);
             g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+
             rect = new Rectangle(rectX, rectY, rectWidth, rectHeight);
-            if(rect != null)
+            g.DrawRectangle(pen, rect);
+        
+            if(rectangles.Count != 0 && segmentIndex!=0)
             {
-                g.DrawRectangle(pen, rect);
-            }
-            
-            if(rectangles.Count != 0)
-            {
-                foreach (var rect in rectangles)
+                pen = new Pen(selectedColor, 2);
+                if (IsFillCheckBox.Checked)
                 {
-                    g.DrawRectangle(pen, rect);
+                    rectColors[segmentIndex-1] = selectedColor;
+                    g.FillRectangle(new SolidBrush(selectedColor), rectangles[segmentIndex - 1]);
+                }
+                 if(AllCheckBox.Checked)
+                {
+                    for (int i= 0;i < rectangles.Count;i++)
+                    {
+                        g.FillRectangle(new SolidBrush(rectColors[i]), rectangles[i]);
+                    }
+                }
+                else
+                {
+                    g.DrawRectangle(pen, rectangles[segmentIndex - 1]);
                 }
             }
         }
+
         private void OnCanvasPanelMouseDown(object sender, MouseEventArgs e)
         {
             isMouseDown = true;
             rectX = e.X;
             rectY = e.Y;
         }
+
         private void OnCanvasPanelMouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
@@ -119,6 +129,7 @@ namespace SegmentRectangle
             }
             CanvasPanel.Invalidate();
         }
+
         private void OnCanvasPanelMouseMove(object sender, MouseEventArgs e)
         {
             if (isMouseDown)
@@ -130,7 +141,6 @@ namespace SegmentRectangle
         }
 
         #endregion
-
 
         private void OnColorSelectButtonClicked(object sender, EventArgs e)
         {
@@ -184,22 +194,41 @@ namespace SegmentRectangle
                 }
             }
         }
-        private void CreateRegions()
+        private void CreateSegments()
         {
-            if (SegmentsComboBox.SelectedItem == null) return;
-            int i = int.Parse(SegmentsComboBox.SelectedItem.ToString());
-            int index = Math.Max(0, i - 2);
-            if (IsHorizontalCheckBox.Checked)
-                if (i == 1)
-                    selectedRectangle = new Rectangle(new Point(rectX,rectY), new Size(rectWidth, commonHeight));
-                else
-                    selectedRectangle = new Rectangle(points[index * 2], new Size(rectWidth, commonHeight));
-            else
-                if (i == 1)
-                    selectedRectangle = new Rectangle(new Point(rectX, rectY), new Size(rectWidth, commonHeight));
-                else
-                    selectedRectangle = new Rectangle(points[index * 2], new Size(commonWidth, rectHeight));
+            isSegmentsCreated = true;
+            for (int i = 1; i <= segments; i++)
+            {
+                rectangles.Clear();
+                if (IsHorizontalCheckBox.Checked)
+                {
+                    commonHeight = rectHeight / segments;
+                    rectangles.Add(new Rectangle(rectX, rectY, rectWidth, commonHeight));
+                    rectColors.Add(Color.Empty);
+                    int y = rectY + commonHeight;
 
+                    for (int j = 1; j < segments - 1; j++)
+                    {
+                        rectangles.Add(new Rectangle(rectX, y, rectWidth, commonHeight));
+                        rectColors.Add(Color.Empty);
+                        y += commonHeight;
+                    }
+                }
+                else
+                {
+                    rectangles.Clear();
+                    commonWidth = rectWidth / segments;
+                    rectangles.Add(new Rectangle(rectX, rectY, commonWidth, rectHeight));
+                    rectColors.Add(Color.Empty);
+                    int x = rectX + commonWidth;
+                    for (int j = 1; j < segments - 1; j++)
+                    {
+                        rectangles.Add(new Rectangle(x, rectY, commonWidth, rectHeight));
+                        rectColors.Add(Color.Empty);
+                        x += commonWidth;
+                    }
+                }
+            }
             CanvasPanel.Invalidate();
         }
         #endregion

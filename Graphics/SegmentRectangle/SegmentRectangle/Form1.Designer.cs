@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.InputPanel = new System.Windows.Forms.Panel();
+            this.AllCheckBox = new System.Windows.Forms.CheckBox();
             this.ColorSelectButton = new System.Windows.Forms.Button();
             this.ColorPanel = new System.Windows.Forms.Panel();
             this.SegmentsComboBox = new System.Windows.Forms.ComboBox();
@@ -44,6 +45,7 @@
             // InputPanel
             // 
             this.InputPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InputPanel.Controls.Add(this.AllCheckBox);
             this.InputPanel.Controls.Add(this.ColorSelectButton);
             this.InputPanel.Controls.Add(this.ColorPanel);
             this.InputPanel.Controls.Add(this.SegmentsComboBox);
@@ -56,6 +58,18 @@
             this.InputPanel.Name = "InputPanel";
             this.InputPanel.Size = new System.Drawing.Size(653, 101);
             this.InputPanel.TabIndex = 0;
+            // 
+            // AllCheckBox
+            // 
+            this.AllCheckBox.AutoSize = true;
+            this.AllCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AllCheckBox.Location = new System.Drawing.Point(26, 57);
+            this.AllCheckBox.Name = "AllCheckBox";
+            this.AllCheckBox.Size = new System.Drawing.Size(41, 22);
+            this.AllCheckBox.TabIndex = 7;
+            this.AllCheckBox.Text = "all";
+            this.AllCheckBox.UseVisualStyleBackColor = true;
+            this.AllCheckBox.CheckedChanged += new System.EventHandler(this.OnAllCheckBoxCheckChanged);
             // 
             // ColorSelectButton
             // 
@@ -83,7 +97,7 @@
             // 
             this.SegmentsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SegmentsComboBox.FormattingEnabled = true;
-            this.SegmentsComboBox.Location = new System.Drawing.Point(62, 58);
+            this.SegmentsComboBox.Location = new System.Drawing.Point(106, 57);
             this.SegmentsComboBox.Name = "SegmentsComboBox";
             this.SegmentsComboBox.Size = new System.Drawing.Size(121, 25);
             this.SegmentsComboBox.TabIndex = 4;
@@ -99,7 +113,7 @@
             this.IsFillCheckBox.TabIndex = 3;
             this.IsFillCheckBox.Text = "Fill";
             this.IsFillCheckBox.UseVisualStyleBackColor = true;
-            this.IsFillCheckBox.CheckedChanged += new System.EventHandler(this.IsFillCheckBox_CheckedChanged);
+            this.IsFillCheckBox.CheckedChanged += new System.EventHandler(this.OnFillCheckBoxChanged);
             // 
             // IsHorizontalCheckBox
             // 
@@ -183,6 +197,7 @@
         private System.Windows.Forms.Panel CanvasPanel;
         private System.Windows.Forms.Button ColorSelectButton;
         private System.Windows.Forms.Panel ColorPanel;
+        private System.Windows.Forms.CheckBox AllCheckBox;
     }
 }
 
