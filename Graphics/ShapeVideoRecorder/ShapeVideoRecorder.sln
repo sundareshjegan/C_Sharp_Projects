@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeVideoRecorder", "ShapeVideoRecorder\ShapeVideoRecorder.csproj", "{8CD313F6-AC69-41FA-B06C-E77515580AFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextRecorder", "TextRecorder\TextRecorder.csproj", "{5BCD3838-8790-471F-8EA4-9BB40243DDAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8CD313F6-AC69-41FA-B06C-E77515580AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CD313F6-AC69-41FA-B06C-E77515580AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CD313F6-AC69-41FA-B06C-E77515580AFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BCD3838-8790-471F-8EA4-9BB40243DDAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BCD3838-8790-471F-8EA4-9BB40243DDAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BCD3838-8790-471F-8EA4-9BB40243DDAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BCD3838-8790-471F-8EA4-9BB40243DDAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

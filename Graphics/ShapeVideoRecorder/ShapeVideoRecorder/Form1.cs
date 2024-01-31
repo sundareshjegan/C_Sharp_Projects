@@ -18,8 +18,9 @@ namespace ShapeVideoRecorder
             InitializeComponent();
             DoubleBuffered = true;
             timer = new Timer();
-            timer.Interval = 10;
+            timer.Interval = 20;
             timer.Tick += Timer_Tick;
+            PlayPauseButton.BackgroundImage = playImage;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -29,21 +30,21 @@ namespace ShapeVideoRecorder
         Timer timer;
         #region Variables
         private bool isMouseDown = false;
+        private bool isPlay = false;
 
         private Image playImage = Properties.Resources.PlayImage;
         private Image pauseImage = Properties.Resources.PauseImage;
         private Pen pen = new Pen(Color.Black, 2);
         private List<IShapes> shapes = new List<IShapes>();
+        private List<IShapes> drawnShapes = new List<IShapes>();
 
         private int startX, startY, endX, endY, index = 0;
         private Point[] trianglePoints = new Point[3];
    
-        private CustomRectangle rect;
-        private Triangle triangle;
-        private Circle circle;
+     
+        private IShapes currentShape;
 
-
-        static int x, y;
+        static int width,height;
         #endregion
 
         #region MouseEvents
@@ -63,17 +64,17 @@ namespace ShapeVideoRecorder
 
         private void OnPlayPauseButtonClicked(object sender, EventArgs e)
         {
-            PlayPauseButton.BackgroundImage = playImage;
             if(PlayPauseButton.BackgroundImage == playImage)
             {
+                isPlay = true;
                 PlayPauseButton.BackgroundImage = pauseImage;
             }
             else
             {
+                isPlay = false;
                 PlayPauseButton.BackgroundImage = playImage;
             }
             timer.Start();
-
         }
 
         private void OnFormMouseMove(object sender, MouseEventArgs e)
@@ -91,6 +92,7 @@ namespace ShapeVideoRecorder
         {
             if (OptionButton.Text == "StartRecording")
             {
+                //PlayPauseButton.Visible = false;
                 OptionButton.Text = "Stop";
                 ShapeCB.Enabled = true;
             }
@@ -106,84 +108,91 @@ namespace ShapeVideoRecorder
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            if (PlayPauseButton.Text == "Play" && index < shapes.Count)
+            if (isPlay && PlayPauseButton.Visible && index < shapes.Count)
             {
-                if (shapes[index] is CustomRectangle r)
+                if (drawnShapes.Count != 0)
                 {
-                    rect = new CustomRectangle();
-                    if (x < r.EndX)
+                    foreach(IShapes shape in drawnShapes)
                     {
-                        x += 1;
+                        if(shape is CustomRectangle rect)
+                        {
+                            e.Graphics.DrawRectangle(pen,rect.StartX,rect.StartY, rect.EndX-rect.StartX, rect.EndY-rect.StartY);
+                        }
+                        else if(shape is Circle c)
+                        {
+                            e.Graphics.DrawEllipse(pen, c.GetCircle());
+                        }
+                        else if(shape is Triangle t)
+                        {
+                            e.Graphics.DrawPolygon(pen, t.GetTrianglePoints());
+                        }
                     }
-                    if (y < r.EndY)
-                    {
-                        y += 1;
-                    }
-                    if (!(x < r.EndX && y < r.EndY))
-                    {
-                      //  x = shapes[index].StartX;
-                       // y = shapes[index].StartY;
-                        index++;
-                    }
-                    rect.StartX = r.StartX;
-                    rect.StartY = r.StartY;
-                    rect.EndX = x;
-                    rect.EndY = y;
-
-                    e.Graphics.DrawRectangle(pen, rect.GetRectangle());
                 }
-                else if (shapes[index] is Triangle t)
+                currentShape = shapes[index];
+                if(currentShape is CustomRectangle r)
                 {
-                    triangle = new Triangle();
-                    if (x < t.EndX)
+                    e.Graphics.DrawRectangle(pen, r.StartX, r.StartY, width, height);
+                    if (width < r.EndX-r.StartX)
                     {
-                        x += 1;
+                        width++;
                     }
-                    if (y < t.EndY)
+                    if (height <r.EndY-r.StartY)
                     {
-                        y += 1;
+                        height++;
                     }
-                    if (!(x < t.EndX && y < t.EndY))
+                    if ((width >= r.EndX-r.StartX)&& (height >= r.EndY - r.StartY))
                     {
-                        x = shapes[index].StartX;
-                        y = shapes[index].StartY;
+                        width = 0;
+                        height = 0;
                         index++;
+                        drawnShapes.Add(r);
                     }
-                    triangle.StartX = t.StartX;
-                    triangle.StartY = t.StartY;
-                    triangle.EndX = x;
-                    triangle.EndY = y;
-                    e.Graphics.DrawPolygon(pen, triangle.GetTrianglePoints());
-                }
-                else if (shapes[index] is Circle c)
-                {
-                    circle = new Circle();
-                    if (x < c.EndX)
-                    {
-                        x += 1;
-                    }
-                    if (y < c.EndY)
-                    {
-                        y += 1;
-                    }
-                    if (!(x < c.EndX && y < c.EndY))
-                    {
-                        x = shapes[index].StartX;
-                        y = shapes[index].StartY;
-                        index++;
-                    }
-                    circle.StartX = c.StartX;
-                    circle.StartY = c.StartY;
-                    circle.EndX = x;
-                    circle.EndY = y;
+              
 
-                    e.Graphics.DrawEllipse(pen, circle.GetCircle());
+                }
+                else if (currentShape is Circle c)
+                {
+                    if (width < c.EndX - c.StartX)
+                    {
+                        width++;
+                    }
+                    if (height < c.EndY - c.StartY)
+                    {
+                        height++;
+                    }
+                    e.Graphics.DrawEllipse(pen, c.StartX, c.StartY, width, height);
+                    if (!((width < c.EndX - c.StartX) && (height < c.EndY - c.StartY)))
+                    {
+                        width = height = 0;
+                        index++;
+                        drawnShapes.Add(c);
+                    }
+                }
+                else if (currentShape is Triangle t)
+                {
+                    if (width < t.EndX - t.StartX)
+                    {
+                        width++;
+                    }
+                    if (height < t.EndY - t.StartY)
+                    {
+                        height++;
+                    }
+                    trianglePoints[0] = new Point((t.StartX + t.EndX) / 2, t.StartY);
+                    trianglePoints[1] = new Point(t.EndX, t.EndY);
+                    trianglePoints[2] = new Point(t.StartX, t.EndY);
+                    e.Graphics.DrawPolygon(pen, trianglePoints);
+                    if (!((width < t.EndX - t.StartX) && (height < t.EndY - t.StartY)))
+                    {
+                        width = height = 0;
+                        index++;
+                        drawnShapes.Add(t);
+                    }
                 }
             }
-
-
             else
             {
+                timer.Stop();
                 if (ShapeCB.Enabled)
                 {
                     if (ShapeCB.Text == "Rectangle")
@@ -195,7 +204,8 @@ namespace ShapeVideoRecorder
                             EndX = endX,
                             EndY = endY
                         };
-                        e.Graphics.DrawRectangle(pen, rect.GetRectangle());
+                        e.Graphics.DrawRectangle(pen, rect.StartX, rect.StartY, rect.EndX-rect.StartX, rect.EndY- rect.StartY );
+                       
                         if (!isMouseDown) shapes.Add(rect);
                     }
                     else if (ShapeCB.Text == "Triangle")
@@ -225,9 +235,9 @@ namespace ShapeVideoRecorder
                 }
                 foreach (IShapes shape in shapes)
                 {
-                    if (shape is CustomRectangle r)
+                    if (shape is CustomRectangle rect)
                     {
-                        e.Graphics.DrawRectangle(pen, r.GetRectangle());
+                        e.Graphics.DrawRectangle(pen, rect.StartX, rect.StartY, rect.EndX - rect.StartX, rect.EndY - rect.StartY);
                     }
                     else if (shape is Triangle t)
                     {
@@ -239,7 +249,6 @@ namespace ShapeVideoRecorder
                     }
                 }
             }
-
         }
     }
 }
