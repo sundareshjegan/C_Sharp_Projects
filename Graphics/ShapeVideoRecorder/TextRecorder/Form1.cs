@@ -15,9 +15,27 @@ namespace TextRecorder
         public Form1()
         {
             InitializeComponent();
-            timer.Interval = 500;
+            timer.Interval = 1000;
             timer.Tick += OnTimerTick;
             font = new Font(fontName, fontSize);
+        }
+
+        private void OnTimerButtonClicked(object sender, string buttonText)
+        {
+            speedLabel.Text = "Speed : "+buttonText;
+            if (buttonText.Contains("Slow"))
+            {
+                timer.Interval = 1000;
+                
+            }
+            else if (buttonText.Contains("Medium"))
+            {
+                timer.Interval = 500;
+            }
+            else
+            {
+                timer.Interval = 100;
+            }
         }
 
         private string typedText = "", tempText="";
@@ -30,6 +48,9 @@ namespace TextRecorder
         private Font font;
         private Point textPosition;
         private Timer timer = new Timer();
+        private TimerOptions popup;
+        private SizeF textSize;
+        private RectangleF rectangle;
 
         private void OnTimerTick(object sender, EventArgs e)
         {
@@ -41,46 +62,56 @@ namespace TextRecorder
             else
             {
                 timer.Stop();
+                PlayPauseButton.BackgroundImage = Properties.Resources.PlayImage;
                 index = 0;
             }
             Invalidate();
         }
 
-        private void OnFormMouseDown(object sender, MouseEventArgs e)
-        {
-            textPosition = e.Location;
-            Invalidate();
-        }
-
+        
+        #region FormEvents
         private void OnFormPaint(object sender, PaintEventArgs e)
         {
             if (!string.IsNullOrEmpty(typedText))
             {
                 e.Graphics.DrawString(typedText, font, brush, textPosition);
-                SizeF textSize = e.Graphics.MeasureString(typedText, font);
-                RectangleF rectangle = new RectangleF(textPosition.X, textPosition.Y, textSize.Width+10, textSize.Height);
-                e.Graphics.DrawRectangle(pen, Rectangle.Round(rectangle));
+                textSize = e.Graphics.MeasureString(typedText, font);
+                rectangle = new RectangleF(textPosition.X, textPosition.Y, textSize.Width + 10, textSize.Height);
+                if(!timer.Enabled)e.Graphics.DrawRectangle(pen, Rectangle.Round(rectangle));
             }
         }
-
         private void OnFormKeyPress(object sender, KeyPressEventArgs e)
         {
             if (Char.IsLetterOrDigit(e.KeyChar))
             {
                 typedText += e.KeyChar;
                 tempText = typedText;
-                Invalidate();
             }
-        }
-
-        private void ClearButton_Click(object sender, EventArgs e)
-        {
-            typedText = "";
+            if (e.KeyChar == '\b' && typedText.Length > 1)
+            {
+                typedText = tempText.Substring(0, typedText.Length - 1);
+            }
             Invalidate();
         }
+        private void OnFormMouseDown(object sender, MouseEventArgs e)
+        {
+            textPosition = e.Location;
+            Invalidate();
+        }
+        private void OnFormClicked(object sender, EventArgs e)
+        {
+            popup?.Dispose();
+        }
+        #endregion
 
+        #region ButtonEvents
         private void OnPlayPauseButtonClicked(object sender, EventArgs e)
         {
+            if (typedText == "")
+            {
+                MessageBox.Show("Start type something..!");
+                return;
+            }
             if (timer.Enabled)
             {
                 PlayPauseButton.BackgroundImage = Properties.Resources.PlayImage;
@@ -92,5 +123,19 @@ namespace TextRecorder
                 timer.Start();
             }
         }
+        private void OnTimerButtonClicked(object sender, MouseEventArgs e)
+        {
+            popup?.Dispose();
+            popup = new TimerOptions();
+            popup.Location = speedLabel.PointToScreen(new Point(0, 0));
+            popup.OnTimerOptionClick += OnTimerButtonClicked;
+            popup.Show();
+        }
+        private void OnClearButtonClicked(object sender, EventArgs e)
+        {
+            typedText = "";
+            Invalidate();
+        }
+        #endregion
     }
 }

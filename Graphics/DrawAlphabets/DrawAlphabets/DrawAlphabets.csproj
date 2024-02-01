@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5BCD3838-8790-471F-8EA4-9BB40243DDAD}</ProjectGuid>
+    <ProjectGuid>{B53904F5-AE6A-4E8B-9691-77B2774E1F83}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TextRecorder</RootNamespace>
-    <AssemblyName>TextRecorder</AssemblyName>
+    <RootNamespace>DrawAlphabets</RootNamespace>
+    <AssemblyName>DrawAlphabets</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -53,12 +53,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimerOptions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TimerOptions.Designer.cs">
-      <DependentUpon>TimerOptions.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -70,11 +64,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="TimerOptions.resx">
-      <DependentUpon>TimerOptions.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -87,18 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\PlayImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\DeleteImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\PauseImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TimerImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
