@@ -16,6 +16,7 @@ namespace DrawAlphabets
         public Form1()
         {
             InitializeComponent();
+            DoubleBuffered = true;
         }
         private bool isMouseDown = false;
         private bool enabled = true;
@@ -25,15 +26,17 @@ namespace DrawAlphabets
         Point[] pointArr;
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics graphics = e.Graphics;
-            if (enabled && points.Count>1)
+            using (GraphicsPath path = new GraphicsPath())
             {
-                pointArr = new Point[points.Count];
-                for (int i = 0; i < points.Count; i++)
+                // Draw the letter "A"
+                path.AddLine(50, 100, 100, 0);
+                path.AddLine(100, 0, 150, 100);
+                path.AddLine(70, 60, 130, 60);
+
+                using (Pen pen = new Pen(Color.Black, 2))
                 {
-                    pointArr[i] = points[i];
+                    e.Graphics.DrawPath(pen, path);
                 }
-                graphics.DrawLines(new Pen(Color.Red, 2),pointArr);
             }
         }
 
