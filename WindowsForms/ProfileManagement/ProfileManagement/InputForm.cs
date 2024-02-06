@@ -22,11 +22,7 @@ namespace ProfileManagement
         
         private void GetData(object sender, UserDetails user)
         {
-            SendUserDetailsAsArray?.Invoke(this, user);
-        }
-        private void InputForm_Load(object sender, EventArgs e)
-        {
-
+            SendUserDetailsAsArray?.Invoke(this, user); 
         }
     }
 }

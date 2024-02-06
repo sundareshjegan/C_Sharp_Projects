@@ -18,7 +18,8 @@ namespace ProfileManagement
             inpform.SendUserDetailsAsArray += GetUser;
             
         }
-        InputForm inpform = new InputForm();
+        private InputForm inpform = new InputForm();
+        private GetColForm newColForm;
 
         public List<UserDetails> users = new List<UserDetails>();
 
@@ -38,17 +39,23 @@ namespace ProfileManagement
         }
         private void OnAddRowBtnClicked(object sender, EventArgs e)
         {
-            inpform.Show();
+            //inpform = new InputForm();
+            new InputForm().Show();
         }
 
-        private void OnDisplayTableCellClicked(object sender, DataGridViewCellEventArgs e)
+        private void OnAddColBtnClicked(object sender, EventArgs e)
         {
-            
+            newColForm = new GetColForm();
+            newColForm.SendNewColName += GetNewColName;
+            newColForm.Location = addColBtn.PointToScreen(new Point(0, 0));
+            newColForm.Show();
         }
 
-        private void displayTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void GetNewColName(object sender, string newColName)
         {
-            
+            displayTable.Columns.Add(newColName, newColName);
+            Width += 100;
+            newColForm?.Dispose();
         }
     }
 }
