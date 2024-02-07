@@ -18,11 +18,19 @@ namespace ProfileManagement
             inputUC1.SendUserDetails += GetData;
         }
 
-        public event EventHandler<UserDetails> SendUserDetailsAsArray;
+        public event EventHandler<List<string>> SendUserDetailsToMainForm;
         
-        private void GetData(object sender, UserDetails user)
+        private void GetData(object sender, List<string> user)
         {
-            SendUserDetailsAsArray?.Invoke(this, user); 
+            if(sender is Form1 f)
+            {
+                Height += 50;
+            }
+            else
+            {
+                Dispose();
+            }
+            //SendUserDetailsToMainForm?.Invoke(this, user); 
         }
     }
 }

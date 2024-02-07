@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.dobLabel = new System.Windows.Forms.Label();
+            this.phoneLabel = new System.Windows.Forms.Label();
+            this.emailLabel = new System.Windows.Forms.Label();
             this.nameTB = new System.Windows.Forms.TextBox();
             this.mailTB = new System.Windows.Forms.TextBox();
             this.BrowseBtn = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.profileLabel = new System.Windows.Forms.Label();
             this.imgUrlTB = new System.Windows.Forms.TextBox();
             this.SubmitBtn = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -45,53 +45,53 @@
             ((System.ComponentModel.ISupportInitialize)(this.profileBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // nameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(38, 230);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 21);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Name";
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.BackColor = System.Drawing.Color.Transparent;
+            this.nameLabel.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.ForeColor = System.Drawing.Color.White;
+            this.nameLabel.Location = new System.Drawing.Point(38, 230);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(57, 21);
+            this.nameLabel.TabIndex = 0;
+            this.nameLabel.Text = "Name";
             // 
-            // label2
+            // dobLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(38, 273);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 21);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "DOB";
+            this.dobLabel.AutoSize = true;
+            this.dobLabel.BackColor = System.Drawing.Color.Transparent;
+            this.dobLabel.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dobLabel.ForeColor = System.Drawing.Color.White;
+            this.dobLabel.Location = new System.Drawing.Point(38, 273);
+            this.dobLabel.Name = "dobLabel";
+            this.dobLabel.Size = new System.Drawing.Size(45, 21);
+            this.dobLabel.TabIndex = 0;
+            this.dobLabel.Text = "DOB";
             // 
-            // label3
+            // phoneLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(38, 318);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 21);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Phone";
+            this.phoneLabel.AutoSize = true;
+            this.phoneLabel.BackColor = System.Drawing.Color.Transparent;
+            this.phoneLabel.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.phoneLabel.ForeColor = System.Drawing.Color.White;
+            this.phoneLabel.Location = new System.Drawing.Point(38, 318);
+            this.phoneLabel.Name = "phoneLabel";
+            this.phoneLabel.Size = new System.Drawing.Size(60, 21);
+            this.phoneLabel.TabIndex = 0;
+            this.phoneLabel.Text = "Phone";
             // 
-            // label4
+            // emailLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(35, 364);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 21);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "E-mail";
+            this.emailLabel.AutoSize = true;
+            this.emailLabel.BackColor = System.Drawing.Color.Transparent;
+            this.emailLabel.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailLabel.ForeColor = System.Drawing.Color.White;
+            this.emailLabel.Location = new System.Drawing.Point(35, 364);
+            this.emailLabel.Name = "emailLabel";
+            this.emailLabel.Size = new System.Drawing.Size(63, 21);
+            this.emailLabel.TabIndex = 0;
+            this.emailLabel.Text = "E-mail";
             // 
             // nameTB
             // 
@@ -123,17 +123,17 @@
             this.BrowseBtn.UseVisualStyleBackColor = true;
             this.BrowseBtn.Click += new System.EventHandler(this.OnBrouseBtnClicked);
             // 
-            // label5
+            // profileLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(5, 408);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(122, 21);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Profile Image";
+            this.profileLabel.AutoSize = true;
+            this.profileLabel.BackColor = System.Drawing.Color.Transparent;
+            this.profileLabel.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.profileLabel.ForeColor = System.Drawing.Color.White;
+            this.profileLabel.Location = new System.Drawing.Point(5, 408);
+            this.profileLabel.Name = "profileLabel";
+            this.profileLabel.Size = new System.Drawing.Size(122, 21);
+            this.profileLabel.TabIndex = 0;
+            this.profileLabel.Text = "Profile Image";
             // 
             // imgUrlTB
             // 
@@ -151,7 +151,7 @@
             this.SubmitBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.SubmitBtn.Enabled = false;
             this.SubmitBtn.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SubmitBtn.Location = new System.Drawing.Point(168, 465);
+            this.SubmitBtn.Location = new System.Drawing.Point(168, 454);
             this.SubmitBtn.Name = "SubmitBtn";
             this.SubmitBtn.Size = new System.Drawing.Size(102, 34);
             this.SubmitBtn.TabIndex = 3;
@@ -218,15 +218,16 @@
             this.Controls.Add(this.mailTB);
             this.Controls.Add(this.phoneTB);
             this.Controls.Add(this.nameTB);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.profileLabel);
+            this.Controls.Add(this.emailLabel);
+            this.Controls.Add(this.phoneLabel);
+            this.Controls.Add(this.dobLabel);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nameLabel);
             this.DoubleBuffered = true;
             this.Name = "InputUC";
             this.Size = new System.Drawing.Size(449, 511);
+            this.Load += new System.EventHandler(this.InputUC_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.InputUC_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.profileBox)).EndInit();
             this.ResumeLayout(false);
@@ -236,14 +237,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label dobLabel;
+        private System.Windows.Forms.Label phoneLabel;
+        private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.TextBox nameTB;
         private System.Windows.Forms.TextBox mailTB;
         private System.Windows.Forms.Button BrowseBtn;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label profileLabel;
         private System.Windows.Forms.TextBox imgUrlTB;
         private System.Windows.Forms.Button SubmitBtn;
         private System.Windows.Forms.Label label6;

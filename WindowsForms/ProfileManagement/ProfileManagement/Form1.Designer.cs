@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.displayTable = new System.Windows.Forms.DataGridView();
-            this.profileImage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dob = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profileImage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.optionsPanel = new System.Windows.Forms.Panel();
             this.userCard = new System.Windows.Forms.Panel();
             this.addColBtn = new System.Windows.Forms.Button();
@@ -46,27 +50,59 @@
             // displayTable
             // 
             this.displayTable.AllowUserToAddRows = false;
+            this.displayTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.displayTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.displayTable.BackgroundColor = System.Drawing.Color.AliceBlue;
+            this.displayTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MV Boli", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.displayTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.displayTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.displayTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.profileImage,
+            this.email,
             this.name,
             this.dob,
-            this.email,
-            this.phone});
+            this.phone,
+            this.profileImage});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.displayTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.displayTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.displayTable.Location = new System.Drawing.Point(224, 0);
             this.displayTable.Name = "displayTable";
+            this.displayTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.displayTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.displayTable.RowHeadersVisible = false;
+            this.displayTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe Fluent Icons", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.displayTable.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.displayTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.displayTable.Size = new System.Drawing.Size(499, 429);
             this.displayTable.TabIndex = 1;
             // 
-            // profileImage
+            // email
             // 
-            this.profileImage.HeaderText = "Profile Image";
-            this.profileImage.Name = "profileImage";
-            this.profileImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.profileImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.email.HeaderText = "E-mail";
+            this.email.Name = "email";
+            this.email.Width = 84;
             // 
             // name
             // 
@@ -75,22 +111,28 @@
             this.name.ReadOnly = true;
             this.name.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.name.Width = 58;
             // 
             // dob
             // 
             this.dob.HeaderText = "DOB";
             this.dob.Name = "dob";
             this.dob.ReadOnly = true;
-            // 
-            // email
-            // 
-            this.email.HeaderText = "E-mail";
-            this.email.Name = "email";
+            this.dob.Width = 67;
             // 
             // phone
             // 
             this.phone.HeaderText = "Phone no";
             this.phone.Name = "phone";
+            this.phone.Width = 106;
+            // 
+            // profileImage
+            // 
+            this.profileImage.HeaderText = "Profile Image";
+            this.profileImage.Name = "profileImage";
+            this.profileImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.profileImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.profileImage.Width = 118;
             // 
             // optionsPanel
             // 
@@ -144,6 +186,7 @@
             this.Controls.Add(this.optionsPanel);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.OnFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.displayTable)).EndInit();
             this.optionsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -157,11 +200,11 @@
         private System.Windows.Forms.Button addColBtn;
         private System.Windows.Forms.Button AddRowBtn;
         private System.Windows.Forms.Panel userCard;
-        private System.Windows.Forms.DataGridViewTextBoxColumn profileImage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn dob;
-        private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewTextBoxColumn phone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profileImage;
     }
 }
 

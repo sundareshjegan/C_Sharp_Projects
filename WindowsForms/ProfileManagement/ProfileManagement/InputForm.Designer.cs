@@ -33,17 +33,19 @@
             // 
             // inputUC1
             // 
+            this.inputUC1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.inputUC1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.inputUC1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inputUC1.Location = new System.Drawing.Point(0, 0);
             this.inputUC1.Name = "inputUC1";
-            this.inputUC1.Size = new System.Drawing.Size(449, 535);
+            this.inputUC1.Size = new System.Drawing.Size(449, 527);
             this.inputUC1.TabIndex = 0;
             // 
             // InputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(449, 535);
+            this.ClientSize = new System.Drawing.Size(449, 527);
             this.Controls.Add(this.inputUC1);
             this.Name = "InputForm";
             this.Text = "InputForm";
