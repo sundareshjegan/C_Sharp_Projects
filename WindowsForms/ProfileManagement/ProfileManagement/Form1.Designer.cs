@@ -40,11 +40,16 @@
             this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profileImage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.optionsPanel = new System.Windows.Forms.Panel();
+            this.photoPanel = new System.Windows.Forms.Panel();
+            this.profilePicBox = new System.Windows.Forms.PictureBox();
             this.userCard = new System.Windows.Forms.Panel();
+            this.saveBtn = new System.Windows.Forms.Button();
             this.addColBtn = new System.Windows.Forms.Button();
             this.AddRowBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.displayTable)).BeginInit();
             this.optionsPanel.SuspendLayout();
+            this.photoPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.profilePicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // displayTable
@@ -78,7 +83,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.displayTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.displayTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.displayTable.Location = new System.Drawing.Point(224, 0);
+            this.displayTable.Location = new System.Drawing.Point(275, 0);
             this.displayTable.Name = "displayTable";
             this.displayTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -95,8 +100,10 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe Fluent Icons", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.displayTable.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.displayTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.displayTable.Size = new System.Drawing.Size(499, 429);
+            this.displayTable.Size = new System.Drawing.Size(448, 720);
             this.displayTable.TabIndex = 1;
+            this.displayTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellClick);
+            this.displayTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellDoubleClicked);
             // 
             // email
             // 
@@ -128,37 +135,67 @@
             // 
             // profileImage
             // 
-            this.profileImage.HeaderText = "Profile Image";
+            this.profileImage.HeaderText = "ProfileImage";
             this.profileImage.Name = "profileImage";
             this.profileImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.profileImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.profileImage.Width = 118;
+            this.profileImage.Width = 110;
             // 
             // optionsPanel
             // 
             this.optionsPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("optionsPanel.BackgroundImage")));
-            this.optionsPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.optionsPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.optionsPanel.Controls.Add(this.userCard);
+            this.optionsPanel.Controls.Add(this.photoPanel);
+            this.optionsPanel.Controls.Add(this.saveBtn);
             this.optionsPanel.Controls.Add(this.addColBtn);
             this.optionsPanel.Controls.Add(this.AddRowBtn);
             this.optionsPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.optionsPanel.Location = new System.Drawing.Point(0, 0);
             this.optionsPanel.Name = "optionsPanel";
-            this.optionsPanel.Size = new System.Drawing.Size(224, 429);
+            this.optionsPanel.Size = new System.Drawing.Size(275, 720);
             this.optionsPanel.TabIndex = 0;
+            // 
+            // photoPanel
+            // 
+            this.photoPanel.Controls.Add(this.profilePicBox);
+            this.photoPanel.Location = new System.Drawing.Point(3, 167);
+            this.photoPanel.Name = "photoPanel";
+            this.photoPanel.Size = new System.Drawing.Size(272, 134);
+            this.photoPanel.TabIndex = 3;
+            this.photoPanel.Visible = false;
+            // 
+            // profilePicBox
+            // 
+            this.profilePicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.profilePicBox.Location = new System.Drawing.Point(88, 3);
+            this.profilePicBox.Name = "profilePicBox";
+            this.profilePicBox.Size = new System.Drawing.Size(100, 102);
+            this.profilePicBox.TabIndex = 2;
+            this.profilePicBox.TabStop = false;
             // 
             // userCard
             // 
-            this.userCard.Location = new System.Drawing.Point(12, 155);
+            this.userCard.Location = new System.Drawing.Point(3, 287);
             this.userCard.Name = "userCard";
-            this.userCard.Size = new System.Drawing.Size(200, 262);
+            this.userCard.Size = new System.Drawing.Size(272, 228);
             this.userCard.TabIndex = 1;
             this.userCard.Visible = false;
+            // 
+            // saveBtn
+            // 
+            this.saveBtn.Location = new System.Drawing.Point(107, 123);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(63, 28);
+            this.saveBtn.TabIndex = 2;
+            this.saveBtn.Text = "Save";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.OnSaveBtnClicked);
             // 
             // addColBtn
             // 
             this.addColBtn.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addColBtn.Location = new System.Drawing.Point(26, 85);
+            this.addColBtn.Location = new System.Drawing.Point(50, 85);
             this.addColBtn.Name = "addColBtn";
             this.addColBtn.Size = new System.Drawing.Size(175, 32);
             this.addColBtn.TabIndex = 0;
@@ -169,7 +206,7 @@
             // AddRowBtn
             // 
             this.AddRowBtn.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddRowBtn.Location = new System.Drawing.Point(26, 47);
+            this.AddRowBtn.Location = new System.Drawing.Point(50, 47);
             this.AddRowBtn.Name = "AddRowBtn";
             this.AddRowBtn.Size = new System.Drawing.Size(175, 32);
             this.AddRowBtn.TabIndex = 0;
@@ -181,14 +218,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 429);
+            this.ClientSize = new System.Drawing.Size(723, 720);
             this.Controls.Add(this.displayTable);
             this.Controls.Add(this.optionsPanel);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.OnFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.displayTable)).EndInit();
             this.optionsPanel.ResumeLayout(false);
+            this.photoPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.profilePicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -199,12 +239,15 @@
         private System.Windows.Forms.DataGridView displayTable;
         private System.Windows.Forms.Button addColBtn;
         private System.Windows.Forms.Button AddRowBtn;
-        private System.Windows.Forms.Panel userCard;
+        private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.PictureBox profilePicBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn dob;
         private System.Windows.Forms.DataGridViewTextBoxColumn phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn profileImage;
+        private System.Windows.Forms.Panel userCard;
+        private System.Windows.Forms.Panel photoPanel;
     }
 }
 

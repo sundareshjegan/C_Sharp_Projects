@@ -28,9 +28,9 @@ namespace ProfileManagement
             }
             else
             {
-                Dispose();
+                SendUserDetailsToMainForm?.Invoke(this, user); 
+                Hide();
             }
-            //SendUserDetailsToMainForm?.Invoke(this, user); 
         }
     }
 }

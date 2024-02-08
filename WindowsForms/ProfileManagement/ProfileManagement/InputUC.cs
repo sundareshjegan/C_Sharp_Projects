@@ -27,20 +27,16 @@ namespace ProfileManagement
             animationTimer.Start();
 
             Form1.SendNewColName += AddNewCol;
+            Form1.EditData += SetData;
         }
 
         public static string filepath = "D:\\Sundareshwaran\\C_Sharp_Projects\\WindowsForms\\ProfileManagement\\Appdata\\userdetails.txt";
 
         public event EventHandler<List<string>> SendUserDetails;
 
-
-        private string name, phone, email, dob, imgPath;
         private List<string> details = new List<string>();
         private List<TextBox> newTextBoxes = new List<TextBox>();
-
-        FileStream fs;
-        StreamWriter sw;
-
+        
         private Image gifImage;
         private Timer animationTimer;
         private int currentFrame;
@@ -67,16 +63,10 @@ namespace ProfileManagement
         #region validateEvents
         private void OnTextBoxTextChanged(object sender, EventArgs e)
         {
-            name = nameTB.Text;
-            phone = phoneTB.Text;
-            email = mailTB.Text;
-            dob = dobTB.Text;
-            imgPath = imgUrlTB.Text;
-
-            if (name != "" && phone != "" && phone.Length == 10 && email != "" && dob != "" && imgPath != "")
+            if (nameTB.Text != "" && phoneTB.Text != "" && phoneTB.Text.Length == 10 && mailTB.Text != "" && dobTB.Text != "" && imgUrlTB.Text != "")
             {
-                bool isValidEmail = Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
-                if (isValidEmail)
+                bool isValidEmail = Regex.IsMatch(mailTB.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+                if (isValidEmail && !Form1.userdetails.ContainsKey(mailTB.Text))
                 {
                     SubmitBtn.Enabled = true;
                     SubmitBtn.UseWaitCursor = false;
@@ -93,7 +83,7 @@ namespace ProfileManagement
 
         private void OnNameTBKeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !Char.IsLetter(e.KeyChar);
+            e.Handled = (!Char.IsLetter(e.KeyChar))||(e.KeyChar=='\b');
         }
 
         private void InputUC_Load(object sender, EventArgs e)
@@ -109,14 +99,16 @@ namespace ProfileManagement
 
         private void AddNewCol(object sender, string newColName)
         {
+            if (newColName == "") return;
             count++;
             Label label = new Label()
             {
                 Font = nameLabel.Font,
                 Text = newColName,
+                Size = profileLabel.Size,
                 BackColor = nameLabel.BackColor,
                 ForeColor = nameLabel.ForeColor,
-                Location = new Point(nameLabel.Location.X,profileLabel.Location.Y + 50 * count)
+                Location = new Point(profileLabel.Location.X,profileLabel.Location.Y + 50 * count)
             };
             TextBox textbox = new TextBox()
             {
@@ -130,6 +122,31 @@ namespace ProfileManagement
             Controls.Add(label);
             Controls.Add(textbox);
             SendUserDetails.Invoke(sender, details);
+        }
+
+        private void SetData(object sender, string email)
+        {
+            foreach (Control c in Controls)
+            {
+                if (c is TextBox t)
+                {
+                    t.Text = "";
+                }
+            }
+            List<string> newdata = Form1.userdetails[email];
+            mailTB.Text =email;
+            nameTB.Text = newdata[0];
+            //dobTB.Text = newdata[1].ToString();
+            phoneTB.Text = newdata[2];
+            imgUrlTB.Text = newdata[3];
+            profileBox.BackgroundImage = new Bitmap(newdata[3]);
+            if(newdata.Count > 4)
+            {
+                for (int i = 0; i < newTextBoxes.Count; i++)
+                {
+                    newTextBoxes[i].Text = newdata[4 + i];
+                }
+            }
         }
         private void OnProfileBoxClicked(object sender, EventArgs e)
         {
@@ -155,23 +172,36 @@ namespace ProfileManagement
 
         private void OnSubmitBtnClicked(object sender, EventArgs e)
         {
-            fs = new FileStream(filepath, FileMode.Append, FileAccess.Write);
-            sw = new StreamWriter(fs);
-            string userdata = mailTB.Text + "|" + nameTB.Text + "|" + dobTB.Text + "|" + phoneTB.Text + "|" + imgUrlTB.Text + "|";
+            details.Add(mailTB.Text);
+            details.Add(nameTB.Text);
+            details.Add(dobTB.Text);
+            details.Add(phoneTB.Text);
+            details.Add(imgUrlTB.Text);
+
             if (newTextBoxes.Count != 0)
             {
                 foreach(TextBox tb in newTextBoxes)
                 {
-                    userdata += tb.Text + "|";
+                    details.Add(tb.Text);
                 }
             }
-            sw.WriteLine(userdata);
-            sw.Flush();
             SendUserDetails?.Invoke(this, details);
-            sw.Close();
-            fs.Close();
+            ClearData();
+        }
 
-            SendUserDetails?.Invoke(this, details);
+        private void ClearData()
+        {
+            foreach(Control c in Controls)
+            {
+                if(c is TextBox t)
+                {
+                    t.Text = "";
+                }
+            }
+            profileBox.BackgroundImage = Properties.Resources.addUserImage;
+            SubmitBtn.Enabled = false;
+            SubmitBtn.BackColor = Color.FromArgb(255, 192, 192);
+            details.Clear();
         }
     }
 }

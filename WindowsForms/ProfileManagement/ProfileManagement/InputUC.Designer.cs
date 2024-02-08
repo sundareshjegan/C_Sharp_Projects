@@ -227,7 +227,6 @@
             this.DoubleBuffered = true;
             this.Name = "InputUC";
             this.Size = new System.Drawing.Size(449, 511);
-            this.Load += new System.EventHandler(this.InputUC_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.InputUC_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.profileBox)).EndInit();
             this.ResumeLayout(false);
