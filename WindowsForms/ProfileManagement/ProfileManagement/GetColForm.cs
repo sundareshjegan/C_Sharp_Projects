@@ -9,7 +9,7 @@ namespace ProfileManagement
         public GetColForm()
         {
             InitializeComponent();
-            gifImage = Properties.Resources.bg6;
+            gifImage = Properties.Resources.greenPurple;
             animationTimer = new Timer();
             animationTimer.Interval = 100;
             animationTimer.Tick += AnimationTimer_Tick;

@@ -36,7 +36,9 @@ namespace ProfileManagement
 
         private List<string> details = new List<string>();
         private List<TextBox> newTextBoxes = new List<TextBox>();
-        
+
+        private string mode = "";
+
         private Image gifImage;
         private Timer animationTimer;
         private int currentFrame;
@@ -66,7 +68,8 @@ namespace ProfileManagement
             if (nameTB.Text != "" && phoneTB.Text != "" && phoneTB.Text.Length == 10 && mailTB.Text != "" && dobTB.Text != "" && imgUrlTB.Text != "")
             {
                 bool isValidEmail = Regex.IsMatch(mailTB.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
-                if (isValidEmail && !Form1.userdetails.ContainsKey(mailTB.Text))
+
+                if ((isValidEmail && mode == "edit" && Form1.userdetails.ContainsKey(mailTB.Text)) || mode=="new" && isValidEmail && !Form1.userdetails.ContainsKey(mailTB.Text))
                 {
                     SubmitBtn.Enabled = true;
                     SubmitBtn.UseWaitCursor = false;
@@ -83,7 +86,8 @@ namespace ProfileManagement
 
         private void OnNameTBKeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = (!Char.IsLetter(e.KeyChar))||(e.KeyChar=='\b');
+            //e.Handled = (!Char.IsLetter(e.KeyChar))||(e.KeyChar=='\b');
+            e.Handled = !char.IsLetter(e.KeyChar) && e.KeyChar != '\b';
         }
 
         private void InputUC_Load(object sender, EventArgs e)
@@ -93,7 +97,7 @@ namespace ProfileManagement
 
         private void OnPhoneTBKeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !Char.IsDigit(e.KeyChar);
+            e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != '\b';
         }
         #endregion
 
@@ -124,6 +128,39 @@ namespace ProfileManagement
             SendUserDetails.Invoke(sender, details);
         }
 
+        public void SetUCData(string email,string mode)
+        {
+            this.mode = mode;
+            if (mode.ToLower() == "new")
+            {
+                mailTB.Enabled = true;
+                ClearData();
+                return;
+            }
+            foreach (Control c in Controls)
+            {
+                if (c is TextBox t)
+                {
+                    t.Text = "";
+                }
+            }
+            List<string> newdata = Form1.userdetails[email];
+            mailTB.Text = email;
+            mailTB.Enabled = false;
+            nameTB.Text = newdata[0];
+            dobTB.Value = DateTime.Parse(newdata[1]);
+            phoneTB.Text = newdata[2];
+            imgUrlTB.Text = newdata[3];
+            profileBox.BackgroundImage = new Bitmap(newdata[3]);
+            if (newdata.Count > 4)
+            {
+                for (int i = 4; i < newdata.Count; i++)
+                {
+
+                    newTextBoxes[i-4].Text = newdata[i];
+                }
+            }
+        }
         private void SetData(object sender, string email)
         {
             foreach (Control c in Controls)
@@ -148,6 +185,7 @@ namespace ProfileManagement
                 }
             }
         }
+
         private void OnProfileBoxClicked(object sender, EventArgs e)
         {
             OpenFileDialog imagefileDialog = new OpenFileDialog();

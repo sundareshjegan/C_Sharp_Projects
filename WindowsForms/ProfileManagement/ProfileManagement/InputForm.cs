@@ -32,5 +32,9 @@ namespace ProfileManagement
                 Hide();
             }
         }
+        public void Send(string email,string mode)
+        {
+            inputUC1.SetUCData(email,mode);
+        }
     }
 }

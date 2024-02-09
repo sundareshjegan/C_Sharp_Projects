@@ -16,7 +16,36 @@ namespace ProfileManagement
         {
             InitializeComponent();
             inpform.SendUserDetailsToMainForm += GetUser;
+            #region animation code
+            //gifImage = Properties.Resources.greenPurple;
+            gifImage = new Bitmap("D:\\Sundareshwaran\\C_Sharp_Projects\\WindowsForms\\ProfileManagement\\greenPurple.gif");
+            animationTimer = new Timer();
+            animationTimer.Interval = 100;
+            animationTimer.Tick += AnimationTimer_Tick;
+            totalFrames = gifImage.GetFrameCount(System.Drawing.Imaging.FrameDimension.Time);
+            //animationTimer.Start();
+            #endregion
         }
+        #region animation varialbles and events
+        private Image gifImage;
+        private Timer animationTimer;
+        private int currentFrame;
+        private int totalFrames;
+        private void AnimationTimer_Tick(object sender, EventArgs e)
+        {
+            currentFrame = (currentFrame + 1) % totalFrames;
+            optionsPanel.Invalidate();
+        }
+        private void optionsPanel_Paint(object sender, PaintEventArgs e)
+        {
+            if (gifImage != null)
+            {
+                gifImage.SelectActiveFrame(System.Drawing.Imaging.FrameDimension.Time, currentFrame);
+                e.Graphics.DrawImage(gifImage, ClientRectangle);
+            }
+        }
+        #endregion
+
         public static event EventHandler<string> SendNewColName;
         public static event EventHandler<string> EditData;
 
@@ -26,19 +55,26 @@ namespace ProfileManagement
 
         private InputForm inpform = new InputForm();
         private GetColForm newColForm;
+        private OptionForm optionform;
 
         private List<string> lines = new List<string>();
         private List<string> newCols = new List<string>();
 
+        private string username;
+
         private void RetriveOldData()
         {
-            FileStream fs = new FileStream(InputUC.filepath, FileMode.Open, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs);
-            string str = sr.ReadLine();
-            while (str!=null && str != "")
+            using (FileStream fs = new FileStream(InputUC.filepath, FileMode.Open, FileAccess.Read))
             {
-                lines.Add(str);
-                str = sr.ReadLine();
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    string str = sr.ReadLine();
+                    while (str != null && str != "")
+                    {
+                        lines.Add(str);
+                        str = sr.ReadLine();
+                    }
+                }
             }
             foreach (string line in lines)
             {
@@ -60,10 +96,15 @@ namespace ProfileManagement
             displayTable.AutoResizeColumns();
             LoadDataToDisplayTable();
         }
-
-        private void OnFormLoad(object sender, EventArgs e)
+        private void OnLoadBtnClicked(object sender, EventArgs e)
         {
-            displayTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //loadBtn.Enabled = false;
+            //displayTable.Columns.Clear();
+            //displayTable.Columns.Add("E-Mail", "email");
+            //displayTable.Columns.Add("Name", "name");
+            //displayTable.Columns.Add("DOB", "dob");
+            //displayTable.Columns.Add("Phone-no", "phone");
+            //displayTable.Columns.Add("ProfileImage", "phone");
             if (File.Exists(headerFilePath))
             {
                 using (StreamReader sr = new StreamReader(headerFilePath))
@@ -78,6 +119,10 @@ namespace ProfileManagement
                 }
             }
             RetriveOldData();
+        }
+        private void OnFormLoad(object sender, EventArgs e)
+        {
+            displayTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -107,11 +152,11 @@ namespace ProfileManagement
             }
             
         }
+
         private void OnAddRowBtnClicked(object sender, EventArgs e)
         {
-            //inpform = new InputForm();
+            inpform.Send("", "new");
             inpform.ShowDialog();
-            //saveBtn.Enabled = true;
         }
 
         private void OnAddColBtnClicked(object sender, EventArgs e)
@@ -144,17 +189,23 @@ namespace ProfileManagement
 
         private void OnSaveBtnClicked(object sender, EventArgs e)
         {
-            using (FileStream fs = new FileStream(InputUC.filepath, FileMode.Create, FileAccess.Write))
+            DialogResult result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
             {
-                using (StreamWriter sw = new StreamWriter(fs))
+                using (FileStream fs = new FileStream(InputUC.filepath, FileMode.Create, FileAccess.Write))
                 {
-                    foreach (KeyValuePair<string, List<string>> entry in userdetails)
+                    using (StreamWriter sw = new StreamWriter(fs))
                     {
-                        string line = entry.Key + "|" + string.Join("|", entry.Value);
-                        sw.WriteLine(line);
+                        foreach (KeyValuePair<string, List<string>> entry in userdetails)
+                        {
+                            string line = entry.Key + "|" + string.Join("|", entry.Value);
+                            sw.WriteLine(line);
+                        }
                     }
+                    MessageBox.Show("File saved Successfully");
                 }
-                MessageBox.Show("File saved Successfully");
+                Close();
             }
         }
 
@@ -196,22 +247,6 @@ namespace ProfileManagement
                         userCard.Height += 30;
                     }
                 }
-                //string imageUrlColumnName = "ProfileImage";
-                //int imageUrlColumnIndex = displayTable.Columns.Cast<DataGridViewColumn>()
-                //    .FirstOrDefault(col => col.HeaderText == imageUrlColumnName)?.Index ?? -1;
-
-                //if (imageUrlColumnIndex != -1)
-                //{
-                //    string imageUrl = selectedRow.Cells[imageUrlColumnIndex].Value?.ToString();
-                //    if (!string.IsNullOrEmpty(imageUrl))
-                //    {
-                //        profilePicBox.BackgroundImage = new Bitmap(imageUrl);
-                //    }
-                //    else
-                //    {
-                //        profilePicBox.Image = null;
-                //    }
-                //}
             }
         }
 
@@ -220,7 +255,8 @@ namespace ProfileManagement
             if (e.RowIndex >= 0 && e.RowIndex < displayTable.Rows.Count)
             {
                 DataGridViewRow selectedRow = displayTable.Rows[e.RowIndex];
-                EditData?.Invoke(this, selectedRow.Cells[0].Value.ToString());
+                // EditData?.Invoke(null, selectedRow.Cells[0].Value.ToString());
+                inpform.Send(selectedRow.Cells[0].Value.ToString(),"edit");
                 inpform.ShowDialog();
                 LoadDataToDisplayTable();
             }
@@ -228,8 +264,8 @@ namespace ProfileManagement
 
         private void LoadDataToDisplayTable()
         {
+            loadBtn.Enabled = false;
             displayTable.Rows.Clear();
-
             foreach (KeyValuePair<string, List<string>> entry in userdetails)
             {
                 List<string> userDetails = entry.Value;
@@ -240,6 +276,45 @@ namespace ProfileManagement
                     rowData[i + 1] = userDetails[i];
                 }
                 displayTable.Rows.Add(rowData);
+            }
+            displayTable.Rows[0].Selected = false;
+            photoPanel.Visible = false;
+            userCard.Visible = false;
+        }
+
+        private void displayTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (displayTable.Rows.Count != 0)
+                {
+                    username = displayTable.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    optionform = new OptionForm()
+                    {
+                        Location = displayTable.PointToScreen(e.Location),
+                    };
+                    optionform.SendOption += GetOption;
+                    optionform.ShowDialog();
+                    LoadDataToDisplayTable();
+                }
+            }
+        }
+
+        private void GetOption(object sender, string option)
+        {
+            if(option.ToLower() == "delete")
+            {
+                DialogResult result = MessageBox.Show($"Are you sure you want to delete..\n{username}?", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    userdetails.Remove(username);
+                }
+            }
+            else if (option.ToLower() == "edit")
+            {
+                inpform.Send(username, "edit");
+                inpform.ShowDialog();
+                LoadDataToDisplayTable();
             }
         }
     }
