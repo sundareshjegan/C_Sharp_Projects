@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace ProfileManagement
 {
@@ -16,14 +17,18 @@ namespace ProfileManagement
         {
             InitializeComponent();
             inpform.SendUserDetailsToMainForm += GetUser;
+
             #region animation code
-            //gifImage = Properties.Resources.greenPurple;
+            typeof(Panel).InvokeMember("DoubleBuffered",
+            BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+            null, optionsPanel, new object[] { true });
+            //gifImage = Properties.Resources.bg6;
             gifImage = new Bitmap("D:\\Sundareshwaran\\C_Sharp_Projects\\WindowsForms\\ProfileManagement\\greenPurple.gif");
             animationTimer = new Timer();
             animationTimer.Interval = 100;
             animationTimer.Tick += AnimationTimer_Tick;
             totalFrames = gifImage.GetFrameCount(System.Drawing.Imaging.FrameDimension.Time);
-            //animationTimer.Start();
+            animationTimer.Start();
             #endregion
         }
         #region animation varialbles and events
@@ -122,7 +127,7 @@ namespace ProfileManagement
         }
         private void OnFormLoad(object sender, EventArgs e)
         {
-            displayTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //displayTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -205,7 +210,7 @@ namespace ProfileManagement
                     }
                     MessageBox.Show("File saved Successfully");
                 }
-                Close();
+                //Close();
             }
         }
 
@@ -316,6 +321,20 @@ namespace ProfileManagement
                 inpform.ShowDialog();
                 LoadDataToDisplayTable();
             }
+        }
+
+        private void OnButtonMouseEnter(object sender, EventArgs e)
+        {
+            if (sender is Button b && b.Name == "loadBtn")
+                importHoverLabel.Text = "Import data from file";
+            else
+                saveHoverLabel.Text = "Save data";
+        }
+
+        private void OnButtonMouseLeave(object sender, EventArgs e)
+        {
+            importHoverLabel.Text = "";
+            saveHoverLabel.Text = "";
         }
     }
 }

@@ -34,7 +34,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.displayTable = new System.Windows.Forms.DataGridView();
+            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dob = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profileImage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.optionsPanel = new System.Windows.Forms.Panel();
+            this.importHoverLabel = new System.Windows.Forms.Label();
             this.userCard = new System.Windows.Forms.Panel();
             this.photoPanel = new System.Windows.Forms.Panel();
             this.profilePicBox = new System.Windows.Forms.PictureBox();
@@ -42,11 +48,7 @@
             this.saveBtn = new System.Windows.Forms.Button();
             this.addColBtn = new System.Windows.Forms.Button();
             this.AddRowBtn = new System.Windows.Forms.Button();
-            this.profileImage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dob = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.saveHoverLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.displayTable)).BeginInit();
             this.optionsPanel.SuspendLayout();
             this.photoPanel.SuspendLayout();
@@ -101,16 +103,57 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe Fluent Icons", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.displayTable.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.displayTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.displayTable.Size = new System.Drawing.Size(448, 542);
+            this.displayTable.Size = new System.Drawing.Size(587, 604);
             this.displayTable.TabIndex = 1;
             this.displayTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellClick);
             this.displayTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellDoubleClicked);
             this.displayTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.displayTable_CellMouseClick);
             // 
+            // email
+            // 
+            this.email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.email.HeaderText = "E-mail";
+            this.email.Name = "email";
+            this.email.ReadOnly = true;
+            this.email.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.email.ToolTipText = "email-id";
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.name.Width = 58;
+            // 
+            // dob
+            // 
+            this.dob.HeaderText = "DOB";
+            this.dob.Name = "dob";
+            this.dob.ReadOnly = true;
+            this.dob.Width = 67;
+            // 
+            // phone
+            // 
+            this.phone.HeaderText = "Phone no";
+            this.phone.Name = "phone";
+            this.phone.Width = 106;
+            // 
+            // profileImage
+            // 
+            this.profileImage.HeaderText = "ProfileImage";
+            this.profileImage.Name = "profileImage";
+            this.profileImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.profileImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.profileImage.Width = 110;
+            // 
             // optionsPanel
             // 
             this.optionsPanel.BackgroundImage = global::ProfileManagement.Properties.Resources.greenPurple;
             this.optionsPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.optionsPanel.Controls.Add(this.saveHoverLabel);
+            this.optionsPanel.Controls.Add(this.importHoverLabel);
             this.optionsPanel.Controls.Add(this.userCard);
             this.optionsPanel.Controls.Add(this.photoPanel);
             this.optionsPanel.Controls.Add(this.loadBtn);
@@ -120,9 +163,20 @@
             this.optionsPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.optionsPanel.Location = new System.Drawing.Point(0, 0);
             this.optionsPanel.Name = "optionsPanel";
-            this.optionsPanel.Size = new System.Drawing.Size(275, 542);
+            this.optionsPanel.Size = new System.Drawing.Size(275, 604);
             this.optionsPanel.TabIndex = 0;
             this.optionsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.optionsPanel_Paint);
+            // 
+            // importHoverLabel
+            // 
+            this.importHoverLabel.AutoSize = true;
+            this.importHoverLabel.BackColor = System.Drawing.Color.Transparent;
+            this.importHoverLabel.Font = new System.Drawing.Font("Lucida Sans Unicode", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.importHoverLabel.ForeColor = System.Drawing.Color.White;
+            this.importHoverLabel.Location = new System.Drawing.Point(12, 61);
+            this.importHoverLabel.Name = "importHoverLabel";
+            this.importHoverLabel.Size = new System.Drawing.Size(0, 16);
+            this.importHoverLabel.TabIndex = 4;
             // 
             // userCard
             // 
@@ -154,23 +208,29 @@
             // 
             this.loadBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("loadBtn.BackgroundImage")));
             this.loadBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.loadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loadBtn.Location = new System.Drawing.Point(12, 12);
             this.loadBtn.Name = "loadBtn";
             this.loadBtn.Size = new System.Drawing.Size(50, 46);
             this.loadBtn.TabIndex = 2;
             this.loadBtn.UseVisualStyleBackColor = true;
             this.loadBtn.Click += new System.EventHandler(this.OnLoadBtnClicked);
+            this.loadBtn.MouseEnter += new System.EventHandler(this.OnButtonMouseEnter);
+            this.loadBtn.MouseLeave += new System.EventHandler(this.OnButtonMouseLeave);
             // 
             // saveBtn
             // 
             this.saveBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("saveBtn.BackgroundImage")));
             this.saveBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.saveBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.saveBtn.Location = new System.Drawing.Point(216, 12);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(53, 46);
             this.saveBtn.TabIndex = 2;
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.OnSaveBtnClicked);
+            this.saveBtn.MouseEnter += new System.EventHandler(this.OnButtonMouseEnter);
+            this.saveBtn.MouseLeave += new System.EventHandler(this.OnButtonMouseLeave);
             // 
             // addColBtn
             // 
@@ -194,50 +254,22 @@
             this.AddRowBtn.UseVisualStyleBackColor = true;
             this.AddRowBtn.Click += new System.EventHandler(this.OnAddRowBtnClicked);
             // 
-            // profileImage
+            // saveHoverLabel
             // 
-            this.profileImage.HeaderText = "ProfileImage";
-            this.profileImage.Name = "profileImage";
-            this.profileImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.profileImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.profileImage.Width = 110;
-            // 
-            // phone
-            // 
-            this.phone.HeaderText = "Phone no";
-            this.phone.Name = "phone";
-            this.phone.Width = 106;
-            // 
-            // dob
-            // 
-            this.dob.HeaderText = "DOB";
-            this.dob.Name = "dob";
-            this.dob.ReadOnly = true;
-            this.dob.Width = 67;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.name.Width = 58;
-            // 
-            // email
-            // 
-            this.email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.email.HeaderText = "E-mail";
-            this.email.Name = "email";
-            this.email.ReadOnly = true;
-            this.email.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.email.ToolTipText = "email-id";
+            this.saveHoverLabel.AutoSize = true;
+            this.saveHoverLabel.BackColor = System.Drawing.Color.Transparent;
+            this.saveHoverLabel.Font = new System.Drawing.Font("Lucida Sans Unicode", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveHoverLabel.ForeColor = System.Drawing.Color.White;
+            this.saveHoverLabel.Location = new System.Drawing.Point(203, 61);
+            this.saveHoverLabel.Name = "saveHoverLabel";
+            this.saveHoverLabel.Size = new System.Drawing.Size(0, 16);
+            this.saveHoverLabel.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 542);
+            this.ClientSize = new System.Drawing.Size(862, 604);
             this.Controls.Add(this.displayTable);
             this.Controls.Add(this.optionsPanel);
             this.Name = "Form1";
@@ -246,6 +278,7 @@
             this.Load += new System.EventHandler(this.OnFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.displayTable)).EndInit();
             this.optionsPanel.ResumeLayout(false);
+            this.optionsPanel.PerformLayout();
             this.photoPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.profilePicBox)).EndInit();
             this.ResumeLayout(false);
@@ -253,8 +286,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel optionsPanel;
         private System.Windows.Forms.DataGridView displayTable;
         private System.Windows.Forms.Button addColBtn;
         private System.Windows.Forms.Button AddRowBtn;
@@ -268,6 +299,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dob;
         private System.Windows.Forms.DataGridViewTextBoxColumn phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn profileImage;
+        public System.Windows.Forms.Panel optionsPanel;
+        private System.Windows.Forms.Label importHoverLabel;
+        private System.Windows.Forms.Label saveHoverLabel;
     }
 }
 
