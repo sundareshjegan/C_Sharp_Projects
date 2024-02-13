@@ -46,7 +46,6 @@ namespace LiscenceManagement
             }
         }
 
-
         private bool isLiscenceValid = false;
         private string activationFileName,saltFileName;
         private string activatedTime = "";
@@ -55,7 +54,7 @@ namespace LiscenceManagement
         private byte[] encryptionKey;
         private int keySize = 256;
 
-        private int activationDuration = 130;
+        private int activationDuration = 20;
 
         private Timer timer;
         
@@ -183,6 +182,7 @@ namespace LiscenceManagement
             {
                 timer.Stop();
                 MessageBox.Show("Liscence Expired..!");
+                Dispose();
             }
             
         }
