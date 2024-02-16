@@ -14,38 +14,75 @@ namespace ClickAndDraw
             DoubleBuffered = true;
         }
 
-        Pen pen = new Pen(Color.Black, 3);
-        List<Point> points = new List<Point>();
-        Point[] arr = new Point[10];
-        int i = 5;
-        int xPos = 100, yPos = 100;
-        GraphicsPath path = new GraphicsPath();
-        protected override void OnPaint(PaintEventArgs e)
+        private Rectangle rect;
+        private Graphics g;
+        private Pen pen = new Pen(Color.Red, 3);
+
+        private ShapesChooseForm shapeForm;
+
+        private List<Rectangle> rectangles = new List<Rectangle>();
+
+        private bool isMouseDown = false;
+        private int startX, startY,endX, endY;
+
+        private void OnFormPaint(object sender, PaintEventArgs e)
         {
-            base.OnPaint(e);
-            Graphics g = e.Graphics;
-            //e.Graphics.DrawLine(pen, new Point(100,100),new Point(500,500));
-            //g.DrawRectangle(pen,new Rectangle(new Point(100,100),new Size(300,200)));
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-           // g.DrawArc(pen, new Rectangle(new Point(100, 100), new Size(50, 50)),0,90);
-           // g.DrawArc(pen, new Rectangle(new Point(200, 100), new Size(50, 50)),90,180);
-            //g.DrawArc(pen, new Rectangle(new Point(300, 100), new Size(50, 50)),0,360);
-
-            path.AddLine(new PointF(300, 300),new PointF(400,450));
-            path.AddLine(new PointF(400, 450),new PointF(200,350));
-            path.AddLine(new PointF(200, 350),new PointF(400,350));
-            path.AddLine(new PointF(400, 350),new PointF(200,450));
-            path.AddLine(new PointF(200, 450),new PointF(300,300));
-
-            g.DrawPath(pen,path);
-
+            g = e.Graphics;
+            foreach (Rectangle r in rectangles)
+            {
+                g.DrawRectangle(pen, r);
+            }
+            if(rect != null)
+            {
+                rect = new Rectangle(startX, startY, endX - startX, endY - startY);
+                g.DrawRectangle(pen, rect);
+            }
+            
         }
 
-       
-        private void OnFormClicked(object sender, EventArgs e)
+        #region ButtonEvents
+        private void OnDrawShapeBtnClicked(object sender, EventArgs e)
         {
-            MouseEventArgs mouseEvent = e as MouseEventArgs;
-            points.Add(mouseEvent.Location);        
+            shapeForm = new ShapesChooseForm();
+            shapeForm.SendShape += SetShapeText;
+            shapeForm.Location = drawShapeBtn.PointToClient(new Point(0, 0));
+            shapeForm.ShowDialog();
         }
+        #endregion
+
+        #region MouseEvents
+        private void OnMouseDown(object sender, MouseEventArgs e)
+        {
+            isMouseDown = true;
+            startX = e.X;
+            startY = e.Y;
+        }
+
+        private void OnMouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseDown = false;
+            endX = e.X;
+            endY = e.Y;
+            rectangles.Add(rect);
+            Invalidate();
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+            {   
+                endX = e.X;
+                endY = e.Y;
+                Invalidate();
+            }
+        }
+        #endregion
+
+        #region UserDefined Functions
+        private void SetShapeText(object sender, string shapeName)
+        {
+            drawShapeBtn.Text = shapeName;
+        }
+        #endregion
     }
 }
