@@ -5,3 +5,10 @@ D:\Sundareshwaran\Projects-Visual Studio\Tasks\SubsequenceArray\obj\Debug\Subseq
 D:\Sundareshwaran\Projects-Visual Studio\Tasks\SubsequenceArray\obj\Debug\SubsequenceArray.csproj.CoreCompileInputs.cache
 D:\Sundareshwaran\Projects-Visual Studio\Tasks\SubsequenceArray\obj\Debug\SubsequenceArray.exe
 D:\Sundareshwaran\Projects-Visual Studio\Tasks\SubsequenceArray\obj\Debug\SubsequenceArray.pdb
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\SubsequenceArray\bin\Debug\SubsequenceArray.exe.config
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\SubsequenceArray\bin\Debug\SubsequenceArray.exe
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\SubsequenceArray\bin\Debug\SubsequenceArray.pdb
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\SubsequenceArray\obj\Debug\SubsequenceArray.csprojAssemblyReference.cache
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\SubsequenceArray\obj\Debug\SubsequenceArray.csproj.CoreCompileInputs.cache
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\SubsequenceArray\obj\Debug\SubsequenceArray.exe
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\SubsequenceArray\obj\Debug\SubsequenceArray.pdb

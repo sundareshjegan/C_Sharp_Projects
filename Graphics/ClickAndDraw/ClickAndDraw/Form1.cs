@@ -25,6 +25,8 @@ namespace ClickAndDraw
         private bool isMouseDown = false;
         private int startX, startY,endX, endY;
 
+        public delegate void DelegateName(string s, int n);
+
         private void OnFormPaint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;

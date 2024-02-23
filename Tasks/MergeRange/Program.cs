@@ -11,13 +11,13 @@ namespace MergeRange
     }
     class Operations
     { 
-        internal static bool checkToMerge(Range start, Range end)
+        internal static bool CheckToMerge(Range start, Range end)
         {
             int max = Math.Max(start.Start, end.Start);
             int min = Math.Min(start.End, end.End);
             return max - min <= 0;
         }
-        internal static void printRanges(List<Range> ranges)
+        internal static void PrintRanges(List<Range> ranges)
         {
             Console.WriteLine("Ranges\t\tValue");
             foreach(Range range in ranges)
@@ -48,7 +48,7 @@ namespace MergeRange
 
                 for (int i = 0; i < listSize; i++)
                 {
-                    if (Operations.checkToMerge(ranges[i], newRange))
+                    if (Operations.CheckToMerge(ranges[i], newRange))
                     {
                         newRange.Start = Math.Min(ranges[i].Start, newRange.Start);
                         newRange.End = Math.Max(ranges[i].End, newRange.End);
@@ -59,7 +59,7 @@ namespace MergeRange
                     }
                 }
                 ranges.Add(newRange);
-                Operations.printRanges(ranges);
+                Operations.PrintRanges(ranges);
             }
         }
         #region ValidateInteger

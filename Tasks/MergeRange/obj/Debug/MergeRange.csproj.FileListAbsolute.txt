@@ -5,3 +5,10 @@ D:\Sundareshwaran\Projects-Visual Studio\Tasks\MergeRange\bin\Debug\MergeRange.e
 D:\Sundareshwaran\Projects-Visual Studio\Tasks\MergeRange\bin\Debug\MergeRange.pdb
 D:\Sundareshwaran\Projects-Visual Studio\Tasks\MergeRange\obj\Debug\MergeRange.exe
 D:\Sundareshwaran\Projects-Visual Studio\Tasks\MergeRange\obj\Debug\MergeRange.pdb
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\MergeRange\bin\Debug\.0.exe.config
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\MergeRange\bin\Debug\.0.exe
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\MergeRange\bin\Debug\.0.pdb
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\MergeRange\obj\Debug\MergeRange.csprojAssemblyReference.cache
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\MergeRange\obj\Debug\MergeRange.csproj.CoreCompileInputs.cache
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\MergeRange\obj\Debug\.0.exe
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\MergeRange\obj\Debug\.0.pdb

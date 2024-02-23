@@ -33,7 +33,7 @@ namespace StudentDetails
             Operations.CalculateRank(studentsList);
             stuID++;
         }
-        private static void removeStudent()
+        private static void RemoveStudent()
         {
             InputValidate.ValidateInt("Enter the student ID to remove : ");
             int id = InputValidate.IntValue;
@@ -83,7 +83,7 @@ namespace StudentDetails
                         addStudent();
                         break;
                     case 2:
-                        removeStudent();
+                        RemoveStudent();
                         break;
                     case 3:
                         Operations.Print(studentsList);

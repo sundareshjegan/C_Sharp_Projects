@@ -5,3 +5,10 @@ D:\Sundareshwaran\Projects-Visual Studio\Tasks\LinQueryDemo\obj\Debug\LinQueryDe
 D:\Sundareshwaran\Projects-Visual Studio\Tasks\LinQueryDemo\obj\Debug\LinQueryDemo.csproj.CoreCompileInputs.cache
 D:\Sundareshwaran\Projects-Visual Studio\Tasks\LinQueryDemo\obj\Debug\LinQueryDemo.exe
 D:\Sundareshwaran\Projects-Visual Studio\Tasks\LinQueryDemo\obj\Debug\LinQueryDemo.pdb
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\LinQueryDemo\bin\Debug\LinQueryDemo.exe.config
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\LinQueryDemo\bin\Debug\LinQueryDemo.exe
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\LinQueryDemo\bin\Debug\LinQueryDemo.pdb
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\LinQueryDemo\obj\Debug\LinQueryDemo.csprojAssemblyReference.cache
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\LinQueryDemo\obj\Debug\LinQueryDemo.csproj.CoreCompileInputs.cache
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\LinQueryDemo\obj\Debug\LinQueryDemo.exe
+D:\Sundareshwaran\C_Sharp_Projects\Tasks\LinQueryDemo\obj\Debug\LinQueryDemo.pdb
