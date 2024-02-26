@@ -17,9 +17,14 @@ namespace ExpenseTracker
             InitializeComponent();
             StartAnimation();
 
-            categoryTB.DataSource= ExpenseManager.categories;
+            categoryTB.DataSource = ExpenseManager.categories;
+            ExpenseManager.OnCategoryUpdated += UpdateCategory;
+        }
 
-      
+        private void UpdateCategory(object sender, string e)
+        {
+            categoryTB.DataSource = null;
+            categoryTB.DataSource = ExpenseManager.categories;
         }
 
         private void StartAnimation()
@@ -92,5 +97,13 @@ namespace ExpenseTracker
             if (descriptionTB.Text == "Description")
                 descriptionTB.Text = "";
         }
+
+        private void OnAddCategoryBtnClicked(object sender, EventArgs e)
+        {
+            AddCategoryForm addCategoryForm = new AddCategoryForm();
+            addCategoryForm.Location = addCategoryBtn.PointToScreen(new Point(0, 0));
+            addCategoryForm.ShowDialog();
+        }
+
     }
 }

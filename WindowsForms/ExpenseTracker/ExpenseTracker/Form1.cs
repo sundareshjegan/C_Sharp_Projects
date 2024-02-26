@@ -20,7 +20,7 @@ namespace ExpenseTracker
             timer.Start();
             expenseDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            ExpenseManager.OnDataUpdated += UpdateDataGridView;
+            ExpenseManager.OnExpenseUpdated += UpdateDataGridView;
         }
 
         private void UpdateDataGridView(object sender, string e)
@@ -46,12 +46,20 @@ namespace ExpenseTracker
             if (isMenuClicked)
             {
                 if(optionsPanel.Width < 210)
+                {
+                    timer.Interval = 5;
                     optionsPanel.Width += 50;
+                }
+                    
             }
             else if(!isMenuClicked){
                 if (optionsPanel.Width > 80)
+                {
+                    timer.Interval = 5;
                     optionsPanel.Width -= 50;
+                }
             }
+            timer.Interval = 100;
         }
 
         private void OnPictureBoxMouseEnter(object sender, EventArgs e)
