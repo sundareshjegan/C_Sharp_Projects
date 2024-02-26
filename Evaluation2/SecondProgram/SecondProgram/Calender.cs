@@ -61,6 +61,12 @@ namespace SecondProgram
             dateLabels.Add(l33);
             dateLabels.Add(l34);
             dateLabels.Add(l35);
+            dateLabels.Add(l36);
+            dateLabels.Add(l37);
+            dateLabels.Add(l38);
+            dateLabels.Add(l39);
+            dateLabels.Add(l40);
+            dateLabels.Add(l41);
         }
 
         private void ResetLabels()

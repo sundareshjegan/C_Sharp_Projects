@@ -36,14 +36,14 @@
             this.calender1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.calender1.Location = new System.Drawing.Point(0, 0);
             this.calender1.Name = "calender1";
-            this.calender1.Size = new System.Drawing.Size(320, 333);
+            this.calender1.Size = new System.Drawing.Size(320, 367);
             this.calender1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 333);
+            this.ClientSize = new System.Drawing.Size(320, 367);
             this.Controls.Add(this.calender1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

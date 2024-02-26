@@ -77,6 +77,12 @@
             this.l3 = new System.Windows.Forms.Label();
             this.l9 = new System.Windows.Forms.Label();
             this.l2 = new System.Windows.Forms.Label();
+            this.l36 = new System.Windows.Forms.Label();
+            this.l37 = new System.Windows.Forms.Label();
+            this.l38 = new System.Windows.Forms.Label();
+            this.l39 = new System.Windows.Forms.Label();
+            this.l40 = new System.Windows.Forms.Label();
+            this.l41 = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             this.daysPanel.SuspendLayout();
             this.datePanel.SuspendLayout();
@@ -246,28 +252,34 @@
             this.datePanel.Controls.Add(this.l15);
             this.datePanel.Controls.Add(this.l8);
             this.datePanel.Controls.Add(this.l1);
+            this.datePanel.Controls.Add(this.l41);
             this.datePanel.Controls.Add(this.l35);
             this.datePanel.Controls.Add(this.l28);
             this.datePanel.Controls.Add(this.l21);
             this.datePanel.Controls.Add(this.l14);
+            this.datePanel.Controls.Add(this.l40);
             this.datePanel.Controls.Add(this.l7);
             this.datePanel.Controls.Add(this.l34);
             this.datePanel.Controls.Add(this.l27);
             this.datePanel.Controls.Add(this.l20);
             this.datePanel.Controls.Add(this.l13);
+            this.datePanel.Controls.Add(this.l39);
             this.datePanel.Controls.Add(this.l6);
             this.datePanel.Controls.Add(this.l33);
             this.datePanel.Controls.Add(this.l26);
             this.datePanel.Controls.Add(this.l19);
             this.datePanel.Controls.Add(this.l12);
+            this.datePanel.Controls.Add(this.l38);
             this.datePanel.Controls.Add(this.l5);
             this.datePanel.Controls.Add(this.l32);
             this.datePanel.Controls.Add(this.l25);
+            this.datePanel.Controls.Add(this.l37);
             this.datePanel.Controls.Add(this.l18);
             this.datePanel.Controls.Add(this.l31);
             this.datePanel.Controls.Add(this.l24);
             this.datePanel.Controls.Add(this.l11);
             this.datePanel.Controls.Add(this.l17);
+            this.datePanel.Controls.Add(this.l36);
             this.datePanel.Controls.Add(this.l4);
             this.datePanel.Controls.Add(this.l30);
             this.datePanel.Controls.Add(this.l23);
@@ -279,7 +291,7 @@
             this.datePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.datePanel.Location = new System.Drawing.Point(0, 117);
             this.datePanel.Name = "datePanel";
-            this.datePanel.Size = new System.Drawing.Size(322, 222);
+            this.datePanel.Size = new System.Drawing.Size(322, 250);
             this.datePanel.TabIndex = 5;
             // 
             // l29
@@ -597,6 +609,60 @@
             this.l2.Size = new System.Drawing.Size(0, 18);
             this.l2.TabIndex = 3;
             // 
+            // l36
+            // 
+            this.l36.AutoSize = true;
+            this.l36.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.l36.Location = new System.Drawing.Point(61, 214);
+            this.l36.Name = "l36";
+            this.l36.Size = new System.Drawing.Size(0, 18);
+            this.l36.TabIndex = 3;
+            // 
+            // l37
+            // 
+            this.l37.AutoSize = true;
+            this.l37.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.l37.Location = new System.Drawing.Point(105, 214);
+            this.l37.Name = "l37";
+            this.l37.Size = new System.Drawing.Size(0, 18);
+            this.l37.TabIndex = 3;
+            // 
+            // l38
+            // 
+            this.l38.AutoSize = true;
+            this.l38.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.l38.Location = new System.Drawing.Point(147, 214);
+            this.l38.Name = "l38";
+            this.l38.Size = new System.Drawing.Size(0, 18);
+            this.l38.TabIndex = 3;
+            // 
+            // l39
+            // 
+            this.l39.AutoSize = true;
+            this.l39.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.l39.Location = new System.Drawing.Point(189, 214);
+            this.l39.Name = "l39";
+            this.l39.Size = new System.Drawing.Size(0, 18);
+            this.l39.TabIndex = 3;
+            // 
+            // l40
+            // 
+            this.l40.AutoSize = true;
+            this.l40.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.l40.Location = new System.Drawing.Point(224, 214);
+            this.l40.Name = "l40";
+            this.l40.Size = new System.Drawing.Size(0, 18);
+            this.l40.TabIndex = 3;
+            // 
+            // l41
+            // 
+            this.l41.AutoSize = true;
+            this.l41.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.l41.Location = new System.Drawing.Point(263, 214);
+            this.l41.Name = "l41";
+            this.l41.Size = new System.Drawing.Size(0, 18);
+            this.l41.TabIndex = 3;
+            // 
             // Calender
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -605,7 +671,7 @@
             this.Controls.Add(this.daysPanel);
             this.Controls.Add(this.headerPanel);
             this.Name = "Calender";
-            this.Size = new System.Drawing.Size(322, 336);
+            this.Size = new System.Drawing.Size(322, 367);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
             this.daysPanel.ResumeLayout(false);
@@ -667,5 +733,11 @@
         private System.Windows.Forms.Label l9;
         private System.Windows.Forms.Label l2;
         private System.Windows.Forms.Button todayBtn;
+        private System.Windows.Forms.Label l41;
+        private System.Windows.Forms.Label l40;
+        private System.Windows.Forms.Label l39;
+        private System.Windows.Forms.Label l38;
+        private System.Windows.Forms.Label l37;
+        private System.Windows.Forms.Label l36;
     }
 }
