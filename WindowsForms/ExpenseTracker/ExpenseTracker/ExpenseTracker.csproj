@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ExpenseTracker</RootNamespace>
     <AssemblyName>ExpenseTracker</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -53,6 +53,12 @@
     <Compile Include="AddCategoryForm.Designer.cs">
       <DependentUpon>AddCategoryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BudgetInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BudgetInputForm.Designer.cs">
+      <DependentUpon>BudgetInputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Expense.cs" />
     <Compile Include="ExpenseInputForm.cs">
       <SubType>Form</SubType>
@@ -71,6 +77,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddCategoryForm.resx">
       <DependentUpon>AddCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BudgetInputForm.resx">
+      <DependentUpon>BudgetInputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExpenseInputForm.resx">
       <DependentUpon>ExpenseInputForm.cs</DependentUpon>
@@ -104,6 +113,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bluegradient.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\categories.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

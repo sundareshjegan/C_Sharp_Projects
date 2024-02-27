@@ -16,11 +16,34 @@ namespace ExpenseTracker
         {
             InitializeComponent();
             timer.Interval = 100;
+            menuTimer.Interval = 10;
+
             timer.Tick += OnTimerTicked;
+            menuTimer.Tick += OnMenuTimerTicked;
+
             timer.Start();
             expenseDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             ExpenseManager.OnExpenseUpdated += UpdateDataGridView;
+        }
+
+        private void OnMenuTimerTicked(object sender, EventArgs e)
+        {
+            if (isMenuClicked)
+            {
+                if (optionsPanel.Width < 210)
+                {
+                    optionsPanel.Width += 10;
+                }
+
+            }
+            else if (!isMenuClicked)
+            {
+                if (optionsPanel.Width > 70)
+                {
+                    optionsPanel.Width -= 10;
+                }
+            }
         }
 
         private void UpdateDataGridView(object sender, string e)
@@ -33,6 +56,7 @@ namespace ExpenseTracker
         private bool isMenuClicked = false;
         private int i = 0, selectedRow;
         private Timer timer = new Timer();
+        private Timer menuTimer = new Timer();
 
         private void OnTimerTicked(object sender, EventArgs e)
         {
@@ -43,35 +67,24 @@ namespace ExpenseTracker
             }
             else headingLabel.Location = new Point(7 * i, 21);
             i++;
-            if (isMenuClicked)
-            {
-                if(optionsPanel.Width < 210)
-                {
-                    timer.Interval = 5;
-                    optionsPanel.Width += 50;
-                }
-                    
-            }
-            else if(!isMenuClicked){
-                if (optionsPanel.Width > 80)
-                {
-                    timer.Interval = 5;
-                    optionsPanel.Width -= 50;
-                }
-            }
-            timer.Interval = 100;
         }
 
         private void OnPictureBoxMouseEnter(object sender, EventArgs e)
         {
             if(sender is PictureBox pb)
                 pb.BackColor = Color.Gainsboro;
+            if (sender is Label label)
+                label.Parent.BackColor = Color.Gainsboro;
         }
 
         private void OnPictureBoxMouseLeave(object sender, EventArgs e)
         {
             if (sender is PictureBox pb)
-                pb.BackColor = Color.White;
+                pb.BackColor = Color.Transparent;
+            if (sender is Panel panel)
+                panel.BackColor = Color.Transparent;
+            if (sender is Label label)
+                label.BackColor = Color.Transparent;
         }
 
         private void OnPlusPBClick(object sender, EventArgs e)
@@ -81,37 +94,36 @@ namespace ExpenseTracker
             expenseInputForm.ShowDialog();
         }
 
-        private void OnFilterPBClick(object sender, EventArgs e)
+        private void OnMenuPBClick(object sender, EventArgs e)
         {
-
+            menuTimer.Start();
+            isMenuClicked = !isMenuClicked;
         }
 
         private void expenseDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-   
-                delPB.Visible = true;
-                selectedRow = e.RowIndex;
-           
+            deletePanel.Visible = true;
+            selectedRow = e.RowIndex;
         }
 
-        private void OnMenuPBClick(object sender, EventArgs e)
+        private void OnCategoryPBClicked(object sender, EventArgs e)
         {
-            isMenuClicked = !isMenuClicked;
-            //if (isMenuClicked)
-            //{
-            //    optionsPanel.Width = 220;
-            //}
-            //else
-            //{
-            //    optionsPanel.Width = 67;
-            //}
+            AddCategoryForm addCategoryForm = new AddCategoryForm();
+            addCategoryForm.Location = categoryPB.PointToScreen(new Point(0, 0));
+            addCategoryForm.ShowDialog();
         }
 
-        private void delPB_Click(object sender, EventArgs e)
-            
+        private void OnBudgetClicked(object sender, EventArgs e)
+        {
+            BudgetInputForm budgetInputForm = new BudgetInputForm();
+            budgetInputForm.Location = budgetPB.PointToScreen(new Point(0, 0));
+            budgetInputForm.ShowDialog();
+        }
+
+        private void OnDelPBClicked(object sender, EventArgs e)
         {
             ExpenseManager.RemoveExpense(selectedRow);
-            delPB.Visible = false;
+            deletePanel.Visible = false;
         }
     }
 }
