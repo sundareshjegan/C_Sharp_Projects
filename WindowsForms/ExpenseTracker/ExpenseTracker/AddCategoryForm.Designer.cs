@@ -57,11 +57,14 @@
             this.updateCancel = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
             this.operationsPanel = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.catBudgetTB = new System.Windows.Forms.NumericUpDown();
             this.AddCategoryPanel.SuspendLayout();
             this.DeleteCategoryPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.UpdateCategoryPanel.SuspendLayout();
             this.operationsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.catBudgetTB)).BeginInit();
             this.SuspendLayout();
             // 
             // addCategoryLabel
@@ -69,7 +72,7 @@
             this.addCategoryLabel.AutoSize = true;
             this.addCategoryLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addCategoryLabel.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.addCategoryLabel.Location = new System.Drawing.Point(16, 69);
+            this.addCategoryLabel.Location = new System.Drawing.Point(16, 78);
             this.addCategoryLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.addCategoryLabel.Name = "addCategoryLabel";
             this.addCategoryLabel.Size = new System.Drawing.Size(134, 18);
@@ -89,7 +92,7 @@
             // 
             this.okBtn.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.okBtn.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.okBtn.Location = new System.Drawing.Point(224, 110);
+            this.okBtn.Location = new System.Drawing.Point(224, 179);
             this.okBtn.Margin = new System.Windows.Forms.Padding(2);
             this.okBtn.Name = "okBtn";
             this.okBtn.Size = new System.Drawing.Size(61, 32);
@@ -102,7 +105,7 @@
             // 
             this.addCancelBtn.BackColor = System.Drawing.Color.LightSalmon;
             this.addCancelBtn.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addCancelBtn.Location = new System.Drawing.Point(76, 110);
+            this.addCancelBtn.Location = new System.Drawing.Point(83, 179);
             this.addCancelBtn.Margin = new System.Windows.Forms.Padding(2);
             this.addCancelBtn.Name = "addCancelBtn";
             this.addCancelBtn.Size = new System.Drawing.Size(67, 32);
@@ -113,16 +116,18 @@
             // 
             // AddCategoryPanel
             // 
+            this.AddCategoryPanel.Controls.Add(this.catBudgetTB);
             this.AddCategoryPanel.Controls.Add(this.addWarningLabel);
+            this.AddCategoryPanel.Controls.Add(this.label7);
             this.AddCategoryPanel.Controls.Add(this.addCategoryLabel);
             this.AddCategoryPanel.Controls.Add(this.label6);
             this.AddCategoryPanel.Controls.Add(this.addCancelBtn);
             this.AddCategoryPanel.Controls.Add(this.newCategoryTB);
             this.AddCategoryPanel.Controls.Add(this.okBtn);
-            this.AddCategoryPanel.Location = new System.Drawing.Point(0, 0);
+            this.AddCategoryPanel.Location = new System.Drawing.Point(21, 215);
             this.AddCategoryPanel.Margin = new System.Windows.Forms.Padding(2);
             this.AddCategoryPanel.Name = "AddCategoryPanel";
-            this.AddCategoryPanel.Size = new System.Drawing.Size(368, 177);
+            this.AddCategoryPanel.Size = new System.Drawing.Size(368, 231);
             this.AddCategoryPanel.TabIndex = 3;
             this.AddCategoryPanel.Visible = false;
             // 
@@ -152,7 +157,6 @@
             // 
             this.DeleteCategoryPanel.Controls.Add(this.deleteWarningLabel);
             this.DeleteCategoryPanel.Controls.Add(this.deleteCategoryCB);
-            this.DeleteCategoryPanel.Controls.Add(this.AddCategoryPanel);
             this.DeleteCategoryPanel.Controls.Add(this.label2);
             this.DeleteCategoryPanel.Controls.Add(this.label5);
             this.DeleteCategoryPanel.Controls.Add(this.deleteCancel);
@@ -245,7 +249,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(166, 212);
+            this.panel2.Size = new System.Drawing.Size(166, 556);
             this.panel2.TabIndex = 4;
             // 
             // deleteCategoryBtn
@@ -314,7 +318,7 @@
             this.UpdateCategoryPanel.Controls.Add(this.updatedCategoryTB);
             this.UpdateCategoryPanel.Controls.Add(this.updateCancel);
             this.UpdateCategoryPanel.Controls.Add(this.updateBtn);
-            this.UpdateCategoryPanel.Location = new System.Drawing.Point(4, 2);
+            this.UpdateCategoryPanel.Location = new System.Drawing.Point(399, 71);
             this.UpdateCategoryPanel.Margin = new System.Windows.Forms.Padding(2);
             this.UpdateCategoryPanel.Name = "UpdateCategoryPanel";
             this.UpdateCategoryPanel.Size = new System.Drawing.Size(368, 210);
@@ -417,18 +421,39 @@
             this.operationsPanel.BackColor = System.Drawing.SystemColors.Control;
             this.operationsPanel.Controls.Add(this.UpdateCategoryPanel);
             this.operationsPanel.Controls.Add(this.DeleteCategoryPanel);
+            this.operationsPanel.Controls.Add(this.AddCategoryPanel);
             this.operationsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.operationsPanel.Location = new System.Drawing.Point(166, 0);
             this.operationsPanel.Name = "operationsPanel";
-            this.operationsPanel.Size = new System.Drawing.Size(0, 212);
+            this.operationsPanel.Size = new System.Drawing.Size(790, 556);
             this.operationsPanel.TabIndex = 5;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label7.Location = new System.Drawing.Point(84, 129);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(66, 18);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Budget";
+            // 
+            // catBudgetTB
+            // 
+            this.catBudgetTB.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.catBudgetTB.Location = new System.Drawing.Point(155, 120);
+            this.catBudgetTB.Name = "catBudgetTB";
+            this.catBudgetTB.Size = new System.Drawing.Size(185, 27);
+            this.catBudgetTB.TabIndex = 4;
             // 
             // AddCategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(166, 212);
+            this.ClientSize = new System.Drawing.Size(956, 556);
             this.ControlBox = false;
             this.Controls.Add(this.operationsPanel);
             this.Controls.Add(this.panel2);
@@ -445,6 +470,7 @@
             this.UpdateCategoryPanel.ResumeLayout(false);
             this.UpdateCategoryPanel.PerformLayout();
             this.operationsPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.catBudgetTB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -480,5 +506,7 @@
         private System.Windows.Forms.Label addWarningLabel;
         private System.Windows.Forms.Label updateWarningLabel;
         private System.Windows.Forms.Label deleteWarningLabel;
+        private System.Windows.Forms.NumericUpDown catBudgetTB;
+        private System.Windows.Forms.Label label7;
     }
 }

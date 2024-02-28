@@ -13,15 +13,15 @@ namespace ExpenseTracker
         public static List<string> categories = new List<string>() { "Food", "Snacks", "Travel", "Others" };
         public static Dictionary<string, List<int>> categoryDict = new Dictionary<string, List<int>>()
         {
-            { "Food" ,   new List<int>{0,0} }  ,
-            { "Snacks" ,   new List<int>{0,0} }  ,
-            { "Travel" ,   new List<int>{0,0} }  ,
-            { "Others" ,   new List<int>{0,0} }
+            { "Food" ,   new List<int>{1000,0} }  ,
+            { "Snacks" ,   new List<int>{1000,0} }  ,
+            { "Travel" ,   new List<int>{1000,0} }  ,
+            { "Others" ,   new List<int>{1000,0} }
         };
 
         public static List<List<int>> monthExpenseList = new List<List<int>>()
         {
-          new List<int>{0,0} ,   new List<int>{0,0} ,   new List<int>{0,0} ,   new List<int>{0,0},
+          new List<int>{2000,0} ,   new List<int>{ 2000, 0} ,   new List<int>{0,0} ,   new List<int>{0,0},
           new List<int>{0,0} ,   new List<int>{0,0} ,   new List<int>{0,0} ,   new List<int>{0,0},
           new List<int>{0,0} ,   new List<int>{0,0} ,   new List<int>{0,0} ,   new List<int>{0,0}
         };
@@ -95,12 +95,13 @@ namespace ExpenseTracker
         #endregion
 
         #region Category Management methods
-        public static void AddCategory(string categoryName)
+        public static void AddCategory(string categoryName, int amount)
         {
             categories.Add(categoryName);
 
             // add category to dictionary
-            categoryDict.Add(categoryName, new List<int>() { 0, 0 });
+            categoryDict.Add(categoryName, new List<int>() { amount, 0 });
+
             OnCategoryUpdated?.Invoke(categories, "Category");
         }
 

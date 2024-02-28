@@ -73,7 +73,7 @@ namespace ExpenseTracker
             }
             else if(bt.Text == "Add" && newCategoryTB.Text!="" && !string.IsNullOrWhiteSpace(newCategoryTB.Text))
             {
-                ExpenseManager.AddCategory(newCategoryTB.Text);
+                ExpenseManager.AddCategory(newCategoryTB.Text, (int)catBudgetTB.Value);
                 addWarningLabel.ForeColor = Color.DodgerBlue;
                 addWarningLabel.Text = "Category added Successfully..!";
             }
