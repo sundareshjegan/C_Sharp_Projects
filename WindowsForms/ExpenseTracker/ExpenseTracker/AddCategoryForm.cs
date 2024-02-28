@@ -28,6 +28,9 @@ namespace ExpenseTracker
             panels.Add(AddCategoryPanel);
             panels.Add(UpdateCategoryPanel);
             panels.Add(DeleteCategoryPanel);
+
+            MonthCB.DataSource = new BindingSource(ExpenseManager.MonthNumberAndName,null);
+            MonthCB.DisplayMember = "Value";
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -41,7 +44,7 @@ namespace ExpenseTracker
             }
         }
 
-        public event EventHandler<string> CategoryChanged;
+        //public event EventHandler<string> CategoryChanged;
         private Timer timer = new Timer();
         
         private void UpdateComboBoxes()
@@ -49,6 +52,15 @@ namespace ExpenseTracker
             deleteCategoryCB.DataSource = existingCategoryCB.DataSource = null;
             existingCategoryCB.DataSource = ExpenseManager.categories;
             deleteCategoryCB.DataSource = ExpenseManager.categories;
+
+            newBudgetCB.Value = 0;
+        }
+
+        private void ResetWarningLabels()
+        {
+            addWarningLabel.Text = "";
+            updateWarningLabel.Text = "";
+            deleteWarningLabel.Text = "";
         }
 
         private void OnCancelBtnClicked(object sender, EventArgs e)
@@ -82,26 +94,25 @@ namespace ExpenseTracker
 
         private void OnUpdateBtnClicked(object sender, EventArgs e)
         {
-            if (ExpenseManager.categories.Contains(updatedCategoryTB.Text))
-            {
-                updateWarningLabel.ForeColor = Color.Red;
-                updateWarningLabel.Text = "Category already exists";
-            }
-            else
-            {
-                ExpenseManager.UpdateCategory(existingCategoryCB.Text, updatedCategoryTB.Text);
-                UpdateComboBoxes();
-                updateWarningLabel.ForeColor = Color.DodgerBlue;
-                updateWarningLabel.Text = "Category Updated Successfully";
-            }
+            ExpenseManager.UpdateCategory(existingCategoryCB.Text, updatedCategoryTB.Text,MonthCB.SelectedIndex, (int)newBudgetCB.Value);
+            updateWarningLabel.ForeColor = Color.DodgerBlue;
+            updateWarningLabel.Text = "Category Updated Successfully";
+            UpdateComboBoxes();
             ResetTextBoxes();
         }
 
         private void OnDeleteBtnClicked(object sender, EventArgs e)
         {
-            ExpenseManager.RemoveCategory(deleteCategoryCB.Text);
-            deleteWarningLabel.Text = deleteCategoryCB.Text + " Deleted Successfully";
-            UpdateComboBoxes();
+            if(deleteCategoryCB.Text == "Others")
+            {
+                deleteWarningLabel.Text = "You cannot delete others category..!";
+            }
+            else
+            {
+                ExpenseManager.RemoveCategory(deleteCategoryCB.Text);
+                deleteWarningLabel.Text = deleteCategoryCB.Text + " Deleted Successfully";
+                UpdateComboBoxes();
+            }
             ResetTextBoxes();
         }
 
@@ -115,20 +126,24 @@ namespace ExpenseTracker
                 operationsPanel.Controls.Clear();
                 panels[0].Visible = true;
                 operationsPanel.Controls.Add(panels[0]);
+                Height = panels[0].Height;
             }
             else if (button.Text == "Update Category")
             {
                 operationsPanel.Controls.Clear();
                 panels[1].Visible = true;
                 operationsPanel.Controls.Add(panels[1]);
+                Height = panels[1].Height;
             }
             else if (button.Text == "Delete Category")
             {
                 operationsPanel.Controls.Clear();
                 panels[2].Visible = true;
                 operationsPanel.Controls.Add(panels[2]);
+                Height = panels[0].Height;
             }
             ResetTextBoxes();
+            ResetWarningLabels();
         }
 
         private void OnCloseBtnClicked(object sender, EventArgs e)
@@ -139,6 +154,16 @@ namespace ExpenseTracker
         private void OnComboBoxKeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void ExistingCategoryCBTextChanged(object sender, EventArgs e)
+        {
+            updatedCategoryTB.Text = existingCategoryCB.Text;
+            try
+            {
+                newBudgetCB.Value = (int)ExpenseManager.categoryDict[existingCategoryCB.Text][MonthCB.SelectedIndex][0];
+            }
+            catch (Exception ex) { }
         }
     }
 }

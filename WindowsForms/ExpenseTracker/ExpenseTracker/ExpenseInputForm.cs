@@ -16,10 +16,31 @@ namespace ExpenseTracker
         {
             InitializeComponent();
             StartAnimation();
-
             categoryTB.DataSource = ExpenseManager.categories;
             ExpenseManager.OnCategoryUpdated += UpdateCategory;
         }
+
+        public ExpenseInputForm(Expense expense, int id)
+        {
+            InitializeComponent();
+            StartAnimation();
+            categoryTB.DataSource = ExpenseManager.categories;
+            ExpenseManager.OnCategoryUpdated += UpdateCategory;
+
+            saveBtn.Text = "Edit";
+
+            //expenseToEdit = expense;
+            editExpenseId = id;
+
+            amountTB.Visible = false;
+            NameTB.Text = expense.Name;
+            amountNumericUpDown.Value = expense.Amount;
+            categoryTB.Text = expense.Category;
+            descriptionTB.Text = expense.Description;
+            dateTimePicker.Value = expense.Date;
+        }
+        
+        private int editExpenseId = 0;
 
         private void UpdateCategory(object sender, string e)
         {
@@ -81,7 +102,15 @@ namespace ExpenseTracker
                 Category = categoryTB.Text,
                 Description = descriptionTB.Text,
             };
-            ExpenseManager.AddExpense(expense);
+
+            if (saveBtn.Text == "Edit")
+            {
+                ExpenseManager.UpdateExpense(expense, editExpenseId);
+            }
+            else
+            {
+                ExpenseManager.AddExpense(expense);
+            }
             Dispose();
         }
 

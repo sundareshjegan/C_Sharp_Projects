@@ -61,7 +61,22 @@
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.expenseBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.filterOptionsPanel = new System.Windows.Forms.Panel();
+            this.filterResetBtn = new System.Windows.Forms.PictureBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.filterToDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.filterFromDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.filterDayCB = new System.Windows.Forms.ComboBox();
+            this.filterMonthCB = new System.Windows.Forms.ComboBox();
+            this.filterCategoryCB = new System.Windows.Forms.ComboBox();
             this.optionsPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.categoryPB)).BeginInit();
@@ -78,6 +93,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.expenseDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.expenseBindingSource2)).BeginInit();
             this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.filterOptionsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filterResetBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // optionsPanel
@@ -243,6 +262,7 @@
             this.filterPB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.filterPB.TabIndex = 0;
             this.filterPB.TabStop = false;
+            this.filterPB.Click += new System.EventHandler(this.OnFilterPBClicked);
             this.filterPB.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
             this.filterPB.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
             // 
@@ -322,7 +342,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1012, 68);
+            this.panel2.Size = new System.Drawing.Size(1008, 68);
             this.panel2.TabIndex = 2;
             // 
             // headingLabel
@@ -332,7 +352,7 @@
             this.headingLabel.ForeColor = System.Drawing.Color.White;
             this.headingLabel.Location = new System.Drawing.Point(7, 21);
             this.headingLabel.Name = "headingLabel";
-            this.headingLabel.Size = new System.Drawing.Size(237, 32);
+            this.headingLabel.Size = new System.Drawing.Size(238, 32);
             this.headingLabel.TabIndex = 3;
             this.headingLabel.Text = "Expense Tracker";
             // 
@@ -368,16 +388,17 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.expenseDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.expenseDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.expenseDataGridView.Location = new System.Drawing.Point(73, 68);
+            this.expenseDataGridView.Location = new System.Drawing.Point(73, 168);
             this.expenseDataGridView.Name = "expenseDataGridView";
             this.expenseDataGridView.RowHeadersVisible = false;
             this.expenseDataGridView.RowHeadersWidth = 51;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expenseDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.expenseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.expenseDataGridView.Size = new System.Drawing.Size(939, 465);
+            this.expenseDataGridView.Size = new System.Drawing.Size(935, 414);
             this.expenseDataGridView.TabIndex = 3;
-            this.expenseDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.expenseDataGridView_CellClick);
+            this.expenseDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnExpenseDataGridViewCellClick);
+            this.expenseDataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OnExpenseDataGridViewCellMouseClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -430,31 +451,213 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.DodgerBlue;
-            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.panel6);
+            this.panel5.Controls.Add(this.panel7);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel5.Location = new System.Drawing.Point(73, 533);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(939, 49);
+            this.panel5.Size = new System.Drawing.Size(935, 49);
             this.panel5.TabIndex = 4;
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.label5);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel6.Location = new System.Drawing.Point(634, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(200, 49);
+            this.panel6.TabIndex = 5;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(334, 15);
+            this.label5.Location = new System.Drawing.Point(0, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(158, 25);
+            this.label5.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.label5.Size = new System.Drawing.Size(158, 35);
             this.label5.TabIndex = 4;
             this.label5.Text = "Total Expense";
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.label7);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel7.Location = new System.Drawing.Point(834, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(101, 49);
+            this.panel7.TabIndex = 5;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label7.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.label7.Size = new System.Drawing.Size(25, 35);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "0";
+            // 
+            // filterOptionsPanel
+            // 
+            this.filterOptionsPanel.BackColor = System.Drawing.Color.DodgerBlue;
+            this.filterOptionsPanel.Controls.Add(this.filterResetBtn);
+            this.filterOptionsPanel.Controls.Add(this.label12);
+            this.filterOptionsPanel.Controls.Add(this.label11);
+            this.filterOptionsPanel.Controls.Add(this.label10);
+            this.filterOptionsPanel.Controls.Add(this.label9);
+            this.filterOptionsPanel.Controls.Add(this.label8);
+            this.filterOptionsPanel.Controls.Add(this.filterToDatePicker);
+            this.filterOptionsPanel.Controls.Add(this.filterFromDatePicker);
+            this.filterOptionsPanel.Controls.Add(this.filterDayCB);
+            this.filterOptionsPanel.Controls.Add(this.filterMonthCB);
+            this.filterOptionsPanel.Controls.Add(this.filterCategoryCB);
+            this.filterOptionsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.filterOptionsPanel.Location = new System.Drawing.Point(73, 68);
+            this.filterOptionsPanel.Name = "filterOptionsPanel";
+            this.filterOptionsPanel.Size = new System.Drawing.Size(935, 100);
+            this.filterOptionsPanel.TabIndex = 4;
+            // 
+            // filterResetBtn
+            // 
+            this.filterResetBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.filterResetBtn.Image = ((System.Drawing.Image)(resources.GetObject("filterResetBtn.Image")));
+            this.filterResetBtn.Location = new System.Drawing.Point(883, 41);
+            this.filterResetBtn.Name = "filterResetBtn";
+            this.filterResetBtn.Size = new System.Drawing.Size(49, 37);
+            this.filterResetBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.filterResetBtn.TabIndex = 1;
+            this.filterResetBtn.TabStop = false;
+            this.filterResetBtn.Click += new System.EventHandler(this.FilterResetBtnClick);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(779, 17);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(47, 23);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Day";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(624, 17);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 23);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Month";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(444, 17);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(83, 23);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "To Date";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(243, 17);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(110, 23);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "From Date";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(45, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(95, 23);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Category";
+            // 
+            // filterToDatePicker
+            // 
+            this.filterToDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterToDatePicker.Location = new System.Drawing.Point(393, 51);
+            this.filterToDatePicker.Name = "filterToDatePicker";
+            this.filterToDatePicker.Size = new System.Drawing.Size(185, 27);
+            this.filterToDatePicker.TabIndex = 5;
+            this.filterToDatePicker.ValueChanged += new System.EventHandler(this.FilterDatePickerValueChanged);
+            this.filterToDatePicker.DropDown += new System.EventHandler(this.FilterDatePickerDropDown);
+            // 
+            // filterFromDatePicker
+            // 
+            this.filterFromDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterFromDatePicker.Location = new System.Drawing.Point(202, 51);
+            this.filterFromDatePicker.Name = "filterFromDatePicker";
+            this.filterFromDatePicker.Size = new System.Drawing.Size(185, 27);
+            this.filterFromDatePicker.TabIndex = 5;
+            this.filterFromDatePicker.ValueChanged += new System.EventHandler(this.FilterDatePickerValueChanged);
+            this.filterFromDatePicker.DropDown += new System.EventHandler(this.FilterDatePickerDropDown);
+            // 
+            // filterDayCB
+            // 
+            this.filterDayCB.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterDayCB.FormattingEnabled = true;
+            this.filterDayCB.Location = new System.Drawing.Point(740, 47);
+            this.filterDayCB.Name = "filterDayCB";
+            this.filterDayCB.Size = new System.Drawing.Size(137, 31);
+            this.filterDayCB.TabIndex = 0;
+            this.filterDayCB.DropDown += new System.EventHandler(this.OnFilterCBDropDown);
+            this.filterDayCB.TextChanged += new System.EventHandler(this.FilterCBTextChanged);
+            this.filterDayCB.Click += new System.EventHandler(this.OnFilterCBClick);
+            this.filterDayCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FilterCBKeyPress);
+            // 
+            // filterMonthCB
+            // 
+            this.filterMonthCB.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterMonthCB.FormattingEnabled = true;
+            this.filterMonthCB.Location = new System.Drawing.Point(584, 47);
+            this.filterMonthCB.Name = "filterMonthCB";
+            this.filterMonthCB.Size = new System.Drawing.Size(150, 31);
+            this.filterMonthCB.TabIndex = 0;
+            this.filterMonthCB.DropDown += new System.EventHandler(this.OnFilterCBDropDown);
+            this.filterMonthCB.TextChanged += new System.EventHandler(this.FilterCBTextChanged);
+            this.filterMonthCB.Click += new System.EventHandler(this.OnFilterCBClick);
+            this.filterMonthCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FilterCBKeyPress);
+            // 
+            // filterCategoryCB
+            // 
+            this.filterCategoryCB.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterCategoryCB.FormattingEnabled = true;
+            this.filterCategoryCB.Location = new System.Drawing.Point(10, 47);
+            this.filterCategoryCB.Name = "filterCategoryCB";
+            this.filterCategoryCB.Size = new System.Drawing.Size(186, 31);
+            this.filterCategoryCB.TabIndex = 0;
+            this.filterCategoryCB.TextChanged += new System.EventHandler(this.FilterCBTextChanged);
+            this.filterCategoryCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FilterCBKeyPress);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 582);
-            this.Controls.Add(this.expenseDataGridView);
+            this.ClientSize = new System.Drawing.Size(1008, 582);
             this.Controls.Add(this.panel5);
+            this.Controls.Add(this.expenseDataGridView);
+            this.Controls.Add(this.filterOptionsPanel);
             this.Controls.Add(this.optionsPanel);
             this.Controls.Add(this.panel2);
             this.DoubleBuffered = true;
@@ -482,7 +685,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.expenseDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.expenseBindingSource2)).EndInit();
             this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            this.filterOptionsPanel.ResumeLayout(false);
+            this.filterOptionsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filterResetBtn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -518,6 +727,21 @@
         private System.Windows.Forms.Panel limitPanel;
         private System.Windows.Forms.PictureBox budgetPB;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel filterOptionsPanel;
+        private System.Windows.Forms.DateTimePicker filterToDatePicker;
+        private System.Windows.Forms.DateTimePicker filterFromDatePicker;
+        private System.Windows.Forms.ComboBox filterDayCB;
+        private System.Windows.Forms.ComboBox filterMonthCB;
+        private System.Windows.Forms.ComboBox filterCategoryCB;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox filterResetBtn;
     }
 }
 

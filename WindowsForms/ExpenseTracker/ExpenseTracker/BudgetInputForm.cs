@@ -60,6 +60,7 @@ namespace ExpenseTracker
                     monthNumber = 12;
                     break;
             }
+
             return monthNumber;
         }
 
