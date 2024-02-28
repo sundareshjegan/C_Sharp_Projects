@@ -44,6 +44,7 @@ namespace ExpenseTracker
         public static void UpdateExpense(Expense expense,int id)
         {
             monthExpenseList[expense.Date.Month - 1][1] -= ExpensesList[id].Amount;
+            ExpensesList[id].Id = expense.Id;
             ExpensesList[id].Date = expense.Date;
             ExpensesList[id].Name = expense.Name;
             ExpensesList[id].Category = expense.Category;       

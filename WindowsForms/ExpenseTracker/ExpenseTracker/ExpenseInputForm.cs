@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ExpenseTracker
@@ -27,9 +21,8 @@ namespace ExpenseTracker
             categoryTB.DataSource = ExpenseManager.categories;
             ExpenseManager.OnCategoryUpdated += UpdateCategory;
 
+            //update the form with existing data
             saveBtn.Text = "Edit";
-
-            //expenseToEdit = expense;
             editExpenseId = id;
 
             amountTB.Visible = false;
@@ -50,10 +43,14 @@ namespace ExpenseTracker
 
         private void StartAnimation()
         {
+            //to set height of the form to 0
+            Height = 0;
+
+            //to set gif animations
             DoubleBuffered = true;
             gifImage = Properties.Resources.bluegradient;
             animationTimer = new Timer();
-            animationTimer.Interval = 100;
+            animationTimer.Interval = 20;
             animationTimer.Tick += AnimationTimer_Tick;
             totalFrames = gifImage.GetFrameCount(System.Drawing.Imaging.FrameDimension.Time);
             animationTimer.Start();
@@ -71,6 +68,12 @@ namespace ExpenseTracker
         {
             currentFrame = (currentFrame + 1) % totalFrames;
             Invalidate();
+
+            //To increase Height of the Form While Loading
+            if(Height < 350)
+            {
+                Height += 30;
+            }
         }
         private void OnExpenseInputFormPaint(object sender, PaintEventArgs e)
         {
@@ -114,11 +117,10 @@ namespace ExpenseTracker
             Dispose();
         }
 
-        private void NameTB_Click(object sender, EventArgs e)
+        private void OnNameTBClick(object sender, EventArgs e)
         {
-            if (NameTB.Text == "Name")
+            if (NameTB.Text == "Name") 
                 NameTB.Text = "";
-
         }
 
         private void DescriptionTBClick(object sender, EventArgs e)
