@@ -116,9 +116,11 @@ namespace ExpenseTracker
 
         private void OnAddExpenseBtnClicked(object sender, EventArgs e)
         {
+            isMenuClicked = false;
             isFilterClicked = false;
             expenseInputForm = new ExpenseInputForm();
-            expenseInputForm.Location = addExpenseBtn.PointToScreen(new Point(0, 0));
+            //expenseInputForm.Location = addExpenseBtn.PointToScreen(new Point(0, 0));
+            expenseInputForm.Location = Cursor.Position;
             expenseInputForm.ShowDialog();
         }
         private void OnFilterExpenseBtnClicked(object sender, EventArgs e)
