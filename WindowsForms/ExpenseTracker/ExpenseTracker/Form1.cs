@@ -16,7 +16,7 @@ namespace ExpenseTracker
         {
             InitializeComponent();
             timer.Interval = 100;
-            menuTimer.Interval = 10;
+            menuTimer.Interval = 5;
             filterTimer.Interval = 10;
 
             timer.Tick += OnTimerTicked;
@@ -39,11 +39,11 @@ namespace ExpenseTracker
 
         private void OnFilterTimerTick(object sender, EventArgs e)
         {
-            filterOptionsPanel.Width += 10;
             if (isFilterClicked)
             {
                 if (filterOptionsPanel.Height < 90)
                 {
+                    filterOptionsPanel.Width += 10;
                     filterOptionsPanel.Height += 10;
                 }
             }
@@ -60,7 +60,7 @@ namespace ExpenseTracker
         {
             if (isMenuClicked)
             {
-                if (optionsPanel.Width < 210)
+                if (optionsPanel.Width < 200)
                 {
                     optionsPanel.Width += 10;
                     Width += 10;
@@ -69,7 +69,7 @@ namespace ExpenseTracker
             }
             else if (!isMenuClicked)
             {
-                if (optionsPanel.Width > 70)
+                if (optionsPanel.Width > 50)
                 {
                     optionsPanel.Width -= 10;
                     Width -= 10;
@@ -114,44 +114,45 @@ namespace ExpenseTracker
                 label.BackColor = Color.Transparent;
         }
 
-        private void OnMenuPBClick(object sender, EventArgs e)
-        {
-            menuTimer.Start();
-            isMenuClicked = !isMenuClicked;
-        }
-
-        private void OnPlusPBClick(object sender, EventArgs e)
+        private void OnAddExpenseBtnClicked(object sender, EventArgs e)
         {
             isFilterClicked = false;
             expenseInputForm = new ExpenseInputForm();
-            expenseInputForm.Location = addPB.PointToScreen(new Point(0, 0));
+            expenseInputForm.Location = addExpenseBtn.PointToScreen(new Point(0, 0));
             expenseInputForm.ShowDialog();
         }
-
-        private void OnCategoryPBClicked(object sender, EventArgs e)
+        private void OnFilterExpenseBtnClicked(object sender, EventArgs e)
+        {
+            filterTimer.Start();
+            isFilterClicked = !isFilterClicked;
+            LoadFilterData();
+        }
+        private void OnCategoryBtnClicked(object sender, EventArgs e)
         {
             AddCategoryForm addCategoryForm = new AddCategoryForm();
-            addCategoryForm.Location = categoryPB.PointToScreen(new Point(0, 0));
+            addCategoryForm.Location = Cursor.Position;
             addCategoryForm.ShowDialog();
         }
-
-        private void OnBudgetClicked(object sender, EventArgs e)
+        private void OnBudgetBtnClicked(object sender, EventArgs e)
         {
             BudgetInputForm budgetInputForm = new BudgetInputForm();
-            budgetInputForm.Location = budgetPB.PointToScreen(new Point(0, 0));
+            budgetInputForm.Location = Cursor.Position;
             budgetInputForm.ShowDialog();
         }
 
         private void OnExpenseDataGridViewCellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            selectedRow = expenseDataGridView.Rows[e.RowIndex];
-            selectedRowIndex = e.RowIndex;
-            if(e.Button == MouseButtons.Right && selectedRowIndex >= 0)
+            if(e.RowIndex >= 0)
             {
-                ExpenseOptionForm expenseOptionForm = new ExpenseOptionForm();
-                expenseOptionForm.Location = Cursor.Position;
-                expenseOptionForm.SendOption += GetOption;
-                expenseOptionForm.ShowDialog();
+                selectedRow = expenseDataGridView.Rows[e.RowIndex];
+                selectedRowIndex = e.RowIndex;
+                if(e.Button == MouseButtons.Right && selectedRowIndex >= 0)
+                {
+                    ExpenseOptionForm expenseOptionForm = new ExpenseOptionForm();
+                    expenseOptionForm.Location = Cursor.Position;
+                    expenseOptionForm.SendOption += GetOption;
+                    expenseOptionForm.ShowDialog();
+                }
             }
         }
 
@@ -169,13 +170,6 @@ namespace ExpenseTracker
             {
                 ExpenseManager.RemoveExpense(selectedRowIndex);
             }
-        }
-
-        private void OnFilterPBClicked(object sender, EventArgs e)
-        {
-            filterTimer.Start();
-            isFilterClicked = !isFilterClicked;
-            LoadFilterData();
         }
 
         private void FilterDatePickerDropDown(object sender, EventArgs e)
@@ -199,7 +193,7 @@ namespace ExpenseTracker
             filterMonthCB.Enabled = filterDayCB.Enabled = filterFromDatePicker.Enabled = filterToDatePicker.Enabled = true;
             filterCategoryCB.Text = "Select";
             UpdateDataGridView(sender,"reset");
-            LoadFilterData();
+            //LoadFilterData();
         }
 
         private void FilterCBTextChanged(object sender, EventArgs e)
@@ -249,6 +243,17 @@ namespace ExpenseTracker
             expenseDataGridView.ClearSelection();
         }
 
+        private void MenuMouseEnter(object sender, EventArgs e)
+        {
+            menuTimer.Start();
+            isMenuClicked = true;
+        }
+
+        private void MenuMouseLeave(object sender, EventArgs e)
+        {
+            isMenuClicked = false;
+        }
+
         private void OnExpenseDataGridViewRowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             int totalAmount = 0;
@@ -257,12 +262,6 @@ namespace ExpenseTracker
                 totalAmount += (int)expenseDataGridView.Rows[i].Cells[4].Value;
             }
             totalAmountLabel.Text = totalAmount.ToString();
-        }
-
-        private void OnDelPBClicked(object sender, EventArgs e)
-        {
-            ExpenseManager.RemoveExpense(selectedRowIndex);
-            deletePanel.Visible = false;
         }
         private void LoadFilterData()
         { 

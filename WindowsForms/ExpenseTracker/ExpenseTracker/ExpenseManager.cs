@@ -9,10 +9,10 @@ namespace ExpenseTracker
 {
     public static class ExpenseManager
     {
-        private static int expenseId;
+        private static int expenseId , totalCategoryAmount  = 4000;
         public static List<Expense> ExpensesList = new List<Expense>();
         public static List<string> categories = new List<string>() { "Food", "Snacks", "Travel", "Others" };
-        public static List<List<int>> monthExpenseList = GetMonthWiseList(2000);
+        public static List<List<int>> monthExpenseList = GetMonthWiseList(10000);
         public static Dictionary<string, List<List<int>> > categoryDict = new Dictionary<string, List<List<int>> >()
         {
             { "Food" ,      GetMonthWiseList(1000)  }  ,
@@ -110,21 +110,39 @@ namespace ExpenseTracker
         #endregion
 
         #region Category Management methods
-        public static void AddCategory(string categoryName, int amount)
+        public static void AddCategory(string categoryName, int amount , int month)
         {
-            categories.Add(categoryName);
 
+            if (totalCategoryAmount + amount > monthExpenseList[month][0])
+            {
+                string message = "Your category exceeds the month budget , please reset month budget\n\n Do you want to add this?";
+                string title = "Category > Month Budget";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    goto AddLabel;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+       AddLabel:
+            monthExpenseList[month][0] += totalCategoryAmount + amount - monthExpenseList[month][0];
+            categories.Insert(categories.Count-1,categoryName);
             // add category to dictionary
             categoryDict.Add(categoryName, GetMonthWiseList(amount));
-
             OnCategoryUpdated?.Invoke(categories, "Category");
+
         }
 
         public static void RemoveCategory(string categoryNameToRemove)
         {
             categories.Remove(categoryNameToRemove);
             categoryDict.Remove(categoryNameToRemove);
-
+            
             // removing category from dictionary list
             foreach (Expense expense in ExpensesList)
             {

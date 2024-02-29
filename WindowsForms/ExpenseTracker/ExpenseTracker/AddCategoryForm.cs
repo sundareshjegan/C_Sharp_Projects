@@ -31,14 +31,17 @@ namespace ExpenseTracker
 
             MonthCB.DataSource = new BindingSource(ExpenseManager.MonthNumberAndName,null);
             MonthCB.DisplayMember = "Value";
+
+            addCategoryMonthCB.DataSource = new BindingSource(ExpenseManager.MonthNumberAndName, null);
+            addCategoryMonthCB.DisplayMember = "Value";
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if(!isShrink && Width < 520)
+            if(!isShrink && Width < 610)
             {
                 Width += 10;
             }
-            else if (isShrink && Width > 170)
+            else if (isShrink && Width > 255)
             {
                 Width -= 10;
             }
@@ -72,6 +75,7 @@ namespace ExpenseTracker
         private void ResetTextBoxes()
         {
             existingCategoryCB.Text = updatedCategoryTB.Text = deleteCategoryCB.Text = newCategoryTB.Text = "";
+            
             //addWarningLabel.Text = deleteWarningLabel.Text = updateWarningLabel.Text = "";
         }
 
@@ -85,7 +89,7 @@ namespace ExpenseTracker
             }
             else if(bt.Text == "Add" && newCategoryTB.Text!="" && !string.IsNullOrWhiteSpace(newCategoryTB.Text))
             {
-                ExpenseManager.AddCategory(newCategoryTB.Text, (int)catBudgetTB.Value);
+                ExpenseManager.AddCategory(newCategoryTB.Text, (int)catBudgetTB.Value,addCategoryMonthCB.SelectedIndex);
                 addWarningLabel.ForeColor = Color.DodgerBlue;
                 addWarningLabel.Text = "Category added Successfully..!";
             }
@@ -94,11 +98,14 @@ namespace ExpenseTracker
 
         private void OnUpdateBtnClicked(object sender, EventArgs e)
         {
-            ExpenseManager.UpdateCategory(existingCategoryCB.Text, updatedCategoryTB.Text,MonthCB.SelectedIndex, (int)newBudgetCB.Value);
-            updateWarningLabel.ForeColor = Color.DodgerBlue;
-            updateWarningLabel.Text = "Category Updated Successfully";
-            UpdateComboBoxes();
-            ResetTextBoxes();
+            if(ExpenseManager.categoryDict.ContainsKey(updatedCategoryTB.Text) && existingCategoryCB.Text== updatedCategoryTB.Text)
+            {
+                ExpenseManager.UpdateCategory(existingCategoryCB.Text, updatedCategoryTB.Text, MonthCB.SelectedIndex, (int)newBudgetCB.Value);
+                updateWarningLabel.ForeColor = Color.DodgerBlue;
+                updateWarningLabel.Text = "Category Updated Successfully";
+                UpdateComboBoxes();
+                ResetTextBoxes();
+            }
         }
 
         private void OnDeleteBtnClicked(object sender, EventArgs e)
@@ -126,7 +133,7 @@ namespace ExpenseTracker
                 operationsPanel.Controls.Clear();
                 panels[0].Visible = true;
                 operationsPanel.Controls.Add(panels[0]);
-                Height = panels[0].Height;
+                Height = panels[1].Height;
             }
             else if (button.Text == "Update Category")
             {
@@ -140,7 +147,7 @@ namespace ExpenseTracker
                 operationsPanel.Controls.Clear();
                 panels[2].Visible = true;
                 operationsPanel.Controls.Add(panels[2]);
-                Height = panels[0].Height;
+                Height = panels[1].Height;
             }
             ResetTextBoxes();
             ResetWarningLabels();
@@ -164,6 +171,20 @@ namespace ExpenseTracker
                 newBudgetCB.Value = (int)ExpenseManager.categoryDict[existingCategoryCB.Text][MonthCB.SelectedIndex][0];
             }
             catch (Exception ex) { }
+        }
+
+        private void OnBtnMouseEnter(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            button.ForeColor = Color.DodgerBlue;
+            button.BackColor = Color.White;
+        }
+
+        private void OnBtnMouseLeave(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            button.BackColor = Color.DodgerBlue;
+            button.ForeColor = Color.White;
         }
     }
 }

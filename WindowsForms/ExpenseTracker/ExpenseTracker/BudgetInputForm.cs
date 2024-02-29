@@ -66,8 +66,16 @@ namespace ExpenseTracker
 
         private void OnOKBtnClicked(object sender, EventArgs e)
         {
-            ExpenseManager.SetBudget(GetMonthNumber(monthCB.Text)-1, (int)budgetNumericUpdown.Value);
-            Dispose();
+            if(!string.IsNullOrEmpty(monthCB.Text) || !string.IsNullOrWhiteSpace(monthCB.Text))
+            {
+                ExpenseManager.SetBudget(GetMonthNumber(monthCB.Text)-1, (int)budgetNumericUpdown.Value);
+                budgetWarningLabel.Text = "";
+                Dispose();
+            }
+            else
+            {
+                budgetWarningLabel.Text = "Please Select Month";
+            }
         }
 
         private void OnCancelBtnClicked(object sender, EventArgs e)

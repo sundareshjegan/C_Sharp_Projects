@@ -34,35 +34,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.optionsPanel = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.categoryPB = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.limitPanel = new System.Windows.Forms.Panel();
-            this.budgetPB = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.deletePanel = new System.Windows.Forms.Panel();
-            this.delPB = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.filterPB = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.addPB = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.menuPB = new System.Windows.Forms.PictureBox();
+            this.budgetBtn = new System.Windows.Forms.Button();
+            this.categoryBtn = new System.Windows.Forms.Button();
+            this.filterExpenseBtn = new System.Windows.Forms.Button();
+            this.addExpenseBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.headingLabel = new System.Windows.Forms.Label();
             this.expenseDataGridView = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expenseBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -80,323 +58,114 @@
             this.filterDayCB = new System.Windows.Forms.ComboBox();
             this.filterMonthCB = new System.Windows.Forms.ComboBox();
             this.filterCategoryCB = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.expenseBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.optionsPanel.SuspendLayout();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.categoryPB)).BeginInit();
-            this.limitPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.budgetPB)).BeginInit();
-            this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.deletePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.delPB)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filterPB)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.addPB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.menuPB)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expenseDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.expenseBindingSource2)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.filterOptionsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filterResetBtn)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.expenseBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // optionsPanel
             // 
             this.optionsPanel.BackColor = System.Drawing.Color.White;
-            this.optionsPanel.Controls.Add(this.panel4);
-            this.optionsPanel.Controls.Add(this.limitPanel);
-            this.optionsPanel.Controls.Add(this.panel8);
-            this.optionsPanel.Controls.Add(this.deletePanel);
-            this.optionsPanel.Controls.Add(this.panel3);
-            this.optionsPanel.Controls.Add(this.panel1);
-            this.optionsPanel.Controls.Add(this.menuPB);
+            this.optionsPanel.Controls.Add(this.budgetBtn);
+            this.optionsPanel.Controls.Add(this.categoryBtn);
+            this.optionsPanel.Controls.Add(this.filterExpenseBtn);
+            this.optionsPanel.Controls.Add(this.addExpenseBtn);
             this.optionsPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.optionsPanel.Location = new System.Drawing.Point(0, 84);
-            this.optionsPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.optionsPanel.Location = new System.Drawing.Point(0, 68);
             this.optionsPanel.Name = "optionsPanel";
-            this.optionsPanel.Size = new System.Drawing.Size(93, 632);
+            this.optionsPanel.Size = new System.Drawing.Size(50, 514);
             this.optionsPanel.TabIndex = 0;
+            this.optionsPanel.MouseEnter += new System.EventHandler(this.MenuMouseEnter);
+            this.optionsPanel.MouseLeave += new System.EventHandler(this.MenuMouseLeave);
             // 
-            // panel4
+            // budgetBtn
             // 
-            this.panel4.Controls.Add(this.categoryPB);
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel4.Location = new System.Drawing.Point(17, 204);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(267, 57);
-            this.panel4.TabIndex = 5;
-            this.panel4.Click += new System.EventHandler(this.OnCategoryPBClicked);
-            this.panel4.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.panel4.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
+            this.budgetBtn.FlatAppearance.BorderSize = 0;
+            this.budgetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.budgetBtn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.budgetBtn.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.budgetBtn.Image = ((System.Drawing.Image)(resources.GetObject("budgetBtn.Image")));
+            this.budgetBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.budgetBtn.Location = new System.Drawing.Point(3, 56);
+            this.budgetBtn.Name = "budgetBtn";
+            this.budgetBtn.Size = new System.Drawing.Size(200, 46);
+            this.budgetBtn.TabIndex = 6;
+            this.budgetBtn.Text = "    Budget";
+            this.budgetBtn.UseVisualStyleBackColor = true;
+            this.budgetBtn.Click += new System.EventHandler(this.OnBudgetBtnClicked);
+            this.budgetBtn.MouseEnter += new System.EventHandler(this.MenuMouseEnter);
+            this.budgetBtn.MouseLeave += new System.EventHandler(this.MenuMouseLeave);
             // 
-            // categoryPB
+            // categoryBtn
             // 
-            this.categoryPB.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.categoryPB.Dock = System.Windows.Forms.DockStyle.Left;
-            this.categoryPB.Image = global::ExpenseTracker.Properties.Resources.categories;
-            this.categoryPB.Location = new System.Drawing.Point(0, 0);
-            this.categoryPB.Margin = new System.Windows.Forms.Padding(4);
-            this.categoryPB.Name = "categoryPB";
-            this.categoryPB.Size = new System.Drawing.Size(61, 57);
-            this.categoryPB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.categoryPB.TabIndex = 1;
-            this.categoryPB.TabStop = false;
-            this.categoryPB.Click += new System.EventHandler(this.OnCategoryPBClicked);
-            this.categoryPB.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.categoryPB.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
+            this.categoryBtn.FlatAppearance.BorderSize = 0;
+            this.categoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.categoryBtn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryBtn.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.categoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("categoryBtn.Image")));
+            this.categoryBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.categoryBtn.Location = new System.Drawing.Point(3, 108);
+            this.categoryBtn.Name = "categoryBtn";
+            this.categoryBtn.Size = new System.Drawing.Size(200, 46);
+            this.categoryBtn.TabIndex = 6;
+            this.categoryBtn.Text = "    Categories";
+            this.categoryBtn.UseVisualStyleBackColor = true;
+            this.categoryBtn.Click += new System.EventHandler(this.OnCategoryBtnClicked);
+            this.categoryBtn.MouseEnter += new System.EventHandler(this.MenuMouseEnter);
+            this.categoryBtn.MouseLeave += new System.EventHandler(this.MenuMouseLeave);
             // 
-            // label4
+            // filterExpenseBtn
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label4.Location = new System.Drawing.Point(85, 14);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(140, 29);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Categories";
-            this.label4.Click += new System.EventHandler(this.OnCategoryPBClicked);
-            this.label4.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.label4.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
+            this.filterExpenseBtn.FlatAppearance.BorderSize = 0;
+            this.filterExpenseBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.filterExpenseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.filterExpenseBtn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterExpenseBtn.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.filterExpenseBtn.Image = ((System.Drawing.Image)(resources.GetObject("filterExpenseBtn.Image")));
+            this.filterExpenseBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.filterExpenseBtn.Location = new System.Drawing.Point(3, 160);
+            this.filterExpenseBtn.Name = "filterExpenseBtn";
+            this.filterExpenseBtn.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.filterExpenseBtn.Size = new System.Drawing.Size(200, 46);
+            this.filterExpenseBtn.TabIndex = 6;
+            this.filterExpenseBtn.Text = "     Filter Expense";
+            this.filterExpenseBtn.UseVisualStyleBackColor = true;
+            this.filterExpenseBtn.Click += new System.EventHandler(this.OnFilterExpenseBtnClicked);
+            this.filterExpenseBtn.MouseEnter += new System.EventHandler(this.MenuMouseEnter);
+            this.filterExpenseBtn.MouseLeave += new System.EventHandler(this.MenuMouseLeave);
             // 
-            // limitPanel
+            // addExpenseBtn
             // 
-            this.limitPanel.Controls.Add(this.budgetPB);
-            this.limitPanel.Controls.Add(this.label6);
-            this.limitPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.limitPanel.Location = new System.Drawing.Point(16, 268);
-            this.limitPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.limitPanel.Name = "limitPanel";
-            this.limitPanel.Size = new System.Drawing.Size(267, 57);
-            this.limitPanel.TabIndex = 5;
-            this.limitPanel.Click += new System.EventHandler(this.OnBudgetClicked);
-            this.limitPanel.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.limitPanel.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // budgetPB
-            // 
-            this.budgetPB.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.budgetPB.Dock = System.Windows.Forms.DockStyle.Left;
-            this.budgetPB.Image = ((System.Drawing.Image)(resources.GetObject("budgetPB.Image")));
-            this.budgetPB.Location = new System.Drawing.Point(0, 0);
-            this.budgetPB.Margin = new System.Windows.Forms.Padding(4);
-            this.budgetPB.Name = "budgetPB";
-            this.budgetPB.Size = new System.Drawing.Size(61, 57);
-            this.budgetPB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.budgetPB.TabIndex = 1;
-            this.budgetPB.TabStop = false;
-            this.budgetPB.Click += new System.EventHandler(this.OnBudgetClicked);
-            this.budgetPB.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.budgetPB.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label6.Location = new System.Drawing.Point(85, 14);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(97, 29);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Budget";
-            this.label6.Click += new System.EventHandler(this.OnBudgetClicked);
-            this.label6.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.label6.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.pictureBox1);
-            this.panel8.Controls.Add(this.label7);
-            this.panel8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel8.Location = new System.Drawing.Point(16, 571);
-            this.panel8.Margin = new System.Windows.Forms.Padding(4);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(267, 57);
-            this.panel8.TabIndex = 5;
-            this.panel8.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.panel8.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(61, 57);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label7.Location = new System.Drawing.Point(85, 14);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 29);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Guest";
-            this.label7.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.label7.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // deletePanel
-            // 
-            this.deletePanel.Controls.Add(this.delPB);
-            this.deletePanel.Controls.Add(this.label3);
-            this.deletePanel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.deletePanel.Location = new System.Drawing.Point(17, 332);
-            this.deletePanel.Margin = new System.Windows.Forms.Padding(4);
-            this.deletePanel.Name = "deletePanel";
-            this.deletePanel.Size = new System.Drawing.Size(267, 57);
-            this.deletePanel.TabIndex = 5;
-            this.deletePanel.Visible = false;
-            this.deletePanel.Click += new System.EventHandler(this.OnDelPBClicked);
-            this.deletePanel.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.deletePanel.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // delPB
-            // 
-            this.delPB.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.delPB.Dock = System.Windows.Forms.DockStyle.Left;
-            this.delPB.Image = ((System.Drawing.Image)(resources.GetObject("delPB.Image")));
-            this.delPB.Location = new System.Drawing.Point(0, 0);
-            this.delPB.Margin = new System.Windows.Forms.Padding(4);
-            this.delPB.Name = "delPB";
-            this.delPB.Size = new System.Drawing.Size(61, 57);
-            this.delPB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.delPB.TabIndex = 1;
-            this.delPB.TabStop = false;
-            this.delPB.Click += new System.EventHandler(this.OnDelPBClicked);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label3.Location = new System.Drawing.Point(85, 14);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 29);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Delete";
-            this.label3.Click += new System.EventHandler(this.OnDelPBClicked);
-            this.label3.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.label3.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.filterPB);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel3.Location = new System.Drawing.Point(16, 140);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(267, 57);
-            this.panel3.TabIndex = 5;
-            this.panel3.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.panel3.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // filterPB
-            // 
-            this.filterPB.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.filterPB.Dock = System.Windows.Forms.DockStyle.Left;
-            this.filterPB.Image = ((System.Drawing.Image)(resources.GetObject("filterPB.Image")));
-            this.filterPB.Location = new System.Drawing.Point(0, 0);
-            this.filterPB.Margin = new System.Windows.Forms.Padding(4);
-            this.filterPB.Name = "filterPB";
-            this.filterPB.Size = new System.Drawing.Size(61, 57);
-            this.filterPB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.filterPB.TabIndex = 0;
-            this.filterPB.TabStop = false;
-            this.filterPB.Click += new System.EventHandler(this.OnFilterPBClicked);
-            this.filterPB.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.filterPB.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label2.Location = new System.Drawing.Point(89, 12);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 29);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Filter";
-            this.label2.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.label2.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.addPB);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel1.Location = new System.Drawing.Point(16, 76);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(267, 57);
-            this.panel1.TabIndex = 5;
-            this.panel1.Click += new System.EventHandler(this.OnPlusPBClick);
-            this.panel1.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.panel1.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // addPB
-            // 
-            this.addPB.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addPB.Dock = System.Windows.Forms.DockStyle.Left;
-            this.addPB.Image = ((System.Drawing.Image)(resources.GetObject("addPB.Image")));
-            this.addPB.Location = new System.Drawing.Point(0, 0);
-            this.addPB.Margin = new System.Windows.Forms.Padding(4);
-            this.addPB.Name = "addPB";
-            this.addPB.Size = new System.Drawing.Size(61, 57);
-            this.addPB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.addPB.TabIndex = 0;
-            this.addPB.TabStop = false;
-            this.addPB.Click += new System.EventHandler(this.OnPlusPBClick);
-            this.addPB.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.addPB.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label1.Location = new System.Drawing.Point(85, 12);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 29);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Add";
-            this.label1.Click += new System.EventHandler(this.OnPlusPBClick);
-            this.label1.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.label1.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
-            // 
-            // menuPB
-            // 
-            this.menuPB.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.menuPB.Image = ((System.Drawing.Image)(resources.GetObject("menuPB.Image")));
-            this.menuPB.Location = new System.Drawing.Point(16, 21);
-            this.menuPB.Margin = new System.Windows.Forms.Padding(4);
-            this.menuPB.Name = "menuPB";
-            this.menuPB.Size = new System.Drawing.Size(61, 48);
-            this.menuPB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.menuPB.TabIndex = 0;
-            this.menuPB.TabStop = false;
-            this.menuPB.Click += new System.EventHandler(this.OnMenuPBClick);
-            this.menuPB.MouseEnter += new System.EventHandler(this.OnPictureBoxMouseEnter);
-            this.menuPB.MouseLeave += new System.EventHandler(this.OnPictureBoxMouseLeave);
+            this.addExpenseBtn.FlatAppearance.BorderSize = 0;
+            this.addExpenseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addExpenseBtn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addExpenseBtn.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.addExpenseBtn.Image = ((System.Drawing.Image)(resources.GetObject("addExpenseBtn.Image")));
+            this.addExpenseBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.addExpenseBtn.Location = new System.Drawing.Point(3, 4);
+            this.addExpenseBtn.Name = "addExpenseBtn";
+            this.addExpenseBtn.Size = new System.Drawing.Size(200, 46);
+            this.addExpenseBtn.TabIndex = 6;
+            this.addExpenseBtn.Text = "     Add Expense";
+            this.addExpenseBtn.UseVisualStyleBackColor = true;
+            this.addExpenseBtn.Click += new System.EventHandler(this.OnAddExpenseBtnClicked);
+            this.addExpenseBtn.MouseEnter += new System.EventHandler(this.MenuMouseEnter);
+            this.addExpenseBtn.MouseLeave += new System.EventHandler(this.MenuMouseLeave);
             // 
             // panel2
             // 
@@ -404,9 +173,8 @@
             this.panel2.Controls.Add(this.headingLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1344, 84);
+            this.panel2.Size = new System.Drawing.Size(1007, 68);
             this.panel2.TabIndex = 2;
             // 
             // headingLabel
@@ -414,10 +182,9 @@
             this.headingLabel.AutoSize = true;
             this.headingLabel.Font = new System.Drawing.Font("Verdana", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headingLabel.ForeColor = System.Drawing.Color.White;
-            this.headingLabel.Location = new System.Drawing.Point(9, 26);
-            this.headingLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.headingLabel.Location = new System.Drawing.Point(173, 23);
             this.headingLabel.Name = "headingLabel";
-            this.headingLabel.Size = new System.Drawing.Size(290, 40);
+            this.headingLabel.Size = new System.Drawing.Size(238, 32);
             this.headingLabel.TabIndex = 3;
             this.headingLabel.Text = "Expense Tracker";
             // 
@@ -453,18 +220,226 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.expenseDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.expenseDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.expenseDataGridView.Location = new System.Drawing.Point(93, 84);
-            this.expenseDataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.expenseDataGridView.Location = new System.Drawing.Point(50, 68);
             this.expenseDataGridView.Name = "expenseDataGridView";
             this.expenseDataGridView.RowHeadersVisible = false;
             this.expenseDataGridView.RowHeadersWidth = 51;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expenseDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.expenseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.expenseDataGridView.Size = new System.Drawing.Size(1251, 632);
+            this.expenseDataGridView.Size = new System.Drawing.Size(957, 514);
             this.expenseDataGridView.TabIndex = 3;
             this.expenseDataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OnExpenseDataGridViewCellMouseClick);
             this.expenseDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.OnExpenseDataGridViewRowsAdded);
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel5.Controls.Add(this.panel6);
+            this.panel5.Controls.Add(this.panel7);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(50, 533);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(957, 49);
+            this.panel5.TabIndex = 4;
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.label5);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel6.Location = new System.Drawing.Point(656, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(200, 49);
+            this.panel6.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.label5.Size = new System.Drawing.Size(158, 35);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Total Expense";
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.totalAmountLabel);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel7.Location = new System.Drawing.Point(856, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(101, 49);
+            this.panel7.TabIndex = 5;
+            // 
+            // totalAmountLabel
+            // 
+            this.totalAmountLabel.AutoSize = true;
+            this.totalAmountLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.totalAmountLabel.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalAmountLabel.ForeColor = System.Drawing.Color.White;
+            this.totalAmountLabel.Location = new System.Drawing.Point(0, 0);
+            this.totalAmountLabel.Name = "totalAmountLabel";
+            this.totalAmountLabel.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.totalAmountLabel.Size = new System.Drawing.Size(25, 35);
+            this.totalAmountLabel.TabIndex = 4;
+            this.totalAmountLabel.Text = "0";
+            // 
+            // filterOptionsPanel
+            // 
+            this.filterOptionsPanel.BackColor = System.Drawing.Color.DodgerBlue;
+            this.filterOptionsPanel.Controls.Add(this.panel1);
+            this.filterOptionsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.filterOptionsPanel.Location = new System.Drawing.Point(50, 68);
+            this.filterOptionsPanel.Name = "filterOptionsPanel";
+            this.filterOptionsPanel.Size = new System.Drawing.Size(957, 0);
+            this.filterOptionsPanel.TabIndex = 4;
+            // 
+            // filterResetBtn
+            // 
+            this.filterResetBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.filterResetBtn.Image = ((System.Drawing.Image)(resources.GetObject("filterResetBtn.Image")));
+            this.filterResetBtn.Location = new System.Drawing.Point(890, 41);
+            this.filterResetBtn.Name = "filterResetBtn";
+            this.filterResetBtn.Size = new System.Drawing.Size(49, 37);
+            this.filterResetBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.filterResetBtn.TabIndex = 1;
+            this.filterResetBtn.TabStop = false;
+            this.filterResetBtn.Click += new System.EventHandler(this.FilterResetBtnClick);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(786, 17);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(47, 23);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Day";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(631, 17);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 23);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Month";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(451, 17);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(83, 23);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "To Date";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(250, 17);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(110, 23);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "From Date";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(52, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(95, 23);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Category";
+            // 
+            // filterToDatePicker
+            // 
+            this.filterToDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterToDatePicker.Location = new System.Drawing.Point(400, 51);
+            this.filterToDatePicker.Name = "filterToDatePicker";
+            this.filterToDatePicker.Size = new System.Drawing.Size(185, 27);
+            this.filterToDatePicker.TabIndex = 5;
+            this.filterToDatePicker.ValueChanged += new System.EventHandler(this.FilterDatePickerValueChanged);
+            this.filterToDatePicker.DropDown += new System.EventHandler(this.FilterDatePickerDropDown);
+            // 
+            // filterFromDatePicker
+            // 
+            this.filterFromDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterFromDatePicker.Location = new System.Drawing.Point(209, 51);
+            this.filterFromDatePicker.Name = "filterFromDatePicker";
+            this.filterFromDatePicker.Size = new System.Drawing.Size(185, 27);
+            this.filterFromDatePicker.TabIndex = 5;
+            this.filterFromDatePicker.ValueChanged += new System.EventHandler(this.FilterDatePickerValueChanged);
+            this.filterFromDatePicker.DropDown += new System.EventHandler(this.FilterDatePickerDropDown);
+            // 
+            // filterDayCB
+            // 
+            this.filterDayCB.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterDayCB.FormattingEnabled = true;
+            this.filterDayCB.Location = new System.Drawing.Point(747, 47);
+            this.filterDayCB.Name = "filterDayCB";
+            this.filterDayCB.Size = new System.Drawing.Size(137, 31);
+            this.filterDayCB.TabIndex = 0;
+            this.filterDayCB.TextChanged += new System.EventHandler(this.FilterCBTextChanged);
+            this.filterDayCB.Click += new System.EventHandler(this.OnFilterCBClick);
+            this.filterDayCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FilterCBKeyPress);
+            // 
+            // filterMonthCB
+            // 
+            this.filterMonthCB.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterMonthCB.FormattingEnabled = true;
+            this.filterMonthCB.Location = new System.Drawing.Point(591, 47);
+            this.filterMonthCB.Name = "filterMonthCB";
+            this.filterMonthCB.Size = new System.Drawing.Size(150, 31);
+            this.filterMonthCB.TabIndex = 0;
+            this.filterMonthCB.TextChanged += new System.EventHandler(this.FilterCBTextChanged);
+            this.filterMonthCB.Click += new System.EventHandler(this.OnFilterCBClick);
+            this.filterMonthCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FilterCBKeyPress);
+            // 
+            // filterCategoryCB
+            // 
+            this.filterCategoryCB.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterCategoryCB.FormattingEnabled = true;
+            this.filterCategoryCB.Location = new System.Drawing.Point(17, 47);
+            this.filterCategoryCB.Name = "filterCategoryCB";
+            this.filterCategoryCB.Size = new System.Drawing.Size(186, 31);
+            this.filterCategoryCB.TabIndex = 0;
+            this.filterCategoryCB.TextChanged += new System.EventHandler(this.FilterCBTextChanged);
+            this.filterCategoryCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FilterCBKeyPress);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.filterResetBtn);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.filterCategoryCB);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.filterMonthCB);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.filterDayCB);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.filterFromDatePicker);
+            this.panel1.Controls.Add(this.filterToDatePicker);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(-1, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(958, 0);
+            this.panel1.TabIndex = 5;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -481,6 +456,7 @@
             this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -488,6 +464,7 @@
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // categoryDataGridViewTextBoxColumn
             // 
@@ -495,6 +472,7 @@
             this.categoryDataGridViewTextBoxColumn.HeaderText = "Category";
             this.categoryDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
+            this.categoryDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // amountDataGridViewTextBoxColumn
             // 
@@ -502,6 +480,7 @@
             this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
             this.amountDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // descriptionDataGridViewTextBoxColumn
             // 
@@ -509,274 +488,39 @@
             this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
             this.descriptionDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // expenseBindingSource2
             // 
             this.expenseBindingSource2.DataSource = typeof(ExpenseTracker.Expense);
             // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.DodgerBlue;
-            this.panel5.Controls.Add(this.panel6);
-            this.panel5.Controls.Add(this.panel7);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(93, 656);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1251, 60);
-            this.panel5.TabIndex = 4;
-            // 
-            // panel6
-            // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.label5);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(851, 0);
-            this.panel6.Margin = new System.Windows.Forms.Padding(4);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(266, 60);
-            this.panel6.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
-            this.label5.Size = new System.Drawing.Size(201, 44);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Total Expense";
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.DodgerBlue;
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.totalAmountLabel);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(1117, 0);
-            this.panel7.Margin = new System.Windows.Forms.Padding(4);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(134, 60);
-            this.panel7.TabIndex = 5;
-            // 
-            // totalAmountLabel
-            // 
-            this.totalAmountLabel.AutoSize = true;
-            this.totalAmountLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.totalAmountLabel.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalAmountLabel.ForeColor = System.Drawing.Color.White;
-            this.totalAmountLabel.Location = new System.Drawing.Point(0, 0);
-            this.totalAmountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.totalAmountLabel.Name = "totalAmountLabel";
-            this.totalAmountLabel.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
-            this.totalAmountLabel.Size = new System.Drawing.Size(31, 44);
-            this.totalAmountLabel.TabIndex = 4;
-            this.totalAmountLabel.Text = "0";
-            // 
-            // filterOptionsPanel
-            // 
-            this.filterOptionsPanel.BackColor = System.Drawing.Color.DodgerBlue;
-            this.filterOptionsPanel.Controls.Add(this.filterResetBtn);
-            this.filterOptionsPanel.Controls.Add(this.label12);
-            this.filterOptionsPanel.Controls.Add(this.label11);
-            this.filterOptionsPanel.Controls.Add(this.label10);
-            this.filterOptionsPanel.Controls.Add(this.label9);
-            this.filterOptionsPanel.Controls.Add(this.label8);
-            this.filterOptionsPanel.Controls.Add(this.filterToDatePicker);
-            this.filterOptionsPanel.Controls.Add(this.filterFromDatePicker);
-            this.filterOptionsPanel.Controls.Add(this.filterDayCB);
-            this.filterOptionsPanel.Controls.Add(this.filterMonthCB);
-            this.filterOptionsPanel.Controls.Add(this.filterCategoryCB);
-            this.filterOptionsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.filterOptionsPanel.Location = new System.Drawing.Point(93, 84);
-            this.filterOptionsPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.filterOptionsPanel.Name = "filterOptionsPanel";
-            this.filterOptionsPanel.Size = new System.Drawing.Size(1251, 0);
-            this.filterOptionsPanel.TabIndex = 4;
-            // 
-            // filterResetBtn
-            // 
-            this.filterResetBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.filterResetBtn.Image = ((System.Drawing.Image)(resources.GetObject("filterResetBtn.Image")));
-            this.filterResetBtn.Location = new System.Drawing.Point(1177, 50);
-            this.filterResetBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.filterResetBtn.Name = "filterResetBtn";
-            this.filterResetBtn.Size = new System.Drawing.Size(65, 46);
-            this.filterResetBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.filterResetBtn.TabIndex = 1;
-            this.filterResetBtn.TabStop = false;
-            this.filterResetBtn.Click += new System.EventHandler(this.FilterResetBtnClick);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(1039, 21);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(60, 29);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Day";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(832, 21);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(87, 29);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "Month";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(592, 21);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(104, 29);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "To Date";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(324, 21);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(139, 29);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "From Date";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(60, 21);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(121, 29);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Category";
-            // 
-            // filterToDatePicker
-            // 
-            this.filterToDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterToDatePicker.Location = new System.Drawing.Point(524, 63);
-            this.filterToDatePicker.Margin = new System.Windows.Forms.Padding(4);
-            this.filterToDatePicker.Name = "filterToDatePicker";
-            this.filterToDatePicker.Size = new System.Drawing.Size(245, 32);
-            this.filterToDatePicker.TabIndex = 5;
-            this.filterToDatePicker.ValueChanged += new System.EventHandler(this.FilterDatePickerValueChanged);
-            this.filterToDatePicker.DropDown += new System.EventHandler(this.FilterDatePickerDropDown);
-            // 
-            // filterFromDatePicker
-            // 
-            this.filterFromDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterFromDatePicker.Location = new System.Drawing.Point(269, 63);
-            this.filterFromDatePicker.Margin = new System.Windows.Forms.Padding(4);
-            this.filterFromDatePicker.Name = "filterFromDatePicker";
-            this.filterFromDatePicker.Size = new System.Drawing.Size(245, 32);
-            this.filterFromDatePicker.TabIndex = 5;
-            this.filterFromDatePicker.ValueChanged += new System.EventHandler(this.FilterDatePickerValueChanged);
-            this.filterFromDatePicker.DropDown += new System.EventHandler(this.FilterDatePickerDropDown);
-            // 
-            // filterDayCB
-            // 
-            this.filterDayCB.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterDayCB.FormattingEnabled = true;
-            this.filterDayCB.Location = new System.Drawing.Point(987, 58);
-            this.filterDayCB.Margin = new System.Windows.Forms.Padding(4);
-            this.filterDayCB.Name = "filterDayCB";
-            this.filterDayCB.Size = new System.Drawing.Size(181, 37);
-            this.filterDayCB.TabIndex = 0;
-            this.filterDayCB.TextChanged += new System.EventHandler(this.FilterCBTextChanged);
-            this.filterDayCB.Click += new System.EventHandler(this.OnFilterCBClick);
-            this.filterDayCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FilterCBKeyPress);
-            // 
-            // filterMonthCB
-            // 
-            this.filterMonthCB.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterMonthCB.FormattingEnabled = true;
-            this.filterMonthCB.Location = new System.Drawing.Point(779, 58);
-            this.filterMonthCB.Margin = new System.Windows.Forms.Padding(4);
-            this.filterMonthCB.Name = "filterMonthCB";
-            this.filterMonthCB.Size = new System.Drawing.Size(199, 37);
-            this.filterMonthCB.TabIndex = 0;
-            this.filterMonthCB.TextChanged += new System.EventHandler(this.FilterCBTextChanged);
-            this.filterMonthCB.Click += new System.EventHandler(this.OnFilterCBClick);
-            this.filterMonthCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FilterCBKeyPress);
-            // 
-            // filterCategoryCB
-            // 
-            this.filterCategoryCB.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterCategoryCB.FormattingEnabled = true;
-            this.filterCategoryCB.Location = new System.Drawing.Point(13, 58);
-            this.filterCategoryCB.Margin = new System.Windows.Forms.Padding(4);
-            this.filterCategoryCB.Name = "filterCategoryCB";
-            this.filterCategoryCB.Size = new System.Drawing.Size(247, 37);
-            this.filterCategoryCB.TabIndex = 0;
-            this.filterCategoryCB.TextChanged += new System.EventHandler(this.FilterCBTextChanged);
-            this.filterCategoryCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FilterCBKeyPress);
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1344, 716);
+            this.ClientSize = new System.Drawing.Size(1007, 582);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.expenseDataGridView);
             this.Controls.Add(this.filterOptionsPanel);
             this.Controls.Add(this.optionsPanel);
             this.Controls.Add(this.panel2);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Expense Tracker";
             this.optionsPanel.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.categoryPB)).EndInit();
-            this.limitPanel.ResumeLayout(false);
-            this.limitPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.budgetPB)).EndInit();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.deletePanel.ResumeLayout(false);
-            this.deletePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.delPB)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filterPB)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.addPB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.menuPB)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expenseDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.expenseBindingSource2)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.filterOptionsPanel.ResumeLayout(false);
-            this.filterOptionsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filterResetBtn)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.expenseBindingSource2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -784,34 +528,12 @@
         #endregion
 
         private System.Windows.Forms.Panel optionsPanel;
-        private System.Windows.Forms.PictureBox addPB;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label headingLabel;
         private System.Windows.Forms.DataGridView expenseDataGridView;
         private System.Windows.Forms.BindingSource expenseBindingSource2;
-        private System.Windows.Forms.PictureBox filterPB;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.PictureBox delPB;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox menuPB;
-        private System.Windows.Forms.Panel deletePanel;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.PictureBox categoryPB;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel limitPanel;
-        private System.Windows.Forms.PictureBox budgetPB;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label totalAmountLabel;
@@ -827,9 +549,17 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox filterResetBtn;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button addExpenseBtn;
+        private System.Windows.Forms.Button filterExpenseBtn;
+        private System.Windows.Forms.Button categoryBtn;
+        private System.Windows.Forms.Button budgetBtn;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

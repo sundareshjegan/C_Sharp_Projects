@@ -34,6 +34,7 @@
             this.budgetNumericUpdown = new System.Windows.Forms.NumericUpDown();
             this.okBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
+            this.budgetWarningLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.budgetNumericUpdown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,12 +119,23 @@
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.OnCancelBtnClicked);
             // 
+            // budgetWarningLabel
+            // 
+            this.budgetWarningLabel.AutoSize = true;
+            this.budgetWarningLabel.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.budgetWarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.budgetWarningLabel.Location = new System.Drawing.Point(111, 161);
+            this.budgetWarningLabel.Name = "budgetWarningLabel";
+            this.budgetWarningLabel.Size = new System.Drawing.Size(0, 16);
+            this.budgetWarningLabel.TabIndex = 4;
+            // 
             // BudgetInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 175);
+            this.ClientSize = new System.Drawing.Size(335, 185);
             this.ControlBox = false;
+            this.Controls.Add(this.budgetWarningLabel);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.okBtn);
             this.Controls.Add(this.budgetNumericUpdown);
@@ -149,5 +161,6 @@
         private System.Windows.Forms.NumericUpDown budgetNumericUpdown;
         private System.Windows.Forms.Button okBtn;
         private System.Windows.Forms.Button cancelBtn;
+        private System.Windows.Forms.Label budgetWarningLabel;
     }
 }
