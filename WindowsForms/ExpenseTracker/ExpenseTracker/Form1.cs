@@ -106,6 +106,7 @@ namespace ExpenseTracker
 
         private void OnPictureBoxMouseLeave(object sender, EventArgs e)
         {
+            //expenseDataGridView.Sort(,ListSortDirection.);
             if (sender is PictureBox pb)
                 pb.BackColor = Color.Transparent;
             if (sender is Panel panel)
@@ -254,6 +255,11 @@ namespace ExpenseTracker
         private void MenuMouseLeave(object sender, EventArgs e)
         {
             isMenuClicked = false;
+        }
+
+        private void expenseDataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            OnExpenseDataGridViewRowsAdded(sender, null);
         }
 
         private void OnExpenseDataGridViewRowsAdded(object sender, DataGridViewRowsAddedEventArgs e)

@@ -44,10 +44,9 @@
             // 
             this.NameTB.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameTB.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.NameTB.Location = new System.Drawing.Point(36, 75);
-            this.NameTB.Margin = new System.Windows.Forms.Padding(4);
+            this.NameTB.Location = new System.Drawing.Point(27, 61);
             this.NameTB.Name = "NameTB";
-            this.NameTB.Size = new System.Drawing.Size(324, 35);
+            this.NameTB.Size = new System.Drawing.Size(244, 30);
             this.NameTB.TabIndex = 0;
             this.NameTB.TabStop = false;
             this.NameTB.Text = "Name";
@@ -58,10 +57,9 @@
             this.categoryTB.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.categoryTB.ForeColor = System.Drawing.Color.DodgerBlue;
             this.categoryTB.FormattingEnabled = true;
-            this.categoryTB.Location = new System.Drawing.Point(36, 119);
-            this.categoryTB.Margin = new System.Windows.Forms.Padding(4);
+            this.categoryTB.Location = new System.Drawing.Point(27, 97);
             this.categoryTB.Name = "categoryTB";
-            this.categoryTB.Size = new System.Drawing.Size(324, 37);
+            this.categoryTB.Size = new System.Drawing.Size(244, 32);
             this.categoryTB.TabIndex = 1;
             this.categoryTB.TabStop = false;
             this.categoryTB.Text = "Category";
@@ -70,25 +68,33 @@
             // 
             this.amountNumericUpDown.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.amountNumericUpDown.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.amountNumericUpDown.Location = new System.Drawing.Point(36, 166);
-            this.amountNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+            this.amountNumericUpDown.Location = new System.Drawing.Point(27, 135);
             this.amountNumericUpDown.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
+            this.amountNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.amountNumericUpDown.Name = "amountNumericUpDown";
-            this.amountNumericUpDown.Size = new System.Drawing.Size(325, 35);
+            this.amountNumericUpDown.Size = new System.Drawing.Size(244, 30);
             this.amountNumericUpDown.TabIndex = 2;
+            this.amountNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // amountTB
             // 
             this.amountTB.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.amountTB.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.amountTB.Location = new System.Drawing.Point(36, 166);
-            this.amountTB.Margin = new System.Windows.Forms.Padding(4);
+            this.amountTB.Location = new System.Drawing.Point(27, 135);
             this.amountTB.Name = "amountTB";
-            this.amountTB.Size = new System.Drawing.Size(324, 35);
+            this.amountTB.Size = new System.Drawing.Size(244, 30);
             this.amountTB.TabIndex = 0;
             this.amountTB.TabStop = false;
             this.amountTB.Text = "Amount";
@@ -104,10 +110,9 @@
             this.dateTimePicker.CustomFormat = "";
             this.dateTimePicker.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker.Location = new System.Drawing.Point(36, 31);
-            this.dateTimePicker.Margin = new System.Windows.Forms.Padding(4);
+            this.dateTimePicker.Location = new System.Drawing.Point(27, 25);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(324, 35);
+            this.dateTimePicker.Size = new System.Drawing.Size(244, 30);
             this.dateTimePicker.TabIndex = 3;
             this.dateTimePicker.TabStop = false;
             // 
@@ -115,11 +120,10 @@
             // 
             this.descriptionTB.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionTB.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.descriptionTB.Location = new System.Drawing.Point(36, 210);
-            this.descriptionTB.Margin = new System.Windows.Forms.Padding(4);
+            this.descriptionTB.Location = new System.Drawing.Point(27, 171);
             this.descriptionTB.Multiline = true;
             this.descriptionTB.Name = "descriptionTB";
-            this.descriptionTB.Size = new System.Drawing.Size(324, 155);
+            this.descriptionTB.Size = new System.Drawing.Size(244, 127);
             this.descriptionTB.TabIndex = 0;
             this.descriptionTB.TabStop = false;
             this.descriptionTB.Text = "Description";
@@ -129,10 +133,9 @@
             // 
             this.saveBtn.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.saveBtn.Location = new System.Drawing.Point(209, 385);
-            this.saveBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.saveBtn.Location = new System.Drawing.Point(157, 313);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(100, 38);
+            this.saveBtn.Size = new System.Drawing.Size(75, 31);
             this.saveBtn.TabIndex = 4;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = true;
@@ -142,10 +145,9 @@
             // 
             this.cancelBtn.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.cancelBtn.Location = new System.Drawing.Point(88, 385);
-            this.cancelBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.cancelBtn.Location = new System.Drawing.Point(66, 313);
             this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(100, 38);
+            this.cancelBtn.Size = new System.Drawing.Size(75, 31);
             this.cancelBtn.TabIndex = 4;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
@@ -158,22 +160,21 @@
             this.addCategoryBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.addCategoryBtn.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addCategoryBtn.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.addCategoryBtn.Location = new System.Drawing.Point(368, 119);
-            this.addCategoryBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.addCategoryBtn.Location = new System.Drawing.Point(276, 97);
             this.addCategoryBtn.Name = "addCategoryBtn";
-            this.addCategoryBtn.Size = new System.Drawing.Size(44, 37);
+            this.addCategoryBtn.Size = new System.Drawing.Size(33, 30);
             this.addCategoryBtn.TabIndex = 4;
             this.addCategoryBtn.UseVisualStyleBackColor = false;
             this.addCategoryBtn.Click += new System.EventHandler(this.OnAddCategoryBtnClicked);
             // 
             // ExpenseInputForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::ExpenseTracker.Properties.Resources.bluegradient;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(430, 440);
+            this.ClientSize = new System.Drawing.Size(322, 358);
             this.ControlBox = false;
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.addCategoryBtn);
@@ -185,7 +186,6 @@
             this.Controls.Add(this.NameTB);
             this.Controls.Add(this.amountNumericUpDown);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ExpenseInputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnExpenseInputFormPaint);

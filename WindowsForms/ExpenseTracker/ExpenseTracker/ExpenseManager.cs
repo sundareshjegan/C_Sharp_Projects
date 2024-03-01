@@ -43,14 +43,33 @@ namespace ExpenseTracker
         
         public static void UpdateExpense(Expense expense,int id)
         {
-            monthExpenseList[expense.Date.Month - 1][1] -= ExpensesList[id].Amount;
+
+            if(ExpensesList[id].Amount - expense.Amount != 0) {
+                if (ExpensesList[id].Amount - expense.Amount > 0)
+                    monthExpenseList[expense.Date.Month - 1][1] -= ExpensesList[id].Amount - expense.Amount;
+                else
+                {
+                    if (monthExpenseList[expense.Date.Month - 1][1] + (expense.Amount - ExpensesList[id].Amount) > monthExpenseList[expense.Date.Month - 1][0])
+                        MessageBox.Show($"You are exceeding your {MonthNumberAndName[expense.Date.Month] } Budget");
+                    monthExpenseList[expense.Date.Month - 1][1] += ExpensesList[id].Amount - expense.Amount;
+                }
+
+            }
+
+            categoryDict[ExpensesList[id].Category][expense.Date.Month - 1][1] -= ExpensesList[id].Amount;
+
+            if (categoryDict[expense.Category][expense.Date.Month - 1][1]  + expense.Amount >  categoryDict[expense.Category][expense.Date.Month - 1][0]  )
+                MessageBox.Show($"You are exceeding your {expense.Category}  Budget limit { categoryDict[expense.Category][expense.Date.Month - 1][0] }");
+
+            categoryDict[expense.Category][expense.Date.Month - 1][1] += expense.Amount;
+            
             ExpensesList[id].Id = expense.Id;
             ExpensesList[id].Date = expense.Date;
             ExpensesList[id].Name = expense.Name;
             ExpensesList[id].Category = expense.Category;       
             ExpensesList[id].Amount = expense.Amount;
             ExpensesList[id].Description = expense.Description;           
-            CheckBudget(expense);
+       //     CheckBudget(expense);
 
             OnExpenseUpdated?.Invoke(ExpensesList, "add");
 
@@ -82,6 +101,11 @@ namespace ExpenseTracker
         public static void RemoveExpense(Expense expense)
         {
             ExpensesList.Remove(expense);
+
+            monthExpenseList[expense.Date.Month - 1][1] -= expense.Amount ;
+            categoryDict[expense.Category][expense.Date.Month - 1][1] -= expense.Amount;
+
+
         }
 
         public static void RemoveExpense(int idToRemove)

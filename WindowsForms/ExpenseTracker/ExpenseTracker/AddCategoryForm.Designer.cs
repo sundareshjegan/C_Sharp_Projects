@@ -65,8 +65,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.closeBtn = new System.Windows.Forms.Button();
             this.deleteCategoryBtn = new System.Windows.Forms.Button();
-            this.addCategoryBtn = new System.Windows.Forms.Button();
             this.updateCategoryBtn = new System.Windows.Forms.Button();
+            this.addCategoryBtn = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.operationsPanel = new System.Windows.Forms.Panel();
             this.AddCategoryPanel.SuspendLayout();
@@ -543,27 +543,6 @@
             this.deleteCategoryBtn.MouseEnter += new System.EventHandler(this.OnBtnMouseEnter);
             this.deleteCategoryBtn.MouseLeave += new System.EventHandler(this.OnBtnMouseLeave);
             // 
-            // addCategoryBtn
-            // 
-            this.addCategoryBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addCategoryBtn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.addCategoryBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.addCategoryBtn.FlatAppearance.BorderSize = 0;
-            this.addCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCategoryBtn.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addCategoryBtn.ForeColor = System.Drawing.Color.White;
-            this.addCategoryBtn.Location = new System.Drawing.Point(0, 120);
-            this.addCategoryBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.addCategoryBtn.Name = "addCategoryBtn";
-            this.addCategoryBtn.Padding = new System.Windows.Forms.Padding(10);
-            this.addCategoryBtn.Size = new System.Drawing.Size(262, 50);
-            this.addCategoryBtn.TabIndex = 2;
-            this.addCategoryBtn.Text = "Add Category";
-            this.addCategoryBtn.UseVisualStyleBackColor = true;
-            this.addCategoryBtn.Click += new System.EventHandler(this.OnOptionsBtnClicked);
-            this.addCategoryBtn.MouseEnter += new System.EventHandler(this.OnBtnMouseEnter);
-            this.addCategoryBtn.MouseLeave += new System.EventHandler(this.OnBtnMouseLeave);
-            // 
             // updateCategoryBtn
             // 
             this.updateCategoryBtn.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -584,6 +563,27 @@
             this.updateCategoryBtn.Click += new System.EventHandler(this.OnOptionsBtnClicked);
             this.updateCategoryBtn.MouseEnter += new System.EventHandler(this.OnBtnMouseEnter);
             this.updateCategoryBtn.MouseLeave += new System.EventHandler(this.OnBtnMouseLeave);
+            // 
+            // addCategoryBtn
+            // 
+            this.addCategoryBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addCategoryBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.addCategoryBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.addCategoryBtn.FlatAppearance.BorderSize = 0;
+            this.addCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addCategoryBtn.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addCategoryBtn.ForeColor = System.Drawing.Color.White;
+            this.addCategoryBtn.Location = new System.Drawing.Point(0, 120);
+            this.addCategoryBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.addCategoryBtn.Name = "addCategoryBtn";
+            this.addCategoryBtn.Padding = new System.Windows.Forms.Padding(10);
+            this.addCategoryBtn.Size = new System.Drawing.Size(262, 50);
+            this.addCategoryBtn.TabIndex = 2;
+            this.addCategoryBtn.Text = "Add Category";
+            this.addCategoryBtn.UseVisualStyleBackColor = true;
+            this.addCategoryBtn.Click += new System.EventHandler(this.OnOptionsBtnClicked);
+            this.addCategoryBtn.MouseEnter += new System.EventHandler(this.OnBtnMouseEnter);
+            this.addCategoryBtn.MouseLeave += new System.EventHandler(this.OnBtnMouseLeave);
             // 
             // panel5
             // 
