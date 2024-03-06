@@ -68,7 +68,7 @@ namespace ExpenseTracker
         {
             if(!string.IsNullOrEmpty(monthCB.Text) || !string.IsNullOrWhiteSpace(monthCB.Text))
             {
-                ExpenseManager.SetBudget(GetMonthNumber(monthCB.Text)-1, (int)budgetNumericUpdown.Value);
+               // ExpenseManager.SetBudget(GetMonthNumber(monthCB.Text)-1, (int)budgetNumericUpdown.Value);
                 budgetWarningLabel.Text = "";
                 Dispose();
             }
@@ -90,7 +90,7 @@ namespace ExpenseTracker
 
         private void OnMonthCBTextChanged(object sender, EventArgs e)
         {
-            budgetNumericUpdown.Value = ExpenseManager.monthExpenseList[GetMonthNumber(monthCB.Text) - 1][0];
+           // budgetNumericUpdown.Value = ExpenseManager.monthExpenseList[GetMonthNumber(monthCB.Text) - 1][0];
         }
     }
 }

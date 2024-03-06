@@ -29,11 +29,11 @@ namespace ExpenseTracker
             panels.Add(UpdateCategoryPanel);
             panels.Add(DeleteCategoryPanel);
 
-            MonthCB.DataSource = new BindingSource(ExpenseManager.MonthNumberAndName,null);
-            MonthCB.DisplayMember = "Value";
+            //MonthCB.DataSource = new BindingSource(ExpenseManager.MonthNumberAndName,null);
+            //MonthCB.DisplayMember = "Value";
 
-            addCategoryMonthCB.DataSource = new BindingSource(ExpenseManager.MonthNumberAndName, null);
-            addCategoryMonthCB.DisplayMember = "Value";
+            //addCategoryMonthCB.DataSource = new BindingSource(ExpenseManager.MonthNumberAndName, null);
+            //addCategoryMonthCB.DisplayMember = "Value";
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -52,9 +52,9 @@ namespace ExpenseTracker
         
         private void UpdateComboBoxes()
         {
-            deleteCategoryCB.DataSource = existingCategoryCB.DataSource = null;
-            existingCategoryCB.DataSource = ExpenseManager.categories;
-            deleteCategoryCB.DataSource = ExpenseManager.categories;
+            //deleteCategoryCB.DataSource = existingCategoryCB.DataSource = null;
+            //existingCategoryCB.DataSource = ExpenseManager.categories;
+            //deleteCategoryCB.DataSource = ExpenseManager.categories;
 
             newBudgetCB.Value = 0;
         }
@@ -82,30 +82,30 @@ namespace ExpenseTracker
         private void OnAddBtnClicked(object sender, EventArgs e)
         {
             Button bt = sender as Button;
-            if (ExpenseManager.categories.Contains(newCategoryTB.Text))
-            {
-                addWarningLabel.ForeColor = Color.Red;
-                addWarningLabel.Text = "Category already exists";
-            }
-            else if(bt.Text == "Add" && newCategoryTB.Text!="" && !string.IsNullOrWhiteSpace(newCategoryTB.Text))
-            {
-                ExpenseManager.AddCategory(newCategoryTB.Text, (int)catBudgetTB.Value,addCategoryMonthCB.SelectedIndex);
-                addWarningLabel.ForeColor = Color.DodgerBlue;
-                addWarningLabel.Text = "Category added Successfully..!";
-            }
+            //if (ExpenseManager.categories.Contains(newCategoryTB.Text))
+            //{
+            //    addWarningLabel.ForeColor = Color.Red;
+            //    addWarningLabel.Text = "Category already exists";
+            //}
+            //else if(bt.Text == "Add" && newCategoryTB.Text!="" && !string.IsNullOrWhiteSpace(newCategoryTB.Text))
+            //{
+            //   // ExpenseManager.AddCategory(newCategoryTB.Text, (int)catBudgetTB.Value,addCategoryMonthCB.SelectedIndex);
+            //    addWarningLabel.ForeColor = Color.DodgerBlue;
+            //    addWarningLabel.Text = "Category added Successfully..!";
+            //}
             ResetTextBoxes();
         }
 
         private void OnUpdateBtnClicked(object sender, EventArgs e)
         {
-            if(ExpenseManager.categoryDict.ContainsKey(updatedCategoryTB.Text) && existingCategoryCB.Text== updatedCategoryTB.Text)
-            {
-                ExpenseManager.UpdateCategory(existingCategoryCB.Text, updatedCategoryTB.Text, MonthCB.SelectedIndex, (int)newBudgetCB.Value);
-                updateWarningLabel.ForeColor = Color.DodgerBlue;
-                updateWarningLabel.Text = "Category Updated Successfully";
-                UpdateComboBoxes();
-                ResetTextBoxes();
-            }
+            //if(ExpenseManager.categoryDict.ContainsKey(updatedCategoryTB.Text) && existingCategoryCB.Text== updatedCategoryTB.Text)
+            //{
+            // //   ExpenseManager.UpdateCategory(existingCategoryCB.Text, updatedCategoryTB.Text, MonthCB.SelectedIndex, (int)newBudgetCB.Value);
+            //    updateWarningLabel.ForeColor = Color.DodgerBlue;
+            //    updateWarningLabel.Text = "Category Updated Successfully";
+            //    UpdateComboBoxes();
+            //    ResetTextBoxes();
+            //}
         }
 
         private void OnDeleteBtnClicked(object sender, EventArgs e)
@@ -116,7 +116,7 @@ namespace ExpenseTracker
             }
             else
             {
-                ExpenseManager.RemoveCategory(deleteCategoryCB.Text);
+             //   ExpenseManager.RemoveCategory(deleteCategoryCB.Text);
                 deleteWarningLabel.Text = deleteCategoryCB.Text + " Deleted Successfully";
                 UpdateComboBoxes();
             }
@@ -168,7 +168,7 @@ namespace ExpenseTracker
             updatedCategoryTB.Text = existingCategoryCB.Text;
             try
             {
-                newBudgetCB.Value = (int)ExpenseManager.categoryDict[existingCategoryCB.Text][MonthCB.SelectedIndex][0];
+              //  newBudgetCB.Value = (int)ExpenseManager.categoryDict[existingCategoryCB.Text][MonthCB.SelectedIndex][0];
             }
             catch (Exception ex) { }
         }

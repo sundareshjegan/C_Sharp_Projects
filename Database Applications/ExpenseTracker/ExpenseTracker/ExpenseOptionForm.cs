@@ -15,7 +15,7 @@ namespace ExpenseTracker
         public ExpenseOptionForm()
         {
             InitializeComponent();
-            Width = 271;
+            Width = 260;
             Height = 0;
 
             timer.Interval = 10;
@@ -25,7 +25,7 @@ namespace ExpenseTracker
 
         private void TimerTick(object sender, EventArgs e)
         {
-            if(Height < 135)
+            if(Height < 133)
             {
                 Height += 7;
             }
@@ -52,6 +52,24 @@ namespace ExpenseTracker
                 SendOption?.Invoke(pb.Name.ToLower());
             }
             Dispose();
+        }
+
+        private void OnButtonMouseEnter(object sender, EventArgs e)
+        {
+            if(sender is Button button)
+            {
+                button.BackColor = Color.DodgerBlue;
+                button.ForeColor = Color.White;
+            }
+        }
+
+        private void OnButtonMouseLeave(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                button.BackColor = Color.White;
+                button.ForeColor = Color.DodgerBlue;
+            }
         }
     }
 }

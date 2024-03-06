@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.NameTB = new System.Windows.Forms.TextBox();
-            this.categoryTB = new System.Windows.Forms.ComboBox();
+            this.categoryCB = new System.Windows.Forms.ComboBox();
             this.amountNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.amountTB = new System.Windows.Forms.TextBox();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -52,17 +52,17 @@
             this.NameTB.Text = "Name";
             this.NameTB.Click += new System.EventHandler(this.OnNameTBClick);
             // 
-            // categoryTB
+            // categoryCB
             // 
-            this.categoryTB.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.categoryTB.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.categoryTB.FormattingEnabled = true;
-            this.categoryTB.Location = new System.Drawing.Point(27, 61);
-            this.categoryTB.Name = "categoryTB";
-            this.categoryTB.Size = new System.Drawing.Size(244, 32);
-            this.categoryTB.TabIndex = 1;
-            this.categoryTB.TabStop = false;
-            this.categoryTB.Text = "Category";
+            this.categoryCB.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryCB.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.categoryCB.FormattingEnabled = true;
+            this.categoryCB.Location = new System.Drawing.Point(27, 61);
+            this.categoryCB.Name = "categoryCB";
+            this.categoryCB.Size = new System.Drawing.Size(244, 32);
+            this.categoryCB.TabIndex = 1;
+            this.categoryCB.TabStop = false;
+            this.categoryCB.Text = "Category";
             // 
             // amountNumericUpDown
             // 
@@ -180,7 +180,7 @@
             this.Controls.Add(this.addCategoryBtn);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.dateTimePicker);
-            this.Controls.Add(this.categoryTB);
+            this.Controls.Add(this.categoryCB);
             this.Controls.Add(this.amountTB);
             this.Controls.Add(this.descriptionTB);
             this.Controls.Add(this.NameTB);
@@ -198,7 +198,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox NameTB;
-        private System.Windows.Forms.ComboBox categoryTB;
+        private System.Windows.Forms.ComboBox categoryCB;
         private System.Windows.Forms.NumericUpDown amountNumericUpDown;
         private System.Windows.Forms.TextBox amountTB;
         private System.Windows.Forms.DateTimePicker dateTimePicker;

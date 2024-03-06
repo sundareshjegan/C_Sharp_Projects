@@ -11,35 +11,36 @@ namespace ExpenseTracker
         {
             InitializeComponent();
             StartAnimation();
-            categoryTB.DataSource = ExpenseManager.categories;
-            ExpenseManager.OnCategoryUpdated += UpdateCategory;
+            SetCategory();
+          //  categoryTB.DataSource = ExpenseManager.categories;
+          //  ExpenseManager.OnCategoryUpdated += UpdateCategory;
         }
 
         public ExpenseInputForm(Expense expense, int id)
         {
             InitializeComponent();
             StartAnimation();
-            categoryTB.DataSource = ExpenseManager.categories;
-            ExpenseManager.OnCategoryUpdated += UpdateCategory;
+          //  categoryTB.DataSource = ExpenseManager.categories;
+          //  ExpenseManager.OnCategoryUpdated += UpdateCategory;
 
             //update the form with existing data
             saveBtn.Text = "Edit";
             editExpenseId = id;
 
-            amountTB.Visible = false;
-            NameTB.Text = expense.Name;
-            amountNumericUpDown.Value = expense.Amount;
-            categoryTB.Text = expense.Category;
-            descriptionTB.Text = expense.Description;
-            dateTimePicker.Value = expense.Date;
+            //amountTB.Visible = false;
+            //NameTB.Text = expense.Name;
+            //amountNumericUpDown.Value = expense.Amount;
+            //categoryTB.Text = expense.Category;
+            //descriptionTB.Text = expense.Description;
+            //dateTimePicker.Value = expense.Date;
         }
         
-        private int editExpenseId = 0;
-        private static int id = 0;
+        private int editExpenseId = 0 ;
+        private int updateId = 0;
+
         private void UpdateCategory(object sender, string e)
         {
-            categoryTB.DataSource = null;
-            categoryTB.DataSource = ExpenseManager.categories;
+            // categoryTB.DataSource = ExpenseManager.categories;
         }
 
         private void StartAnimation()
@@ -97,20 +98,23 @@ namespace ExpenseTracker
 
         private void OnSaveBtnClicked(object sender, EventArgs e)
         {
-            DBManager.Connection.Open();
+            Expense expense = new Expense
+            {
+                Date = dateTimePicker.Value,
+                Category = categoryCB.Text,
+                Name = NameTB.Text,
+                Amount = (int)amountNumericUpDown.Value,
+                Description = descriptionTB.Text
+            };
 
-         
-            string date = dateTimePicker.Value.ToString("yyyy-MM-dd"); // to convert string to date as mysql format...
-         
-            string insertQuery = $"insert into expenses(DATE,CATEGORY,NAME,AMOUNT,DESCRIPTION) values('{date}','Food','Tea',90.09,'super')";
-
-            MySqlCommand cmd = new MySqlCommand(insertQuery, DBManager.Connection);
-
-            int rowsAffected = cmd.ExecuteNonQuery();
-
-            DBManager.Connection.Close();
-
-            Dispose();
+            if (saveBtn.Text == "Edit")
+            {
+                DBManager.UpdateExpense(expense , updateId);
+            }
+            else
+            {
+                DBManager.AddExpense(expense);
+            }
         }
 
         private void OnNameTBClick(object sender, EventArgs e)
@@ -132,5 +136,34 @@ namespace ExpenseTracker
             addCategoryForm.ShowDialog();
         }
 
+        public  void SetData(Expense expense)
+        {
+            updateId = expense.Id;
+            saveBtn.Text = "Edit";
+            amountTB.Visible = false;
+            dateTimePicker.Value = expense.Date;
+            categoryCB.Text = expense.Category;
+            NameTB.Text = expense.Name;
+            amountNumericUpDown.Value = (decimal)expense.Amount;
+            descriptionTB.Text = expense.Description;
+
+        }
+
+        public void SetCategory()
+        {
+            categoryCB.Items.Clear();
+
+            string query = "SELECT CAT_NAME FROM categories";
+            MySqlDataReader reader = DBManager.GetReader(query);
+            while (reader.Read())
+            {
+                if (reader.GetString(0) != "Others")
+                    categoryCB.Items.Add(reader.GetString(0));
+            }
+
+            categoryCB.Items.Add("Others");
+        DBManager.Connection.Close();
+        }
+        
     }
 }

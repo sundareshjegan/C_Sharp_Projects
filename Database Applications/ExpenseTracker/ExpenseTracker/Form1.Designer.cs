@@ -34,19 +34,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.optionsPanel = new System.Windows.Forms.Panel();
-            this.budgetBtn = new System.Windows.Forms.Button();
-            this.categoryBtn = new System.Windows.Forms.Button();
             this.filterExpenseBtn = new System.Windows.Forms.Button();
+            this.categoryBtn = new System.Windows.Forms.Button();
+            this.budgetBtn = new System.Windows.Forms.Button();
             this.addExpenseBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.headingLabel = new System.Windows.Forms.Label();
             this.expenseDataGridView = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.expenseBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -81,56 +75,21 @@
             // optionsPanel
             // 
             this.optionsPanel.BackColor = System.Drawing.Color.White;
-            this.optionsPanel.Controls.Add(this.budgetBtn);
-            this.optionsPanel.Controls.Add(this.categoryBtn);
             this.optionsPanel.Controls.Add(this.filterExpenseBtn);
+            this.optionsPanel.Controls.Add(this.categoryBtn);
+            this.optionsPanel.Controls.Add(this.budgetBtn);
             this.optionsPanel.Controls.Add(this.addExpenseBtn);
             this.optionsPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.optionsPanel.Location = new System.Drawing.Point(0, 68);
             this.optionsPanel.Name = "optionsPanel";
-            this.optionsPanel.Size = new System.Drawing.Size(50, 514);
+            this.optionsPanel.Size = new System.Drawing.Size(60, 514);
             this.optionsPanel.TabIndex = 0;
-            this.optionsPanel.MouseEnter += new System.EventHandler(this.MenuMouseEnter);
-            this.optionsPanel.MouseLeave += new System.EventHandler(this.MenuMouseLeave);
-            // 
-            // budgetBtn
-            // 
-            this.budgetBtn.FlatAppearance.BorderSize = 0;
-            this.budgetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.budgetBtn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.budgetBtn.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.budgetBtn.Image = ((System.Drawing.Image)(resources.GetObject("budgetBtn.Image")));
-            this.budgetBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.budgetBtn.Location = new System.Drawing.Point(3, 56);
-            this.budgetBtn.Name = "budgetBtn";
-            this.budgetBtn.Size = new System.Drawing.Size(200, 46);
-            this.budgetBtn.TabIndex = 6;
-            this.budgetBtn.Text = "    Budget";
-            this.budgetBtn.UseVisualStyleBackColor = true;
-            this.budgetBtn.Click += new System.EventHandler(this.OnBudgetBtnClicked);
-            this.budgetBtn.MouseEnter += new System.EventHandler(this.MenuMouseEnter);
-            this.budgetBtn.MouseLeave += new System.EventHandler(this.MenuMouseLeave);
-            // 
-            // categoryBtn
-            // 
-            this.categoryBtn.FlatAppearance.BorderSize = 0;
-            this.categoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.categoryBtn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.categoryBtn.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.categoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("categoryBtn.Image")));
-            this.categoryBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.categoryBtn.Location = new System.Drawing.Point(3, 108);
-            this.categoryBtn.Name = "categoryBtn";
-            this.categoryBtn.Size = new System.Drawing.Size(200, 46);
-            this.categoryBtn.TabIndex = 6;
-            this.categoryBtn.Text = "    Categories";
-            this.categoryBtn.UseVisualStyleBackColor = true;
-            this.categoryBtn.Click += new System.EventHandler(this.OnCategoryBtnClicked);
-            this.categoryBtn.MouseEnter += new System.EventHandler(this.MenuMouseEnter);
-            this.categoryBtn.MouseLeave += new System.EventHandler(this.MenuMouseLeave);
+            this.optionsPanel.MouseEnter += new System.EventHandler(this.optionsPanel_MouseEnter);
+            this.optionsPanel.MouseLeave += new System.EventHandler(this.optionsPanel_MouseLeave);
             // 
             // filterExpenseBtn
             // 
+            this.filterExpenseBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.filterExpenseBtn.FlatAppearance.BorderSize = 0;
             this.filterExpenseBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.filterExpenseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -138,34 +97,76 @@
             this.filterExpenseBtn.ForeColor = System.Drawing.Color.DodgerBlue;
             this.filterExpenseBtn.Image = ((System.Drawing.Image)(resources.GetObject("filterExpenseBtn.Image")));
             this.filterExpenseBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.filterExpenseBtn.Location = new System.Drawing.Point(3, 160);
+            this.filterExpenseBtn.Location = new System.Drawing.Point(0, 138);
             this.filterExpenseBtn.Name = "filterExpenseBtn";
-            this.filterExpenseBtn.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.filterExpenseBtn.Size = new System.Drawing.Size(200, 46);
+            this.filterExpenseBtn.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.filterExpenseBtn.Size = new System.Drawing.Size(60, 46);
             this.filterExpenseBtn.TabIndex = 6;
             this.filterExpenseBtn.Text = "     Filter Expense";
             this.filterExpenseBtn.UseVisualStyleBackColor = true;
             this.filterExpenseBtn.Click += new System.EventHandler(this.OnFilterExpenseBtnClicked);
-            this.filterExpenseBtn.MouseEnter += new System.EventHandler(this.MenuMouseEnter);
-            this.filterExpenseBtn.MouseLeave += new System.EventHandler(this.MenuMouseLeave);
+            this.filterExpenseBtn.MouseEnter += new System.EventHandler(this.optionsPanel_MouseEnter);
+            this.filterExpenseBtn.MouseLeave += new System.EventHandler(this.optionsPanel_MouseLeave);
+            // 
+            // categoryBtn
+            // 
+            this.categoryBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.categoryBtn.FlatAppearance.BorderSize = 0;
+            this.categoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.categoryBtn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryBtn.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.categoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("categoryBtn.Image")));
+            this.categoryBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.categoryBtn.Location = new System.Drawing.Point(0, 92);
+            this.categoryBtn.Name = "categoryBtn";
+            this.categoryBtn.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.categoryBtn.Size = new System.Drawing.Size(60, 46);
+            this.categoryBtn.TabIndex = 6;
+            this.categoryBtn.Text = "    Categories";
+            this.categoryBtn.UseVisualStyleBackColor = true;
+            this.categoryBtn.Click += new System.EventHandler(this.OnCategoryBtnClicked);
+            this.categoryBtn.MouseEnter += new System.EventHandler(this.optionsPanel_MouseEnter);
+            this.categoryBtn.MouseLeave += new System.EventHandler(this.optionsPanel_MouseLeave);
+            // 
+            // budgetBtn
+            // 
+            this.budgetBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.budgetBtn.FlatAppearance.BorderSize = 0;
+            this.budgetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.budgetBtn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.budgetBtn.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.budgetBtn.Image = ((System.Drawing.Image)(resources.GetObject("budgetBtn.Image")));
+            this.budgetBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.budgetBtn.Location = new System.Drawing.Point(0, 46);
+            this.budgetBtn.Name = "budgetBtn";
+            this.budgetBtn.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.budgetBtn.Size = new System.Drawing.Size(60, 46);
+            this.budgetBtn.TabIndex = 6;
+            this.budgetBtn.Text = "    Budget";
+            this.budgetBtn.UseVisualStyleBackColor = true;
+            this.budgetBtn.Click += new System.EventHandler(this.OnBudgetBtnClicked);
+            this.budgetBtn.MouseEnter += new System.EventHandler(this.optionsPanel_MouseEnter);
+            this.budgetBtn.MouseLeave += new System.EventHandler(this.optionsPanel_MouseLeave);
             // 
             // addExpenseBtn
             // 
+            this.addExpenseBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.addExpenseBtn.FlatAppearance.BorderSize = 0;
             this.addExpenseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addExpenseBtn.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addExpenseBtn.ForeColor = System.Drawing.Color.DodgerBlue;
             this.addExpenseBtn.Image = ((System.Drawing.Image)(resources.GetObject("addExpenseBtn.Image")));
             this.addExpenseBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addExpenseBtn.Location = new System.Drawing.Point(3, 4);
+            this.addExpenseBtn.Location = new System.Drawing.Point(0, 0);
             this.addExpenseBtn.Name = "addExpenseBtn";
-            this.addExpenseBtn.Size = new System.Drawing.Size(200, 46);
+            this.addExpenseBtn.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.addExpenseBtn.Size = new System.Drawing.Size(60, 46);
             this.addExpenseBtn.TabIndex = 6;
             this.addExpenseBtn.Text = "     Add Expense";
             this.addExpenseBtn.UseVisualStyleBackColor = true;
             this.addExpenseBtn.Click += new System.EventHandler(this.OnAddExpenseBtnClicked);
-            this.addExpenseBtn.MouseEnter += new System.EventHandler(this.MenuMouseEnter);
-            this.addExpenseBtn.MouseLeave += new System.EventHandler(this.MenuMouseLeave);
+            this.addExpenseBtn.MouseEnter += new System.EventHandler(this.optionsPanel_MouseEnter);
+            this.addExpenseBtn.MouseLeave += new System.EventHandler(this.optionsPanel_MouseLeave);
             // 
             // panel2
             // 
@@ -182,7 +183,7 @@
             this.headingLabel.AutoSize = true;
             this.headingLabel.Font = new System.Drawing.Font("Verdana", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headingLabel.ForeColor = System.Drawing.Color.White;
-            this.headingLabel.Location = new System.Drawing.Point(173, 23);
+            this.headingLabel.Location = new System.Drawing.Point(407, 19);
             this.headingLabel.Name = "headingLabel";
             this.headingLabel.Size = new System.Drawing.Size(238, 32);
             this.headingLabel.TabIndex = 3;
@@ -191,7 +192,6 @@
             // expenseDataGridView
             // 
             this.expenseDataGridView.AllowUserToAddRows = false;
-            this.expenseDataGridView.AutoGenerateColumns = false;
             this.expenseDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.expenseDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -203,14 +203,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.expenseDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.expenseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.expenseDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.dateDataGridViewTextBoxColumn,
-            this.nameDataGridViewTextBoxColumn,
-            this.categoryDataGridViewTextBoxColumn,
-            this.amountDataGridViewTextBoxColumn,
-            this.descriptionDataGridViewTextBoxColumn});
-            this.expenseDataGridView.DataSource = this.expenseBindingSource2;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -220,71 +212,18 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.expenseDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.expenseDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.expenseDataGridView.Location = new System.Drawing.Point(50, 68);
+            this.expenseDataGridView.Location = new System.Drawing.Point(60, 68);
             this.expenseDataGridView.Name = "expenseDataGridView";
             this.expenseDataGridView.RowHeadersVisible = false;
             this.expenseDataGridView.RowHeadersWidth = 51;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expenseDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.expenseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.expenseDataGridView.Size = new System.Drawing.Size(957, 514);
+            this.expenseDataGridView.Size = new System.Drawing.Size(947, 514);
             this.expenseDataGridView.TabIndex = 3;
             this.expenseDataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OnExpenseDataGridViewCellMouseClick);
             this.expenseDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.OnExpenseDataGridViewRowsAdded);
             this.expenseDataGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.expenseDataGridView_RowsRemoved);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // categoryDataGridViewTextBoxColumn
-            // 
-            this.categoryDataGridViewTextBoxColumn.DataPropertyName = "Category";
-            this.categoryDataGridViewTextBoxColumn.HeaderText = "Category";
-            this.categoryDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
-            this.categoryDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // amountDataGridViewTextBoxColumn
-            // 
-            this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
-            this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
-            this.amountDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // expenseBindingSource2
-            // 
-            this.expenseBindingSource2.DataSource = typeof(ExpenseTracker.Expense);
             // 
             // panel5
             // 
@@ -292,9 +231,9 @@
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Controls.Add(this.panel7);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(50, 533);
+            this.panel5.Location = new System.Drawing.Point(60, 533);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(957, 49);
+            this.panel5.Size = new System.Drawing.Size(947, 49);
             this.panel5.TabIndex = 4;
             // 
             // panel6
@@ -302,7 +241,7 @@
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.label5);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(656, 0);
+            this.panel6.Location = new System.Drawing.Point(646, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(200, 49);
             this.panel6.TabIndex = 5;
@@ -326,7 +265,7 @@
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.totalAmountLabel);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(856, 0);
+            this.panel7.Location = new System.Drawing.Point(846, 0);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(101, 49);
             this.panel7.TabIndex = 5;
@@ -349,9 +288,9 @@
             this.filterOptionsPanel.BackColor = System.Drawing.Color.DodgerBlue;
             this.filterOptionsPanel.Controls.Add(this.panel1);
             this.filterOptionsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.filterOptionsPanel.Location = new System.Drawing.Point(50, 68);
+            this.filterOptionsPanel.Location = new System.Drawing.Point(60, 68);
             this.filterOptionsPanel.Name = "filterOptionsPanel";
-            this.filterOptionsPanel.Size = new System.Drawing.Size(957, 0);
+            this.filterOptionsPanel.Size = new System.Drawing.Size(947, 0);
             this.filterOptionsPanel.TabIndex = 4;
             // 
             // panel1
@@ -368,9 +307,9 @@
             this.panel1.Controls.Add(this.filterFromDatePicker);
             this.panel1.Controls.Add(this.filterToDatePicker);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(-1, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(958, 0);
+            this.panel1.Size = new System.Drawing.Size(947, 0);
             this.panel1.TabIndex = 5;
             // 
             // filterResetBtn
