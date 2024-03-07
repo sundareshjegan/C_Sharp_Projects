@@ -17,7 +17,7 @@ namespace ExpenseTracker
         {
             InitializeComponent();
             timer.Interval = 100;
-            menuTimer.Interval = 10;
+            menuTimer.Interval = 1;
             filterTimer.Interval = 10;
 
             timer.Tick += OnTimerTicked;
@@ -25,8 +25,7 @@ namespace ExpenseTracker
             filterTimer.Tick += OnFilterTimerTick;
             
             timer.Start();
-            //menuTimer.Start();
-            //isMenuClicked = true;
+            menuTimer.Start();
 
             DBManager.GetConnection(); // to get connection between sql and program.
             UpdateDataGridView(this, "select * from expenses");
@@ -36,6 +35,8 @@ namespace ExpenseTracker
 
         private ExpenseInputForm expenseInputForm;
         private bool isMenuClicked = false, isFilterClicked = false, isOptionsBtnClicked = false;
+        private bool isCategoryClicked = false, isDateCLicked = false;
+
         private int i = 0 , row = 0;
 
         private Timer timer = new Timer();
@@ -74,10 +75,10 @@ namespace ExpenseTracker
             }
             else if (!isMenuClicked )
             {
-                if(optionsPanel.Width > 60)
+                if(optionsPanel.Width > 70)
                 {
-                    optionsPanel.Width -= 50;
-                    Width -= 50;
+                    optionsPanel.Width -= 20;
+                    Width -= 20;
                 }
                 
             }
@@ -98,8 +99,8 @@ namespace ExpenseTracker
         {
             try
             {
-                DBManager.Connection.Open();
-            //    query = "SELECT * FROM expenses";
+               // DBManager.Connection.Open();
+               // query = "SELECT * FROM expenses";
                 MySqlCommand cmd = new MySqlCommand(query, DBManager.Connection);
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -107,21 +108,21 @@ namespace ExpenseTracker
                     dataTable.Load(reader);
                     expenseDataGridView.DataSource = dataTable;
                     expenseDataGridView.Columns[0].Visible = false;
+                    expenseDataGridView.ClearSelection();
+                    
                 }
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message);
+                MessageBox.Show("An error occurred update data grid view: " + ex.Message);
             }
             finally
             {
-                DBManager.Connection.Close();
+               // DBManager.Connection.Close();
             }
         }
-
-
-
-
+        
         private void OnPictureBoxMouseEnter(object sender, EventArgs e)
         {
             if(sender is PictureBox pb)
@@ -141,10 +142,17 @@ namespace ExpenseTracker
                 label.BackColor = Color.Transparent;
         }
 
+        private void OnMenuBtnClicked(object sender, EventArgs e)
+        {
+            isMenuClicked = !isMenuClicked;
+
+        }
         private void OnAddExpenseBtnClicked(object sender, EventArgs e)
         {
+            isMenuClicked = true;
             isOptionsBtnClicked = !isOptionsBtnClicked;
             isFilterClicked = false;
+
             expenseInputForm = new ExpenseInputForm();
             expenseInputForm.Location = Cursor.Position;
             expenseInputForm.ShowDialog();
@@ -152,6 +160,8 @@ namespace ExpenseTracker
         private void OnFilterExpenseBtnClicked(object sender, EventArgs e)
         {
             isOptionsBtnClicked = !isOptionsBtnClicked;
+            isMenuClicked = !isMenuClicked;
+
             filterTimer.Start();
             isFilterClicked = !isFilterClicked;
             LoadFilterCategoryData();
@@ -160,6 +170,8 @@ namespace ExpenseTracker
         private void OnCategoryBtnClicked(object sender, EventArgs e)
         {
             isOptionsBtnClicked = !isOptionsBtnClicked;
+            isMenuClicked = true;
+
             AddCategoryForm addCategoryForm = new AddCategoryForm();
             addCategoryForm.Location = Cursor.Position;
             addCategoryForm.ShowDialog();
@@ -172,6 +184,30 @@ namespace ExpenseTracker
             budgetInputForm.ShowDialog();
         }
 
+        private void OnOptionMouseEnter(object sender, EventArgs e)
+        {
+            //isMenuClicked = true;
+            //menuTimer.Start();
+            if (sender is Button button)
+            {
+                button.BackColor = Color.Black;
+                button.ForeColor = Color.White;
+            }
+        }
+
+        private void OnOptionMouseLeave(object sender, EventArgs e)
+        {
+            //if(isOptionsBtnClicked)
+            //    isMenuClicked = true;
+            //else
+            //    isMenuClicked = false;
+            if (sender is Button button)
+            {
+                button.BackColor = Color.White;
+                button.ForeColor = Color.DodgerBlue;
+            }
+        }
+
         private void OnExpenseDataGridViewCellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             row = e.RowIndex;
@@ -182,6 +218,21 @@ namespace ExpenseTracker
                 expenseOptionForm.SendOption += GetOption;
                 expenseOptionForm.ShowDialog();
             }
+        }
+
+        private void expenseDataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+
+        }
+
+        private void OnExpenseDataGridViewRowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            float totalAmount = 0;
+            for (int i = 0; i < expenseDataGridView.Rows.Count; i++)
+            {
+                totalAmount += (float)expenseDataGridView.Rows[i].Cells[4].Value;
+            }
+            totalAmountLabel.Text = totalAmount.ToString();
         }
 
         private void GetOption(string option)
@@ -225,6 +276,7 @@ namespace ExpenseTracker
         private void FilterDatePickerDropDown(object sender, EventArgs e)
         {
             filterMonthCB.Enabled = filterDayCB.Enabled = false;
+
         }
 
         private void FilterCBKeyPress(object sender, KeyPressEventArgs e)
@@ -243,47 +295,36 @@ namespace ExpenseTracker
             filterMonthCB.Enabled = filterDayCB.Enabled = filterFromDatePicker.Enabled = filterToDatePicker.Enabled = true;
             filterCategoryCB.Text = "Select";
             UpdateDataGridView(null,"select * from expenses");
+  
         }
 
-        private void FilterCBTextChanged(object sender, EventArgs e)
+        private void FilterCategoryCBTextChanged(object sender, EventArgs e)
         {
+            isCategoryClicked = true;
+
             string selectedCategory = filterCategoryCB.Text;
-            string query = $"select * from expenses where category = '{selectedCategory}'";
+            string query = $"select * from expenses where category = '{selectedCategory}' ";
+            UpdateDataGridView(null, query);
+        }
+
+        private void FilterMonthCBTextChanged(object sender, EventArgs e)
+        {
+            int selectedMonth = DBManager.GetMonthNumber(filterMonthCB.Text);
+            string query = $"select * from expenses where MONTH(date) = {selectedMonth} ";
             UpdateDataGridView(null, query);
         }
 
         private void FilterDatePickerValueChanged(object sender, EventArgs e)
         {
             //DBManager.GetMinAndMaxDate();
-        }
+            //DateTime fromDate = filterFromDatePicker.Value;
+            //DateTime toDate = filterFromDatePicker.Value;
+            string FromDate = filterFromDatePicker.Value.ToString("yyyy-MM-dd");
+            string ToDate = filterToDatePicker.Value.ToString("yyyy-MM-dd");
 
-        private void expenseDataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            
-        }
-
-        private void optionsPanel_MouseEnter(object sender, EventArgs e)
-        {
-            isMenuClicked = true;
-            menuTimer.Start();
-        }
-
-        private void optionsPanel_MouseLeave(object sender, EventArgs e)
-        {
-            if(isOptionsBtnClicked)
-                isMenuClicked = true;
-            else
-                isMenuClicked = false;
-        }
-
-        private void OnExpenseDataGridViewRowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            float totalAmount = 0;
-            for (int i = 0; i < expenseDataGridView.Rows.Count; i++)
-            {
-                totalAmount += (float)expenseDataGridView.Rows[i].Cells[4].Value;
-            }
-            totalAmountLabel.Text = totalAmount.ToString();
+            // Call this two line after creating seprate functions
+            string query = $"select * from expenses where Date between '{FromDate}' and '{ToDate}'";
+            UpdateDataGridView(null, query);
         }
 
         private void LoadFilterCategoryData()
@@ -293,13 +334,14 @@ namespace ExpenseTracker
             {
                 string query = "SELECT CAT_NAME FROM categories";
                 MySqlDataReader reader = DBManager.GetReader(query);
-         
+
                 while (reader.Read())
                 {
                     // Assuming column index 0 contains the values for the combo box
-                    if(reader.GetString(0) != "Others")
-                    filterCategoryCB.Items.Add(reader.GetString(0));
+                    if (reader.GetString(0) != "Others")
+                        filterCategoryCB.Items.Add(reader.GetString(0));
                 }
+                reader.Close();
                 filterCategoryCB.Items.Add("Others");
             }
             catch (Exception ex)
@@ -308,7 +350,7 @@ namespace ExpenseTracker
             }
             finally
             {
-                DBManager.Connection.Close();
+                //DBManager.Connection.Close();
             }
 
         }
@@ -316,26 +358,37 @@ namespace ExpenseTracker
         private void LoadFilterDate()
         {
             string query = "SELECT MIN(DATE) FROM expenses";
-            MySqlDataReader minreader = DBManager.GetReader(query);
+            MySqlDataReader reader = DBManager.GetReader(query);
 
-            while (minreader.Read())
+            while (reader.Read())
             {
-                filterFromDatePicker.MinDate = DateTime.Parse(minreader.GetString(0));
-                filterToDatePicker.MinDate = DateTime.Parse(minreader.GetString(0));
+                filterFromDatePicker.MinDate = DateTime.Parse(reader.GetString(0));
+                filterToDatePicker.MinDate = DateTime.Parse(reader.GetString(0));
+                filterFromDatePicker.Value = filterFromDatePicker.MinDate;
             }
 
-            DBManager.Connection.Close();
+            reader.Close();
+
+            
 
             query = "SELECT MAX(DATE) FROM expenses";
-            MySqlDataReader maxreader = DBManager.GetReader(query);
-
-           
-            while (maxreader.Read())
+            MySqlDataReader maxReader = DBManager.GetReader(query);
+            while (maxReader.Read())
             {
-                filterFromDatePicker.MaxDate = DateTime.Parse(maxreader.GetString(0));
-                filterToDatePicker.MaxDate = DateTime.Parse(maxreader.GetString(0));
+                filterFromDatePicker.MaxDate = DateTime.Parse(maxReader.GetString(0));
+                filterToDatePicker.MaxDate = DateTime.Parse(maxReader.GetString(0));
+                filterToDatePicker.Value = filterToDatePicker.MaxDate;
             }
-            DBManager.Connection.Close();
+            //to load months in the filter month combobox
+            maxReader.Close();
+
+            filterMonthCB.Items.Clear();
+
+            for (int i = filterFromDatePicker.MinDate.Month; i <= filterToDatePicker.MaxDate.Month; i++)
+            {
+                filterMonthCB.Items.Add(DBManager.GetMonthName(i));
+            }
+            
         }
 
 

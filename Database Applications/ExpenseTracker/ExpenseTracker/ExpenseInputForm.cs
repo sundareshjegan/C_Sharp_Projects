@@ -12,8 +12,14 @@ namespace ExpenseTracker
             InitializeComponent();
             StartAnimation();
             SetCategory();
+            DBManager.OnAddCategoryUpdated += DBManager_OnDbUpdated;
           //  categoryTB.DataSource = ExpenseManager.categories;
           //  ExpenseManager.OnCategoryUpdated += UpdateCategory;
+        }
+
+        private void DBManager_OnDbUpdated(object sender, string e)
+        {
+            SetCategory();
         }
 
         public ExpenseInputForm(Expense expense, int id)
@@ -160,9 +166,8 @@ namespace ExpenseTracker
                 if (reader.GetString(0) != "Others")
                     categoryCB.Items.Add(reader.GetString(0));
             }
-
+            reader.Close();
             categoryCB.Items.Add("Others");
-        DBManager.Connection.Close();
         }
         
     }

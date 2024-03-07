@@ -184,9 +184,14 @@
         mOjhYHwbT3WCK7+g+HZIQ++xu54dWZVXuixDguAOigEcE3hg2gYAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="expenseBindingSource2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>15, 15</value>
-  </metadata>
+  <data name="menuBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABWSURBVFhH7dQx
+        CsAgEETR9SDRg4RcUZMmkHvajxaiBNKKRf6DKZddWBgD0EnOJz3+VK7RpORw6W4b37ao42NgTpL2tnZY
+        fsDyFwD0AD0A0AP0APBTZgX0WV9En16E5gAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="filterResetBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO

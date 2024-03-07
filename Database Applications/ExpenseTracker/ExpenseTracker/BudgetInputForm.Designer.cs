@@ -70,6 +70,7 @@
             this.monthCB.Name = "monthCB";
             this.monthCB.Size = new System.Drawing.Size(195, 28);
             this.monthCB.TabIndex = 1;
+            this.monthCB.SelectedIndexChanged += new System.EventHandler(this.monthCB_SelectedIndexChanged);
             this.monthCB.TextChanged += new System.EventHandler(this.OnMonthCBTextChanged);
             this.monthCB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBoxKeyPress);
             // 

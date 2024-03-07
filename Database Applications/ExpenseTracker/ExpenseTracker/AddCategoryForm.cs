@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace ExpenseTracker
 {
@@ -18,6 +19,7 @@ namespace ExpenseTracker
             UpdateComboBoxes();
             timer.Interval = 10;
             timer.Tick += Timer_Tick;
+            SetUpdateBox();
         }
 
         private bool isShrink = false;
@@ -82,17 +84,28 @@ namespace ExpenseTracker
         private void OnAddBtnClicked(object sender, EventArgs e)
         {
             Button bt = sender as Button;
-            //if (ExpenseManager.categories.Contains(newCategoryTB.Text))
-            //{
-            //    addWarningLabel.ForeColor = Color.Red;
-            //    addWarningLabel.Text = "Category already exists";
-            //}
-            //else if(bt.Text == "Add" && newCategoryTB.Text!="" && !string.IsNullOrWhiteSpace(newCategoryTB.Text))
-            //{
-            //   // ExpenseManager.AddCategory(newCategoryTB.Text, (int)catBudgetTB.Value,addCategoryMonthCB.SelectedIndex);
-            //    addWarningLabel.ForeColor = Color.DodgerBlue;
-            //    addWarningLabel.Text = "Category added Successfully..!";
-            //}
+
+            try
+            {
+                DBManager.AddCategory(newCategoryTB.Text, int.Parse(addCategoryMonthCB.Text), (int)catBudgetTB.Value);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Category already existed   "+ ex);
+            }
+
+            SetUpdateBox();
+                //if (ExpenseManager.categories.Contains(newCategoryTB.Text))
+                //{
+                //    addWarningLabel.ForeColor = Color.Red;
+                //    addWarningLabel.Text = "Category already exists";
+                //}
+                //else if(bt.Text == "Add" && newCategoryTB.Text!="" && !string.IsNullOrWhiteSpace(newCategoryTB.Text))
+                //{
+                //   // ExpenseManager.AddCategory(newCategoryTB.Text, (int)catBudgetTB.Value,addCategoryMonthCB.SelectedIndex);
+                //    addWarningLabel.ForeColor = Color.DodgerBlue;
+                //    addWarningLabel.Text = "Category added Successfully..!";
+                //}
             ResetTextBoxes();
         }
 
@@ -106,20 +119,27 @@ namespace ExpenseTracker
             //    UpdateComboBoxes();
             //    ResetTextBoxes();
             //}
+
+            DBManager.UpdateCategory(existingCategoryCB.Text, updatedCategoryTB.Text, (int)newBudgetCB.Value);
+            SetUpdateBox();
         }
 
         private void OnDeleteBtnClicked(object sender, EventArgs e)
         {
-            if(deleteCategoryCB.Text == "Others")
-            {
-                deleteWarningLabel.Text = "You cannot delete others category..!";
-            }
-            else
-            {
-             //   ExpenseManager.RemoveCategory(deleteCategoryCB.Text);
-                deleteWarningLabel.Text = deleteCategoryCB.Text + " Deleted Successfully";
-                UpdateComboBoxes();
-            }
+            //if(deleteCategoryCB.Text == "Others")
+            //{
+            //    deleteWarningLabel.Text = "You cannot delete others category..!";
+            //}
+            //else
+            //{
+            // //   ExpenseManager.RemoveCategory(deleteCategoryCB.Text);
+
+
+            //    deleteWarningLabel.Text = deleteCategoryCB.Text + " Deleted Successfully";
+            //    UpdateComboBoxes();
+            //}
+            DBManager.DeleteCategory(deleteCategoryCB.Text);
+            SetUpdateBox();
             ResetTextBoxes();
         }
 
@@ -170,7 +190,8 @@ namespace ExpenseTracker
             {
               //  newBudgetCB.Value = (int)ExpenseManager.categoryDict[existingCategoryCB.Text][MonthCB.SelectedIndex][0];
             }
-            catch (Exception ex) { }
+            catch (Exception ex) {
+            }
         }
 
         private void OnBtnMouseEnter(object sender, EventArgs e)
@@ -185,6 +206,24 @@ namespace ExpenseTracker
             Button button = sender as Button;
             button.BackColor = Color.DodgerBlue;
             button.ForeColor = Color.White;
+        }
+
+        private void SetUpdateBox()
+        {
+            existingCategoryCB.Items.Clear();
+            deleteCategoryCB.Items.Clear();
+
+            string query = "SELECT CAT_NAME FROM categories";
+            MySqlDataReader reader = DBManager.GetReader(query);
+            while (reader.Read())
+            {
+                if (reader.GetString(0) != "Others")
+                {
+                    existingCategoryCB.Items.Add(reader.GetString(0));
+                    deleteCategoryCB.Items.Add(reader.GetString(0));
+                };
+            }
+            reader.Close();
         }
     }
 }
