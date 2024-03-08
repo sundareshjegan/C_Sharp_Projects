@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace ExpenseTracker
 {
@@ -22,7 +23,7 @@ namespace ExpenseTracker
             Connection.Open();
         }
 
-        public static void AddExpense(Expense expense)
+        public static Boolean AddExpense(Expense expense)
         {
           //  DBManager.Connection.Close();
          //   DBManager.Connection.Open();
@@ -33,37 +34,125 @@ namespace ExpenseTracker
             MySqlCommand cmd = new MySqlCommand(insertQuery, Connection);
 
             int rowsAffected = cmd.ExecuteNonQuery();
-     
-         //   DBManager.Connection.Close();
 
             OnDbUpdated?.Invoke(null, "SELECT * FROM expenses");
+
+
+            MySqlDataReader reader = GetReader($"select CAT_BUDGET , CUR_BUDGET from categories where CAT_NAME ='{expense.Category}'");
+
+            int curBudget = 0, totalBudget = 0;
+
+            while (reader.Read())
+            {
+                totalBudget = int.Parse(reader.GetString(0));
+                  curBudget = int.Parse(reader.GetString(1));
+            }
+
+
+            reader.Close();
+
+            string updateQuery = $"update categories set CUR_BUDGET = CUR_BUDGET + {expense.Amount} where CAT_NAME = '{expense.Category}'";
+
+            cmd = new MySqlCommand(updateQuery, Connection);
+
+            rowsAffected = cmd.ExecuteNonQuery();
+
+
+            if (expense.Amount + curBudget > totalBudget)
+            {
+                return true;
+            }
+
+            //   DBManager.Connection.Close();
+
+            
+
+            return false;
         }
 
-        public static void UpdateExpense(Expense expense , int id )
+        public static Boolean UpdateExpense(Expense expense, int id)
         {
             //DBManager.Connection.Open();
 
+
+            int curAmount = 0;
+            using (MySqlDataReader reader1 = GetReader($"select amount from expenses where expense_id = {id}"))
+            {
+                while (reader1.Read())
+                {
+                    curAmount = int.Parse(reader1.GetString(0));
+                }
+            }
+
+
             string updateQuery = $"Update expenses set DATE='{expense.Date.ToString("yyyy-MM-dd")}', CATEGORY='{expense.Category}',NAME ='{expense.Name}'" +
-                $",AMOUNT ='{expense.Amount}',DESCRIPTION ='{expense.Description}' where EXPENSE_ID ='{id}'";
+                $",AMOUNT ='{expense.Amount}',DESCRIPTION ='{expense.Description}' where EXPENSE_ID ={id}";
 
             MySqlCommand cmd = new MySqlCommand(updateQuery, Connection);
 
             int rowsAffected = cmd.ExecuteNonQuery();
 
+            OnDbUpdated?.Invoke(null, "SELECT * FROM expenses");
+
+
+
+
+            updateQuery = $"update categories set CUR_BUDGET = CUR_BUDGET - {curAmount} +{expense.Amount} where CAT_NAME  = '{expense.Category}'";
+
+            cmd = new MySqlCommand(updateQuery, Connection);
+
+            rowsAffected = cmd.ExecuteNonQuery();
+
+
+            MySqlDataReader reader = GetReader($"SELECT CAT_BUDGET, CUR_BUDGET FROM categories WHERE CAT_NAME = '{expense.Category}'");
+
+            int curBudget = 0, totalBudget = 0;
+
+            while (reader.Read())
+            {
+                // Assuming CAT_BUDGET and CUR_BUDGET are integers
+                totalBudget = reader.GetInt32(0); // Index 0 corresponds to CAT_BUDGET
+                curBudget = reader.GetInt32(1);   // Index 1 corresponds to CUR_BUDGET
+            }
+
+            reader.Close();
+
+
+            //updateQuery = $"update categories set CUR_BUDGET = CUR_BUDGET + {expense.Amount}  where CAT_NAME  = '{expense.Category}'";
+
+            //cmd = new MySqlCommand(updateQuery, Connection);
+
+            //rowsAffected = cmd.ExecuteNonQuery();
+
+
+            if (curBudget > totalBudget)
+            {
+                return true;
+            }
+
+
             //DBManager.Connection.Close();
 
-            OnDbUpdated?.Invoke(null, "SELECT * FROM expenses");
+            return false;
+
         }
 
-        public static void DeleteExpense(int id)
+        public static void DeleteExpense(Expense expense)
         {
             //DBManager.Connection.Open();
 
-            string deleteQuery = $"DELETE FROM expenses WHERE EXPENSE_ID = {id}";
+            string deleteQuery = $"DELETE FROM expenses WHERE EXPENSE_ID = {expense.Id}";
 
             MySqlCommand cmd = new MySqlCommand(deleteQuery, Connection);
 
             int rowsAffected = cmd.ExecuteNonQuery();
+
+           string updateQuery = $"update categories set CUR_BUDGET = CUR_BUDGET - {expense.Amount} where CAT_NAME = '{expense.Category}'";
+
+            cmd = new MySqlCommand(updateQuery, Connection);
+
+            rowsAffected = cmd.ExecuteNonQuery();
+
 
             //DBManager.Connection.Close();
 
@@ -88,7 +177,6 @@ namespace ExpenseTracker
             MySqlCommand cmd = new MySqlCommand(insertQuery, Connection);
 
             int rowsAffected = cmd.ExecuteNonQuery();
-
             
             OnAddCategoryUpdated?.Invoke(null, "set category in expense input form");
         }
@@ -100,6 +188,15 @@ namespace ExpenseTracker
             MySqlCommand cmd = new MySqlCommand(updateQuery, Connection);
 
             int rowsAffected = cmd.ExecuteNonQuery();
+
+            string updateExpense = $"update expenses set CATEGORY = '{newCategory}' where CATEGORY = '{oldCategory}' ";
+
+            cmd = new MySqlCommand(updateExpense, Connection);
+
+            rowsAffected = cmd.ExecuteNonQuery();
+
+            OnDbUpdated?.Invoke(null, "SELECT * FROM expenses");
+
         }
 
         public static void DeleteCategory(string category) {

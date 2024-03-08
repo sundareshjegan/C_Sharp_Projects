@@ -109,7 +109,6 @@ namespace ExpenseTracker
                     expenseDataGridView.DataSource = dataTable;
                     expenseDataGridView.Columns[0].Visible = false;
                     expenseDataGridView.ClearSelection();
-                    
                 }
                 
             }
@@ -267,9 +266,20 @@ namespace ExpenseTracker
                 expenseInputForm.Location = Cursor.Position;
                 expenseInputForm.ShowDialog();
             }
+
             else if(option == "delete")
             {
-                DBManager.DeleteExpense((int)expenseDataGridView.Rows[row].Cells[0].Value);
+                Expense expense = new Expense()
+                {
+                    //Date = expenseDataGridView.Rows[row].Cells[1].Value,
+                    Id = (int)expenseDataGridView.Rows[row].Cells[0].Value,
+                    Date = DateTime.Parse(expenseDataGridView.Rows[row].Cells[1].Value.ToString()),
+                    Category = expenseDataGridView.Rows[row].Cells[2].Value.ToString(),
+                    Name = expenseDataGridView.Rows[row].Cells[3].Value.ToString(),
+                    Amount = float.Parse(expenseDataGridView.Rows[row].Cells[4].Value.ToString()),
+                    Description = expenseDataGridView.Rows[row].Cells[5].Value.ToString()
+                };
+                DBManager.DeleteExpense(expense);
             }
         }
 

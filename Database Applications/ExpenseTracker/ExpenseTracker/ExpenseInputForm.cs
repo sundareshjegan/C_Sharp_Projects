@@ -115,11 +115,16 @@ namespace ExpenseTracker
 
             if (saveBtn.Text == "Edit")
             {
-                DBManager.UpdateExpense(expense , updateId);
+                if(DBManager.UpdateExpense(expense , updateId))
+                   MessageBox.Show($"Your {expense.Category} limit Budget is exceeded");
             }
             else
             {
-                DBManager.AddExpense(expense);
+
+                if (DBManager.AddExpense(expense))
+                {
+                    MessageBox.Show($"Your {expense.Category} limit Budget is exceeded");
+                }
             }
         }
 
