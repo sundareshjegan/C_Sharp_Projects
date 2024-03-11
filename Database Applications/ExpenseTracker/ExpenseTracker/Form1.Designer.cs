@@ -276,7 +276,7 @@
             this.filterOptionsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.filterOptionsPanel.Location = new System.Drawing.Point(57, 68);
             this.filterOptionsPanel.Name = "filterOptionsPanel";
-            this.filterOptionsPanel.Size = new System.Drawing.Size(950, 110);
+            this.filterOptionsPanel.Size = new System.Drawing.Size(950, 0);
             this.filterOptionsPanel.TabIndex = 4;
             // 
             // panel1
@@ -295,7 +295,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(3, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(947, 110);
+            this.panel1.Size = new System.Drawing.Size(947, 0);
             this.panel1.TabIndex = 5;
             // 
             // filterResetBtn
@@ -450,14 +450,14 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.expenseDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.expenseDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.expenseDataGridView.Location = new System.Drawing.Point(57, 178);
+            this.expenseDataGridView.Location = new System.Drawing.Point(57, 68);
             this.expenseDataGridView.Name = "expenseDataGridView";
             this.expenseDataGridView.RowHeadersVisible = false;
             this.expenseDataGridView.RowHeadersWidth = 51;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expenseDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.expenseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.expenseDataGridView.Size = new System.Drawing.Size(950, 355);
+            this.expenseDataGridView.Size = new System.Drawing.Size(950, 465);
             this.expenseDataGridView.TabIndex = 3;
             this.expenseDataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OnExpenseDataGridViewCellMouseClick);
             this.expenseDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.OnExpenseDataGridViewRowsAdded);

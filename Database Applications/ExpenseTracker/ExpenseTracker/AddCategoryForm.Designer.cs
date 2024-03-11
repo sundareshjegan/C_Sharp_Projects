@@ -140,7 +140,7 @@
             this.AddCategoryPanel.Controls.Add(this.addCancelBtn);
             this.AddCategoryPanel.Controls.Add(this.newCategoryTB);
             this.AddCategoryPanel.Controls.Add(this.okBtn);
-            this.AddCategoryPanel.Location = new System.Drawing.Point(357, 11);
+            this.AddCategoryPanel.Location = new System.Drawing.Point(0, 0);
             this.AddCategoryPanel.Margin = new System.Windows.Forms.Padding(2);
             this.AddCategoryPanel.Name = "AddCategoryPanel";
             this.AddCategoryPanel.Size = new System.Drawing.Size(368, 319);
@@ -159,7 +159,6 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.DodgerBlue;
-            this.panel3.Controls.Add(this.DeleteCategoryPanel);
             this.panel3.Controls.Add(this.label11);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
@@ -175,7 +174,7 @@
             this.DeleteCategoryPanel.Controls.Add(this.label2);
             this.DeleteCategoryPanel.Controls.Add(this.deleteCancel);
             this.DeleteCategoryPanel.Controls.Add(this.deleteBtn);
-            this.DeleteCategoryPanel.Location = new System.Drawing.Point(372, 14);
+            this.DeleteCategoryPanel.Location = new System.Drawing.Point(0, 0);
             this.DeleteCategoryPanel.Margin = new System.Windows.Forms.Padding(2);
             this.DeleteCategoryPanel.Name = "DeleteCategoryPanel";
             this.DeleteCategoryPanel.Size = new System.Drawing.Size(368, 319);
@@ -345,7 +344,6 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.DodgerBlue;
-            this.panel4.Controls.Add(this.AddCategoryPanel);
             this.panel4.Controls.Add(this.label12);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
@@ -503,7 +501,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(262, 320);
+            this.panel2.Size = new System.Drawing.Size(262, 323);
             this.panel2.TabIndex = 4;
             // 
             // closeBtn
@@ -600,11 +598,13 @@
             // operationsPanel
             // 
             this.operationsPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.operationsPanel.Controls.Add(this.AddCategoryPanel);
+            this.operationsPanel.Controls.Add(this.DeleteCategoryPanel);
             this.operationsPanel.Controls.Add(this.UpdateCategoryPanel);
             this.operationsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.operationsPanel.Location = new System.Drawing.Point(262, 0);
             this.operationsPanel.Name = "operationsPanel";
-            this.operationsPanel.Size = new System.Drawing.Size(725, 320);
+            this.operationsPanel.Size = new System.Drawing.Size(0, 323);
             this.operationsPanel.TabIndex = 5;
             // 
             // AddCategoryForm
@@ -612,7 +612,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(987, 320);
+            this.ClientSize = new System.Drawing.Size(258, 323);
             this.ControlBox = false;
             this.Controls.Add(this.operationsPanel);
             this.Controls.Add(this.panel2);

@@ -42,6 +42,7 @@
             // 
             // NameTB
             // 
+            this.NameTB.AcceptsReturn = true;
             this.NameTB.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameTB.ForeColor = System.Drawing.Color.DodgerBlue;
             this.NameTB.Location = new System.Drawing.Point(27, 99);
@@ -54,15 +55,14 @@
             // 
             // categoryCB
             // 
+            this.categoryCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoryCB.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.categoryCB.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.categoryCB.FormattingEnabled = true;
             this.categoryCB.Location = new System.Drawing.Point(27, 61);
             this.categoryCB.Name = "categoryCB";
             this.categoryCB.Size = new System.Drawing.Size(244, 32);
             this.categoryCB.TabIndex = 1;
             this.categoryCB.TabStop = false;
-            this.categoryCB.Text = "Category";
             // 
             // amountNumericUpDown
             // 
@@ -189,6 +189,8 @@
             this.Name = "ExpenseInputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnExpenseInputFormPaint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ExpenseInputForm_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ExpenseInputForm_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.amountNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

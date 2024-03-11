@@ -174,6 +174,18 @@ namespace ExpenseTracker
             reader.Close();
             categoryCB.Items.Add("Others");
         }
-        
+
+        private void ExpenseInputForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar==(char)Keys.Enter)
+            {
+                OnSaveBtnClicked(sender, e);
+            }
+        }
+
+        private void ExpenseInputForm_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }
