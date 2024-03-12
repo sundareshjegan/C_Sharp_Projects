@@ -25,9 +25,6 @@ namespace ExpenseTracker
 
         public static Boolean AddExpense(Expense expense)
         {
-          //  DBManager.Connection.Close();
-         //   DBManager.Connection.Open();
-
             string insertQuery = $"insert into expenses(DATE,CATEGORY,NAME,AMOUNT,DESCRIPTION) values('{expense.Date.ToString("yyyy-MM-dd")}'," +
                                  $" '{expense.Category}','{expense.Name}',{expense.Amount},'{expense.Description}')";
 
@@ -36,7 +33,6 @@ namespace ExpenseTracker
             int rowsAffected = cmd.ExecuteNonQuery();
 
             OnDbUpdated?.Invoke(null, "SELECT * FROM expenses");
-
 
             MySqlDataReader reader = GetReader($"select CAT_BUDGET , CUR_BUDGET from categories where CAT_NAME ='{expense.Category}'");
 
@@ -47,7 +43,6 @@ namespace ExpenseTracker
                 totalBudget = int.Parse(reader.GetString(0));
                   curBudget = int.Parse(reader.GetString(1));
             }
-
 
             reader.Close();
 
@@ -73,8 +68,6 @@ namespace ExpenseTracker
         public static Boolean UpdateExpense(Expense expense, int id)
         {
             //DBManager.Connection.Open();
-
-
             int curAmount = 0;
             using (MySqlDataReader reader1 = GetReader($"select amount from expenses where expense_id = {id}"))
             {
@@ -83,8 +76,6 @@ namespace ExpenseTracker
                     curAmount = int.Parse(reader1.GetString(0));
                 }
             }
-
-
             string updateQuery = $"Update expenses set DATE='{expense.Date.ToString("yyyy-MM-dd")}', CATEGORY='{expense.Category}',NAME ='{expense.Name}'" +
                 $",AMOUNT ='{expense.Amount}',DESCRIPTION ='{expense.Description}' where EXPENSE_ID ={id}";
 
@@ -93,8 +84,6 @@ namespace ExpenseTracker
             int rowsAffected = cmd.ExecuteNonQuery();
 
             OnDbUpdated?.Invoke(null, "SELECT * FROM expenses");
-
-
 
 
             updateQuery = $"update categories set CUR_BUDGET = CUR_BUDGET - {curAmount} +{expense.Amount} where CAT_NAME  = '{expense.Category}'";
@@ -291,36 +280,5 @@ namespace ExpenseTracker
             return true;
         }
         #endregion
-
-
-        //public static void GetMinAndMaxDate()
-        //{
-        //  //  DBManager.Connection.Open();
-
-        //    string query = "SELECT MIN(DATE) FROM expenses";
-        //    MySqlCommand cmd = new MySqlCommand(query, DBManager.Connection);
-
-        //    MySqlDataReader reader = cmd.ExecuteReader();
-
-        // //   DBManager.Connection.Close();
-
-        //}
-
-
-        //public static MySqlDataReader GetCategoriesasReader()
-        //{
-
-        //    DBManager.Connection.Open();
-
-        //    string query = "SELECT CAT_NAME FROM categories";
-        //    MySqlCommand cmd = new MySqlCommand(query, DBManager.Connection);
-
-        //    MySqlDataReader reader = cmd.ExecuteReader();
-
-        //    // db manger is closed in form1 and expenseinput form
-
-        //    return reader;
-
-        //}
     }
 }

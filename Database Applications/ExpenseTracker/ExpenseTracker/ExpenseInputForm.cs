@@ -104,28 +104,40 @@ namespace ExpenseTracker
 
         private void OnSaveBtnClicked(object sender, EventArgs e)
         {
-            Expense expense = new Expense
+            if (categoryCB.Text == "")
             {
-                Date = dateTimePicker.Value,
-                Category = categoryCB.Text,
-                Name = NameTB.Text,
-                Amount = (int)amountNumericUpDown.Value,
-                Description = descriptionTB.Text
-            };
-
-            if (saveBtn.Text == "Edit")
+                MessageBox.Show("Select Category");
+            }
+            else if (NameTB.Text == "" || NameTB.Text == "Name")
             {
-                if(DBManager.UpdateExpense(expense , updateId))
-                   MessageBox.Show($"Your {expense.Category} limit Budget is exceeded");
+                MessageBox.Show("Enter name for your Budget");
             }
             else
             {
-
-                if (DBManager.AddExpense(expense))
+                Expense expense = new Expense
                 {
-                    MessageBox.Show($"Your {expense.Category} limit Budget is exceeded");
+                    Date = dateTimePicker.Value,
+                    Category = categoryCB.Text,
+                    Name = NameTB.Text,
+                    Amount = (int)amountNumericUpDown.Value,
+                    Description = descriptionTB.Text
+                };
+
+                if (saveBtn.Text == "Edit")
+                {
+                    if (DBManager.UpdateExpense(expense, updateId))
+                        MessageBox.Show($"Your {expense.Category} limit Budget is exceeded");
+                }
+                else
+                {
+
+                    if (DBManager.AddExpense(expense))
+                    {
+                        MessageBox.Show($"Your {expense.Category} limit Budget is exceeded");
+                    }
                 }
             }
+            
         }
 
         private void OnNameTBClick(object sender, EventArgs e)

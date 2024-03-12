@@ -35,6 +35,11 @@
             this.AddCategoryPanel = new System.Windows.Forms.Panel();
             this.addCategoryMonthCB = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.catBudgetTB = new System.Windows.Forms.NumericUpDown();
+            this.addWarningLabel = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.DeleteCategoryPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,15 +48,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.deleteCancel = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.catBudgetTB = new System.Windows.Forms.NumericUpDown();
-            this.addWarningLabel = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.UpdateCategoryPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
-            this.MonthCB = new System.Windows.Forms.ComboBox();
+            this.UpdateMonthCB = new System.Windows.Forms.ComboBox();
             this.newBudgetCB = new System.Windows.Forms.NumericUpDown();
             this.updateWarningLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -71,9 +71,9 @@
             this.operationsPanel = new System.Windows.Forms.Panel();
             this.AddCategoryPanel.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.catBudgetTB)).BeginInit();
             this.DeleteCategoryPanel.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.catBudgetTB)).BeginInit();
             this.UpdateCategoryPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.newBudgetCB)).BeginInit();
@@ -149,8 +149,23 @@
             // 
             // addCategoryMonthCB
             // 
+            this.addCategoryMonthCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.addCategoryMonthCB.DropDownWidth = 100;
             this.addCategoryMonthCB.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addCategoryMonthCB.FormattingEnabled = true;
+            this.addCategoryMonthCB.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
             this.addCategoryMonthCB.Location = new System.Drawing.Point(150, 129);
             this.addCategoryMonthCB.Name = "addCategoryMonthCB";
             this.addCategoryMonthCB.Size = new System.Drawing.Size(185, 26);
@@ -165,6 +180,75 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(368, 48);
             this.panel3.TabIndex = 4;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(69, 11);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(216, 23);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "ADD NEW CATEGORY";
+            // 
+            // catBudgetTB
+            // 
+            this.catBudgetTB.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.catBudgetTB.Location = new System.Drawing.Point(151, 170);
+            this.catBudgetTB.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.catBudgetTB.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.catBudgetTB.Name = "catBudgetTB";
+            this.catBudgetTB.Size = new System.Drawing.Size(185, 27);
+            this.catBudgetTB.TabIndex = 4;
+            this.catBudgetTB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // addWarningLabel
+            // 
+            this.addWarningLabel.AutoSize = true;
+            this.addWarningLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addWarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.addWarningLabel.Location = new System.Drawing.Point(105, 258);
+            this.addWarningLabel.Name = "addWarningLabel";
+            this.addWarningLabel.Size = new System.Drawing.Size(0, 13);
+            this.addWarningLabel.TabIndex = 3;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label7.Location = new System.Drawing.Point(80, 175);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(66, 18);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Budget";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label10.Location = new System.Drawing.Point(88, 137);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(58, 18);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Month";
             // 
             // DeleteCategoryPanel
             // 
@@ -215,6 +299,8 @@
             // 
             // deleteCategoryCB
             // 
+            this.deleteCategoryCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.deleteCategoryCB.DropDownWidth = 100;
             this.deleteCategoryCB.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteCategoryCB.FormattingEnabled = true;
             this.deleteCategoryCB.Location = new System.Drawing.Point(161, 132);
@@ -261,69 +347,10 @@
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.OnDeleteBtnClicked);
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(69, 11);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(216, 23);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "ADD NEW CATEGORY";
-            // 
-            // catBudgetTB
-            // 
-            this.catBudgetTB.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.catBudgetTB.Location = new System.Drawing.Point(151, 170);
-            this.catBudgetTB.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.catBudgetTB.Name = "catBudgetTB";
-            this.catBudgetTB.Size = new System.Drawing.Size(185, 27);
-            this.catBudgetTB.TabIndex = 4;
-            // 
-            // addWarningLabel
-            // 
-            this.addWarningLabel.AutoSize = true;
-            this.addWarningLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addWarningLabel.ForeColor = System.Drawing.Color.Red;
-            this.addWarningLabel.Location = new System.Drawing.Point(105, 258);
-            this.addWarningLabel.Name = "addWarningLabel";
-            this.addWarningLabel.Size = new System.Drawing.Size(0, 13);
-            this.addWarningLabel.TabIndex = 3;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label7.Location = new System.Drawing.Point(80, 175);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 18);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Budget";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label10.Location = new System.Drawing.Point(88, 137);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(58, 18);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Month";
-            // 
             // UpdateCategoryPanel
             // 
             this.UpdateCategoryPanel.Controls.Add(this.panel4);
-            this.UpdateCategoryPanel.Controls.Add(this.MonthCB);
+            this.UpdateCategoryPanel.Controls.Add(this.UpdateMonthCB);
             this.UpdateCategoryPanel.Controls.Add(this.newBudgetCB);
             this.UpdateCategoryPanel.Controls.Add(this.updateWarningLabel);
             this.UpdateCategoryPanel.Controls.Add(this.label8);
@@ -363,14 +390,29 @@
             this.label12.TabIndex = 0;
             this.label12.Text = "UPDATE EXISTING CATEGORY";
             // 
-            // MonthCB
+            // UpdateMonthCB
             // 
-            this.MonthCB.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MonthCB.FormattingEnabled = true;
-            this.MonthCB.Location = new System.Drawing.Point(159, 147);
-            this.MonthCB.Name = "MonthCB";
-            this.MonthCB.Size = new System.Drawing.Size(185, 26);
-            this.MonthCB.TabIndex = 5;
+            this.UpdateMonthCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.UpdateMonthCB.DropDownWidth = 50;
+            this.UpdateMonthCB.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateMonthCB.FormattingEnabled = true;
+            this.UpdateMonthCB.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.UpdateMonthCB.Location = new System.Drawing.Point(159, 147);
+            this.UpdateMonthCB.Name = "UpdateMonthCB";
+            this.UpdateMonthCB.Size = new System.Drawing.Size(185, 26);
+            this.UpdateMonthCB.TabIndex = 5;
             // 
             // newBudgetCB
             // 
@@ -381,9 +423,19 @@
             0,
             0,
             0});
+            this.newBudgetCB.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.newBudgetCB.Name = "newBudgetCB";
             this.newBudgetCB.Size = new System.Drawing.Size(185, 27);
             this.newBudgetCB.TabIndex = 4;
+            this.newBudgetCB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // updateWarningLabel
             // 
@@ -409,6 +461,8 @@
             // 
             // existingCategoryCB
             // 
+            this.existingCategoryCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.existingCategoryCB.DropDownWidth = 50;
             this.existingCategoryCB.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.existingCategoryCB.FormattingEnabled = true;
             this.existingCategoryCB.Location = new System.Drawing.Point(159, 55);
@@ -501,7 +555,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(262, 323);
+            this.panel2.Size = new System.Drawing.Size(262, 325);
             this.panel2.TabIndex = 4;
             // 
             // closeBtn
@@ -604,7 +658,7 @@
             this.operationsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.operationsPanel.Location = new System.Drawing.Point(262, 0);
             this.operationsPanel.Name = "operationsPanel";
-            this.operationsPanel.Size = new System.Drawing.Size(0, 323);
+            this.operationsPanel.Size = new System.Drawing.Size(367, 325);
             this.operationsPanel.TabIndex = 5;
             // 
             // AddCategoryForm
@@ -612,7 +666,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(258, 323);
+            this.ClientSize = new System.Drawing.Size(629, 325);
             this.ControlBox = false;
             this.Controls.Add(this.operationsPanel);
             this.Controls.Add(this.panel2);
@@ -625,11 +679,11 @@
             this.AddCategoryPanel.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.catBudgetTB)).EndInit();
             this.DeleteCategoryPanel.ResumeLayout(false);
             this.DeleteCategoryPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.catBudgetTB)).EndInit();
             this.UpdateCategoryPanel.ResumeLayout(false);
             this.UpdateCategoryPanel.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -674,7 +728,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown newBudgetCB;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox MonthCB;
+        private System.Windows.Forms.ComboBox UpdateMonthCB;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox addCategoryMonthCB;
         private System.Windows.Forms.Label label10;

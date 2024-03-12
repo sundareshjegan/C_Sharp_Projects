@@ -35,7 +35,6 @@ namespace ExpenseTracker
 
         private ExpenseInputForm expenseInputForm;
         private bool isMenuClicked = false, isFilterClicked = false, isOptionsBtnClicked = false;
-        private bool isCategoryClicked = false, isDateCLicked = false;
 
         private int i = 0 , row = 0;
 
@@ -80,7 +79,6 @@ namespace ExpenseTracker
                     optionsPanel.Width -= 20;
                     Width -= 20;
                 }
-                
             }
         }
 
@@ -144,8 +142,57 @@ namespace ExpenseTracker
         private void OnMenuBtnClicked(object sender, EventArgs e)
         {
             isMenuClicked = !isMenuClicked;
-
         }
+
+        private void OnHomeBtnClicked(object sender, EventArgs e)
+        {
+            dashboardPanel.Visible = !dashboardPanel.Visible;
+            DisplayExpensePieChart();
+            DashboardDisplayMonthBudgets();
+        }
+        private void DisplayExpensePieChart()
+        {
+            Dictionary<string, float> categoryExpenses = new Dictionary<string, float>();
+            
+            MySqlCommand command = new MySqlCommand("SELECT CATEGORY, SUM(AMOUNT) AS TOTAL_EXPENSE FROM expenses GROUP BY CATEGORY", DBManager.Connection);
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string categoryName = reader["CATEGORY"].ToString();
+                float totalExpense = Convert.ToSingle(reader["TOTAL_EXPENSE"]);
+                categoryExpenses.Add(categoryName, totalExpense);
+            }
+            reader.Close();
+
+            // Populate the pie chart with the data
+            chart1.Series.Clear();
+            //chart1.Titles.Add("Expense Distribution by Category");
+            System.Windows.Forms.DataVisualization.Charting.Series series = chart1.Series.Add("Expenses");
+            series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            foreach (var pair in categoryExpenses)
+            {
+                series.Points.AddXY(pair.Key, pair.Value);
+            }
+        }
+        private void DashboardDisplayMonthBudgets()
+        {
+            dashMonNameLabel.Text = dashMonBudgetLabel.Text = "";
+            MySqlCommand command = new MySqlCommand("SELECT MONTH_NAME, MONTHLY_BUDGET FROM Months", DBManager.Connection);
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string monthName = reader["MONTH_NAME"].ToString();
+                int monthlyBudget = Convert.ToInt32(reader["MONTHLY_BUDGET"]);
+
+                //string formattedText = string.Format("{0,20} -  {1}", monthName.ToUpper(), monthlyBudget); // Adjust the width as needed
+
+                dashMonNameLabel.Text += string.Format("{0,-20} \n",monthName.ToUpper());
+                dashMonBudgetLabel.Text += " - "+monthlyBudget + "\n";
+            }
+            reader.Close();
+        }
+        
+
         private void OnAddExpenseBtnClicked(object sender, EventArgs e)
         {
             isMenuClicked = true;
@@ -159,10 +206,9 @@ namespace ExpenseTracker
         private void OnFilterExpenseBtnClicked(object sender, EventArgs e)
         {
             isOptionsBtnClicked = !isOptionsBtnClicked;
-            isMenuClicked = !isMenuClicked;
-
-            filterTimer.Start();
+            //isMenuClicked = !isMenuClicked;
             isFilterClicked = !isFilterClicked;
+            filterTimer.Start();
             LoadFilterCategoryData();
             LoadFilterDate();
         }
@@ -181,6 +227,7 @@ namespace ExpenseTracker
             BudgetInputForm budgetInputForm = new BudgetInputForm();
             budgetInputForm.Location = Cursor.Position;
             budgetInputForm.ShowDialog();
+            DashboardDisplayMonthBudgets();
         }
 
         private void OnOptionMouseEnter(object sender, EventArgs e)
@@ -217,11 +264,6 @@ namespace ExpenseTracker
                 expenseOptionForm.SendOption += GetOption;
                 expenseOptionForm.ShowDialog();
             }
-        }
-
-        private void expenseDataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-
         }
 
         private void OnExpenseDataGridViewRowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -286,7 +328,6 @@ namespace ExpenseTracker
         private void FilterDatePickerDropDown(object sender, EventArgs e)
         {
             filterMonthCB.Enabled = filterDayCB.Enabled = false;
-
         }
 
         private void FilterCBKeyPress(object sender, KeyPressEventArgs e)
@@ -305,13 +346,10 @@ namespace ExpenseTracker
             filterMonthCB.Enabled = filterDayCB.Enabled = filterFromDatePicker.Enabled = filterToDatePicker.Enabled = true;
             filterCategoryCB.Text = "Select";
             UpdateDataGridView(null,"select * from expenses");
-  
         }
 
         private void FilterCategoryCBTextChanged(object sender, EventArgs e)
         {
-            isCategoryClicked = true;
-
             string selectedCategory = filterCategoryCB.Text;
             string query = $"select * from expenses where category = '{selectedCategory}' ";
             UpdateDataGridView(null, query);
