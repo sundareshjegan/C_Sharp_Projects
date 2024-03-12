@@ -252,11 +252,11 @@
             // headingLabel
             // 
             this.headingLabel.AutoSize = true;
-            this.headingLabel.Font = new System.Drawing.Font("Lucida Console", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headingLabel.Font = new System.Drawing.Font("Lucida Console", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headingLabel.ForeColor = System.Drawing.Color.White;
             this.headingLabel.Location = new System.Drawing.Point(172, 14);
             this.headingLabel.Name = "headingLabel";
-            this.headingLabel.Size = new System.Drawing.Size(283, 29);
+            this.headingLabel.Size = new System.Drawing.Size(345, 35);
             this.headingLabel.TabIndex = 3;
             this.headingLabel.Text = "EXPENSE TRACKER";
             // 
@@ -526,10 +526,11 @@
             this.tabControl1.Controls.Add(this.budgetTabPage);
             this.tabControl1.Controls.Add(this.analysisPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Font = new System.Drawing.Font("Segoe Print", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(6, 6);
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.ShowToolTips = true;
             this.tabControl1.Size = new System.Drawing.Size(787, 465);
@@ -539,10 +540,10 @@
             // 
             this.budgetTabPage.Controls.Add(this.panel4);
             this.budgetTabPage.Controls.Add(this.panel2);
-            this.budgetTabPage.Location = new System.Drawing.Point(4, 45);
+            this.budgetTabPage.Location = new System.Drawing.Point(4, 37);
             this.budgetTabPage.Name = "budgetTabPage";
             this.budgetTabPage.Padding = new System.Windows.Forms.Padding(30, 20, 3, 3);
-            this.budgetTabPage.Size = new System.Drawing.Size(779, 416);
+            this.budgetTabPage.Size = new System.Drawing.Size(779, 424);
             this.budgetTabPage.TabIndex = 1;
             this.budgetTabPage.Text = "Budget Info";
             this.budgetTabPage.ToolTipText = "View Monthly Wise Budgets and expenses";
@@ -555,7 +556,7 @@
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Location = new System.Drawing.Point(353, 20);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(224, 393);
+            this.panel4.Size = new System.Drawing.Size(257, 393);
             this.panel4.TabIndex = 2;
             // 
             // dashCatLabel
@@ -565,7 +566,8 @@
             this.dashCatLabel.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dashCatLabel.Location = new System.Drawing.Point(0, 37);
             this.dashCatLabel.Name = "dashCatLabel";
-            this.dashCatLabel.Size = new System.Drawing.Size(60, 29);
+            this.dashCatLabel.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
+            this.dashCatLabel.Size = new System.Drawing.Size(110, 29);
             this.dashCatLabel.TabIndex = 0;
             this.dashCatLabel.Text = "label7";
             // 
@@ -576,7 +578,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(220, 37);
+            this.panel5.Size = new System.Drawing.Size(253, 37);
             this.panel5.TabIndex = 1;
             // 
             // label13
@@ -584,12 +586,12 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(29, 7);
+            this.label13.Location = new System.Drawing.Point(17, 8);
             this.label13.Margin = new System.Windows.Forms.Padding(50, 0, 3, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(156, 29);
+            this.label13.Size = new System.Drawing.Size(229, 29);
             this.label13.TabIndex = 2;
-            this.label13.Text = "YOUR CATEGORIES";
+            this.label13.Text = "CATEGORIES YOU SPENT ON";
             // 
             // panel2
             // 
@@ -651,10 +653,10 @@
             // 
             this.analysisPage.Controls.Add(this.chart1);
             this.analysisPage.Font = new System.Drawing.Font("Segoe Print", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.analysisPage.Location = new System.Drawing.Point(4, 45);
+            this.analysisPage.Location = new System.Drawing.Point(4, 33);
             this.analysisPage.Name = "analysisPage";
             this.analysisPage.Padding = new System.Windows.Forms.Padding(10);
-            this.analysisPage.Size = new System.Drawing.Size(779, 416);
+            this.analysisPage.Size = new System.Drawing.Size(779, 428);
             this.analysisPage.TabIndex = 0;
             this.analysisPage.Text = "Expense Statistics";
             this.analysisPage.UseVisualStyleBackColor = true;

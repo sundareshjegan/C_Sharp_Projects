@@ -25,7 +25,6 @@ namespace ExpenseTracker
             filterTimer.Tick += OnFilterTimerTick;
             
             timer.Start();
-            menuTimer.Start();
 
             DBManager.GetConnection(); // to get connection between sql and program.
             UpdateDataGridView(this, "select * from expenses");
@@ -34,7 +33,7 @@ namespace ExpenseTracker
         }
 
         private ExpenseInputForm expenseInputForm;
-        private bool isMenuClicked = false, isFilterClicked = false, isOptionsBtnClicked = false;
+        private bool isMenuClicked = true, isFilterClicked = false, isOptionsBtnClicked = false;
 
         private int i = 0 , row = 0;
 
@@ -142,6 +141,7 @@ namespace ExpenseTracker
         private void OnMenuBtnClicked(object sender, EventArgs e)
         {
             isMenuClicked = !isMenuClicked;
+            menuTimer.Start();
         }
 
         private void OnHomeBtnClicked(object sender, EventArgs e)
