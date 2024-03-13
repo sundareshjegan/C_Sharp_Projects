@@ -136,6 +136,7 @@ namespace ExpenseTracker
                         MessageBox.Show($"Your {expense.Category} limit Budget is exceeded");
                     }
                 }
+                Dispose();
             }
             
         }
