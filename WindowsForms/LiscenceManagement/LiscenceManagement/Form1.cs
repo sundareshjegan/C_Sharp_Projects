@@ -14,7 +14,7 @@ namespace LiscenceManagement
             activationFileName = Path.Combine(Environment.CurrentDirectory, "ActivationFile.dat");
             saltFileName = Path.Combine(Environment.CurrentDirectory, "SaltFile.dat");
             salt = GenerateSalt();
-            //isLiscenceValid = CheckSystemTimeChanged();
+            isLiscenceValid = CheckSystemTimeChanged();
 
             timer = new Timer();
             timer.Interval = 1000;
@@ -171,7 +171,7 @@ namespace LiscenceManagement
             DateTime activated = DateTime.Parse(activatedTime);
             DateTime current = DateTime.Now;
             TimeSpan difference = current - activated;
-            isLiscenceValid = ((int)difference.TotalMinutes < activationDuration) && (CheckSystemTimeChanged());
+            isLiscenceValid = ((int)difference.TotalMinutes < activationDuration);// && (CheckSystemTimeChanged());
             if (isLiscenceValid)
             {
                 timer.Start();
