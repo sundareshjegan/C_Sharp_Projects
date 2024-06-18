@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace WpfPractice.UserControls
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for AnimatedButton.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class AnimatedButton : UserControl
     {
-        public UserControl1()
-        {   
+        public AnimatedButton()
+        {
             InitializeComponent();
         }
-
-        //public string CustomProperty
-        //{
-        //    //get { return (string)GetValue(TestProperty); }
-        //}
-        //public static readonly DependencyProperty TestProperty = DependencyProperty.Register
-        //    ("CustomProperty",typeof(string));
     }
 }

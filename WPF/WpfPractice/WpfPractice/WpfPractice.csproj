@@ -62,11 +62,14 @@
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\AnimatedButton.xaml.cs">
+      <DependentUpon>AnimatedButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AnimatedTextBox.xaml.cs">
+      <DependentUpon>AnimatedTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\CustomTextBox.xaml.cs">
       <DependentUpon>CustomTextBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -84,11 +87,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\CustomTextBox.xaml">
+    <Page Include="UserControls\AnimatedButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\UserControl1.xaml">
+    <Page Include="UserControls\AnimatedTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\CustomTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

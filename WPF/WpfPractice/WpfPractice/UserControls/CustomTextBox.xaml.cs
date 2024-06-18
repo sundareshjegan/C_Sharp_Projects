@@ -37,8 +37,6 @@ namespace WpfPractice.UserControls
             };
 
             ellipse.BeginAnimation(Canvas.LeftProperty, moveAnimation);
-
-            // Toggle the flag
             isEllipseOnRight = !isEllipseOnRight;
         }
     }

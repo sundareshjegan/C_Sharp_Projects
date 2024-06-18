@@ -7,7 +7,7 @@
         xmlns:UserControls="clr-namespace:WpfPractice.UserControls" x:Class="WpfPractice.MainWindow"
         mc:Ignorable="d" TabIndex="2147483646" WindowStyle="ThreeDBorderWindow">
 
-    <Grid HorizontalAlignment="Left" Height="388" Margin="55,36,0,0" VerticalAlignment="Top" Width="511">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="254*"/>
             <ColumnDefinition Width="257*"/>
@@ -24,9 +24,7 @@
                 <TextBlock><Run Text="Button"/></TextBlock>
             </WrapPanel>
         </Button>
-        <Button 
-            HorizontalAlignment="Right" 
-            Width="134" Margin="0,85,0,0">
+        <Button Margin="100" >
             <Button.ToolTip>
                 <StackPanel Background="Black" Margin="0,0,0,0">
                     <TextBlock Foreground="White" FontWeight="Bold"><Run Text="Press f1 for help"/></TextBlock>

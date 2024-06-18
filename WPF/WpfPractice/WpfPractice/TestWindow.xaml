@@ -6,9 +6,57 @@
         xmlns:local="clr-namespace:WpfPractice"
         xmlns:UserControls="clr-namespace:WpfPractice.UserControls" x:Class="WpfPractice.TestWindow"
         mc:Ignorable="d"
-        Title="TestWindow" Height="450" Width="919.589">
+        Title="TestWindow" Height="500" Width="1000" FontSize="20" Foreground="DodgerBlue">
+
     <Grid>
-        <UserControls:CustomTextBox HorizontalAlignment="Left" Height="73" Margin="158,87,0,0" VerticalAlignment="Top" Width="117"/>
-        <Slider HorizontalAlignment="Left" Height="27" Margin="158,179,0,0" VerticalAlignment="Top" Width="453" Maximum="4" RenderTransformOrigin="0.5,0.5" OpacityMask="#FFD13939" Opacity="0.895"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="D:\Sundareshwaran\icons\LoginBackground.jpg" />
+        </Grid.Background>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Text="Login Form" VerticalAlignment="Center"
+                   TextAlignment="Center" FontStyle="Oblique" FontWeight="DemiBold"
+                   Margin="0,0,0,20"/>
+        
+        <!--<StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="UserName" Margin="0,20"/>
+            <TextBlock Text="Password" Margin="0,20"/>
+            <TextBlock Text="Confirm Password" Margin="0,20"/>
+        </StackPanel>-->
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <!--<TextBox x:Name="UserNameTextBox" Margin="0,20" />-->
+            <!--<PasswordBox x:Name="PasswordText" Margin="0,20" Width="250"/>-->
+            <!--<TextBlock Margin="0,20" Text="{Binding Path=Text, ElementName=UserNameTextBox}"/>-->
+            <local:AnimatedTextBox Margin="0,0,0,20"
+                                   Width="350" Height="52" AnimatedTextBoxBorderRadius="5"
+                                   AnimatedTextBoxFontSize="20" AnimatedTextBoxPlaceHolder="Username"
+                                   AnimatedTextBoxBackground="#FF000836">
+            </local:AnimatedTextBox>
+            <local:AnimatedTextBox Margin="0,0,0,20"
+                                   Width="350" Height="52" AnimatedTextBoxBorderRadius="5"
+                                   AnimatedTextBoxFontSize="20" AnimatedTextBoxPlaceHolder="Password"
+                                   AnimatedTextBoxBackground="#FF000836" IsPasswordType="True" AutomationProperties.IsRequiredForForm="True">
+            </local:AnimatedTextBox>
+            <local:AnimatedTextBox Margin="0,0,0,20"
+                                   Width="350" Height="52" AnimatedTextBoxBorderRadius="5"
+                                   AnimatedTextBoxFontSize="20" AnimatedTextBoxPlaceHolder="Confirm Password"
+                                   AnimatedTextBoxBackground="#FF000836" IsPasswordType="True">
+            </local:AnimatedTextBox>
+
+            <UserControls:AnimatedButton Width="200" Height="50"/>
+        </StackPanel>
     </Grid>
 </Window>
