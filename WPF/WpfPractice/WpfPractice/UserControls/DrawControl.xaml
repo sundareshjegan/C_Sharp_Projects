@@ -1,0 +1,157 @@
+﻿<UserControl x:Class="WpfPractice.UserControls.DrawControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfPractice.UserControls"
+             mc:Ignorable="d" Height="284" Width="261">
+    <UserControl.Resources
+    >
+        <Storyboard x:Key="Storyboard1">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.1040000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.2080000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01.8000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:02" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path3" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:02.2000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path4" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:02.4000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path8" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01.5000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01.6000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:03.2000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path5" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:02.6000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path6" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01.1000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01.2000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:02.8000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path7" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01.3000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01.4000000" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:03" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="path1" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:00.1040000" Value="0,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:00.2080000" Value="77,10,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="path2" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:00.3000000" Value="0,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:00.4000000" Value="136,31,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="path3" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:00.5000000" Value="0,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:00.6000000" Value="139,62,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="path4" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:00.7000000" Value="0,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:00.8000000" Value="139,104,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="path5" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:00.9000000" Value="0,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:01" Value="134,108,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="path6" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:01.1000000" Value="0,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:01.2000000" Value="72,111,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="path7" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:01.3000000" Value="0,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:01.4000000" Value="0,109,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="path8" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:01.5000000" Value="0,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="00:00:01.6000000" Value="27,51,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <PointAnimationUsingKeyFrames Storyboard.TargetName="path8" Storyboard.TargetProperty="(Path.Data).(PathGeometry.Figures)[0].(PathFigure.Segments)[1].(LineSegment.Point)">
+                <EasingPointKeyFrame KeyTime="00:00:01.5000000" Value="1.29781060991263E-05,60.000004480861"/>
+                <EasingPointKeyFrame KeyTime="00:00:01.6000000" Value="2,55.5"/>
+                <EasingPointKeyFrame KeyTime="00:00:03.2000000" Value="1.29781060991263E-05,60.000004480861"/>
+            </PointAnimationUsingKeyFrames>
+            <PointAnimationUsingKeyFrames Storyboard.TargetName="path8" Storyboard.TargetProperty="(Path.Data).(PathGeometry.Figures)[0].(PathFigure.StartPoint)">
+                <EasingPointKeyFrame KeyTime="00:00:01.5000000" Value="49.882148742604,3.76916335653732E-06"/>
+                <EasingPointKeyFrame KeyTime="00:00:01.6000000" Value="49.5,1.5"/>
+                <EasingPointKeyFrame KeyTime="00:00:03.2000000" Value="49.882148742604,3.76916335653732E-06"/>
+            </PointAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="UserControl.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid OpacityMask="#FF168DE8">
+        <Path x:Name="path1" Fill="#FF168DE8" HorizontalAlignment="Left" Height="94" Stretch="Fill" VerticalAlignment="Top" Width="58" Margin="0,0,0,0">
+            <Path.Data>
+                <PathGeometry Figures="M352.46549,51.244333 L319.87684,92.459037 374.60946,147.36892 378.89537,72.949882"/>
+            </Path.Data>
+        </Path>
+        <Path x:Name="path2" Fill="#FF168DE8" HorizontalAlignment="Left" Height="72" Stretch="Fill" VerticalAlignment="Top" Width="35" OpacityMask="#FF168DE8" Margin="0,0,0,0">
+            <Path.Data>
+                <PathGeometry Figures="M385.33646,64.968807 L418.2716,96.330972 385.485,140.13463"/>
+            </Path.Data>
+        </Path>
+        <Path x:Name="path3" Fill="#FF168DE8" HorizontalAlignment="Left" Height="44" Stretch="Fill" VerticalAlignment="Top" Width="76" OpacityMask="#FF168DE8" Margin="0,0,0,0">
+            <Path.Data>
+                <PathGeometry Figures="M392.24763,143.10917 L424.7369,101.31883 467.80408,141.21234"/>
+            </Path.Data>
+        </Path>
+        <Path x:Name="path4" Fill="#FF168DE8" HorizontalAlignment="Left" Height="69" Stretch="Fill" VerticalAlignment="Top" Width="122" OpacityMask="#FF168DE8" Margin="0,0,0,0">
+            <Path.Data>
+                <PathGeometry Figures="M392.39702,147.99842 L468.52027,144.06595 513.73936,189.21404 495.42028,191.06831 473.23567,195.93708 452.73172,204.55106 433.68015,220.28093"/>
+            </Path.Data>
+        </Path>
+        <Path x:Name="path8" Fill="#FF168DE8" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="100" OpacityMask="#FF168DE8" Margin="0,0,0,0">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="49.882148742604,3.76916335653732E-06">
+                        <LineSegment Point="100.00000133316,54.9152560593316"/>
+                        <LineSegment Point="1.29781060991263E-05,60.000004480861"/>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+
+        <Path x:Name="path5" Fill="#FF168DE8" HorizontalAlignment="Left" Height="114" Stretch="Fill" VerticalAlignment="Top" Width="47" OpacityMask="#FF168DE8" Margin="0,0,0,0">
+            <Path.Data>
+                <PathGeometry Figures="M430.31629,213.03578 L384.77371,148.33603 391.6216,259.98309 399.18828,243.0631 406.64409,231.94801 416.58517,222.82369"/>
+            </Path.Data>
+        </Path>
+        <Path x:Name="path6" HorizontalAlignment="Left" Height="174" Stretch="Fill" VerticalAlignment="Top" Width="68" Fill="#FF168DE8" OpacityMask="#FF168DE8" Margin="0,0,0,0">
+            <Path.Data>
+                <PathGeometry Figures="M382.22883,275.40252 L378.66725,288.70159 376.21867,301.20272 371.73165,338.44013 367.91632,307.32029 362.41343,282.58402 356.81505,264.1024 349.45949,249.82713 341.72258,237.89913 332.15432,226.66618 322.57253,217.65817 373.49258,154.38095"/>
+            </Path.Data>
+        </Path>
+        <Path x:Name="path7" Fill="#FF168DE8" HorizontalAlignment="Left" Height="60" Stretch="Fill" VerticalAlignment="Top" Width="127" OpacityMask="#FF168DE8" Margin="0,0,0,0">
+            <Path.Data>
+                <PathGeometry Figures="M270.50458,149.87995 L245.01292,183.10816 260.56715,183.85626 273.15828,187.10821 287.23121,192.59153 299.57589,197.82561 309.45163,203.55817 314.88328,207.2968 369.44676,148.44609"/>
+            </Path.Data>
+        </Path>
+
+    </Grid>
+</UserControl>

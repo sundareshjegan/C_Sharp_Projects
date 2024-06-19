@@ -7,12 +7,45 @@
         xmlns:UserControls="clr-namespace:WpfPractice.UserControls" x:Class="WpfPractice.TestWindow"
         mc:Ignorable="d"
         Title="TestWindow" Height="500" Width="1000" FontSize="20" Foreground="DodgerBlue">
+    <Window.Resources>
+        <Storyboard x:Key="Storyboard1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="animatedButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-884.39"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="animatedButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-107.714"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Storyboard2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="animatedButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="3"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="animatedButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="8.4"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="animatedButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.03"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="animatedButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.664"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="animatedButton" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="26.192"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.808"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="40.8"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
 
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="D:\Sundareshwaran\icons\LoginBackground.jpg" />
         </Grid.Background>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -29,18 +62,10 @@
         <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Text="Login Form" VerticalAlignment="Center"
                    TextAlignment="Center" FontStyle="Oblique" FontWeight="DemiBold"
                    Margin="0,0,0,20"/>
-        
-        <!--<StackPanel Grid.Row="2" Grid.Column="1">
-            <TextBlock Text="UserName" Margin="0,20"/>
-            <TextBlock Text="Password" Margin="0,20"/>
-            <TextBlock Text="Confirm Password" Margin="0,20"/>
-        </StackPanel>-->
+
 
         <StackPanel Grid.Row="2" Grid.Column="1">
-            <!--<TextBox x:Name="UserNameTextBox" Margin="0,20" />-->
-            <!--<PasswordBox x:Name="PasswordText" Margin="0,20" Width="250"/>-->
-            <!--<TextBlock Margin="0,20" Text="{Binding Path=Text, ElementName=UserNameTextBox}"/>-->
-            <local:AnimatedTextBox Margin="0,0,0,20"
+            <local:AnimatedTextBox x:Name="animatedTextBox" Margin="0,0,0,20"
                                    Width="350" Height="52" AnimatedTextBoxBorderRadius="5"
                                    AnimatedTextBoxFontSize="20" AnimatedTextBoxPlaceHolder="Username"
                                    AnimatedTextBoxBackground="#FF000836">
@@ -55,8 +80,16 @@
                                    AnimatedTextBoxFontSize="20" AnimatedTextBoxPlaceHolder="Confirm Password"
                                    AnimatedTextBoxBackground="#FF000836" IsPasswordType="True">
             </local:AnimatedTextBox>
-
-            <UserControls:AnimatedButton Width="200" Height="50"/>
+            <UserControls:AnimatedButton x:Name="animatedButton" Width="200" Height="50" RenderTransformOrigin="0.5,0.5">
+                <UserControls:AnimatedButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </UserControls:AnimatedButton.RenderTransform>
+            </UserControls:AnimatedButton>
         </StackPanel>
     </Grid>
 </Window>

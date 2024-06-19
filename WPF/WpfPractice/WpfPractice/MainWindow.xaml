@@ -5,37 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPractice"
         xmlns:UserControls="clr-namespace:WpfPractice.UserControls" x:Class="WpfPractice.MainWindow"
-        mc:Ignorable="d" TabIndex="2147483646" WindowStyle="ThreeDBorderWindow">
-
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="254*"/>
-            <ColumnDefinition Width="257*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Button ToolTip="Tooptip test" x:Name="B1"  Click="Button_MouseEnter" Grid.Column="1" Margin="59,39,54,56" Grid.Row="1">
-
-            <WrapPanel>
-                <TextBlock Margin="5,0,5,0" Foreground="Blue"><Run Text="Multi"/></TextBlock>
-                <TextBlock Foreground="Red" Text="Colour "/>
-                <TextBlock><Run Text="Button"/></TextBlock>
-            </WrapPanel>
+        mc:Ignorable="d" TabIndex="2147483646" WindowStyle="ThreeDBorderWindow" Height="500" Width="674">
+    <Window.Resources>
+    </Window.Resources>
+    <Canvas VerticalAlignment="Center" HorizontalAlignment="center">
+        <Button Width="154" Height="100" Canvas.Left="-272" Canvas.Top="-194" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Button.LayoutTransform>
+                <RotateTransform Angle ="{Binding ElementName=scalex_slider, Path=Value}">
+                </RotateTransform>
+            </Button.LayoutTransform>
         </Button>
-        <Button Margin="100" >
-            <Button.ToolTip>
-                <StackPanel Background="Black" Margin="0,0,0,0">
-                    <TextBlock Foreground="White" FontWeight="Bold"><Run Text="Press f1 for help"/></TextBlock>
-                </StackPanel>
-            </Button.ToolTip> TestButton
-        </Button>
-        <WrapPanel HorizontalAlignment="Left" Height="82" VerticalAlignment="Top" Width="225" Margin="10,39,0,0" Grid.Row="1">
-            <Button Content="Button" Height="26" Width="122"/>
-            <Button Content="Button" Height="71" Width="81"/>
-        </WrapPanel>
-    </Grid>
-
+        <Slider Name ="scalex_slider" Height="20" Canvas.Left="-272" Canvas.Top="11.02" Width="225" Maximum="1001"/>
+        <Slider Name ="scaley_slider" Height="20" Canvas.Left="-272" Canvas.Top="47.02" Width="225" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Slider Name ="skewx_slider" Height="20" Canvas.Left="-272" Canvas.Top="83.02" Width="225" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        
+    </Canvas>
 
 </Window>
