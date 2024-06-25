@@ -3,22 +3,73 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfPractice"
+        xmlns:local="clr-namespace:WpfPractice" 
+        xmlns:helpers="clr-namespace:WpfPractice"
         xmlns:UserControls="clr-namespace:WpfPractice.UserControls" x:Class="WpfPractice.MainWindow"
         mc:Ignorable="d" TabIndex="2147483646" WindowStyle="ThreeDBorderWindow" Height="500" Width="674">
-    <Window.Resources>
-    </Window.Resources>
-    <Canvas VerticalAlignment="Center" HorizontalAlignment="center">
-        <Button Width="154" Height="100" Canvas.Left="-272" Canvas.Top="-194" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Button.LayoutTransform>
-                <RotateTransform Angle ="{Binding ElementName=scalex_slider, Path=Value}">
-                </RotateTransform>
-            </Button.LayoutTransform>
-        </Button>
-        <Slider Name ="scalex_slider" Height="20" Canvas.Left="-272" Canvas.Top="11.02" Width="225" Maximum="1001"/>
-        <Slider Name ="scaley_slider" Height="20" Canvas.Left="-272" Canvas.Top="47.02" Width="225" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Slider Name ="skewx_slider" Height="20" Canvas.Left="-272" Canvas.Top="83.02" Width="225" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        
-    </Canvas>
 
+    <Window.Resources>
+        <Color x:Key="SpotifyGreen">#1ED760</Color>
+        <Color x:Key="SpotifyWhite">White</Color>
+        <Color x:Key="SpotifyDarkGrey">#282828</Color>
+
+        <Style TargetType="Label" x:Key="LeftSideBtn">
+            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Padding" Value="20,20"/>
+            <Setter Property="Background" Value="#282828"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Foreground" Value="LightGreen"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Background="#282828">
+            <StackPanel Orientation="Horizontal">
+                <Image Width="40" Height="40" Margin="10,0,0,0" 
+                       Source="F:\Lucid Imaging\C_Sharp_Projects\WPF\WpfPractice\WpfPractice\ImageAssets\spotifyIcon.png"/>
+                <TextBlock Text="Spotify" FontWeight="Bold" FontSize="30" Foreground="white" TextAlignment="Center"
+                    Padding="10" FontFamily="sans serif"/>
+            </StackPanel>
+
+
+            <Label Style="{StaticResource LeftSideBtn}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE80F;" Height="24"/>
+                    <TextBlock Text=" Home"/>
+                </StackPanel>
+            </Label>
+            <Label Style="{StaticResource LeftSideBtn}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE71E;" Height="24"/>
+                    <TextBlock Text=" Search"/>
+                </StackPanel>
+            </Label>
+            <Label Style="{StaticResource LeftSideBtn}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8F1;" Height="24"/>
+                    <TextBlock Text=" Library"/>
+                </StackPanel>
+            </Label>
+        </StackPanel>
+    </Grid>
 </Window>

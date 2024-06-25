@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfPractice", "WpfPractice\WpfPractice.csproj", "{7D3AA9DE-AA98-4A33-975F-CBC7A698ACFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherWatch", "WeatherWatch\WeatherWatch.csproj", "{881A3A90-6A6D-4385-9638-E7E9E906AE57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherWatch", "WeatherWatch\WeatherWatch.csproj", "{881A3A90-6A6D-4385-9638-E7E9E906AE57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

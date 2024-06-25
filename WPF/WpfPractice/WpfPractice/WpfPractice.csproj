@@ -75,6 +75,9 @@
     <Compile Include="UserControls\DrawControl.xaml.cs">
       <DependentUpon>DrawControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\LocationSelector.xaml.cs">
+      <DependentUpon>LocationSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\PopUpControl.xaml.cs">
       <DependentUpon>PopUpControl.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\DrawControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LocationSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,6 +163,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UserControls\file.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="ImageAssets\spotifyIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

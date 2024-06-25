@@ -7,7 +7,7 @@
              mc:Ignorable="d" Height="284" Width="261">
     <UserControl.Resources
     >
-        <Storyboard x:Key="Storyboard1">
+        <Storyboard x:Key="Storyboard1" RepeatBehavior="Forever">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path1" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
                 <DiscreteObjectKeyFrame KeyTime="00:00:00.1040000" Value="{x:Static Visibility.Visible}"/>
