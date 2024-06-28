@@ -26,7 +26,7 @@
         </TreeView>
 
         <!-- ListView to display folders in the selected drive -->
-        <ListView x:Name="FolderListView" Grid.Column="1" MouseDoubleClick="FolderListView_MouseDoubleClick">
+        <ListView x:Name="FolderListView" Grid.Column="1" SelectionChanged="FolderListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Folder Name" DisplayMemberBinding="{Binding Name}" Width="300"/>
@@ -36,6 +36,7 @@
 
         <!-- Buttons for selection and navigation -->
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Load" Width="100" Click="LoadBtnClick"/>
             <Button Content="Back" Width="100" Click="BackButton_Click"/>
             <Button Content="Select" Width="100" Click="SelectButton_Click"/>
         </StackPanel>
