@@ -60,6 +60,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FolderSelctor.xaml.cs">
+      <DependentUpon>FolderSelctor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,10 @@
     <Compile Include="UserControls\RocketControl.xaml.cs">
       <DependentUpon>RocketControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="FolderSelctor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -164,7 +171,9 @@
   <ItemGroup>
     <Resource Include="UserControls\file.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="ImageAssets\wiredBrain.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="ImageAssets\spotifyIcon.png" />
   </ItemGroup>

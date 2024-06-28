@@ -31,45 +31,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="70"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="3"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Background="#282828">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="40" Height="40" Margin="10,0,0,0" 
-                       Source="F:\Lucid Imaging\C_Sharp_Projects\WPF\WpfPractice\WpfPractice\ImageAssets\spotifyIcon.png"/>
-                <TextBlock Text="Spotify" FontWeight="Bold" FontSize="30" Foreground="white" TextAlignment="Center"
-                    Padding="10" FontFamily="sans serif"/>
-            </StackPanel>
+    <UserControls:LocationSelector HorizontalAlignment="Left" Height="126" Margin="80,69,0,0" VerticalAlignment="Top" Width="485"/>
 
 
-            <Label Style="{StaticResource LeftSideBtn}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE80F;" Height="24"/>
-                    <TextBlock Text=" Home"/>
-                </StackPanel>
-            </Label>
-            <Label Style="{StaticResource LeftSideBtn}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE71E;" Height="24"/>
-                    <TextBlock Text=" Search"/>
-                </StackPanel>
-            </Label>
-            <Label Style="{StaticResource LeftSideBtn}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8F1;" Height="24"/>
-                    <TextBlock Text=" Library"/>
-                </StackPanel>
-            </Label>
-        </StackPanel>
-    </Grid>
 </Window>
