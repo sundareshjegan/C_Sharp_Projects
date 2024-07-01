@@ -5,10 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPractice"
         mc:Ignorable="d"
-        Title="FolderSelector" Height="450" Width="800">
+        Title="FolderSelector" Height="450" Width="800"
+        Background="#2D2D30" Foreground="White"
+        MinHeight="500" MinWidth="800">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#3E3E42"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#3E3E42"/>
+            <Setter Property="Padding" Value="5,2"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TreeView">
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <Setter Property="BorderBrush" Value="#3E3E42"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+        </Style>
+        <Style TargetType="TreeViewItem">
+            <Setter Property="Foreground" Value="White"/>
+            <EventSetter Event="Expanded" Handler="TreeViewItem_Expanded"/>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <Setter Property="BorderBrush" Value="#3E3E42"/>
+        </Style>
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="Background" Value="#3E3E42"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#3E3E42"/>
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#3E3E42" />
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3E3E42" />
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width=".3*"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -16,29 +66,52 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- TreeView to display logical drives -->
-        <TreeView x:Name="DriveTreeView" Grid.Column="0" SelectedItemChanged="DriveTreeView_SelectedItemChanged">
+        <TreeView x:Name="DriveTreeView" 
+          Grid.Column="0"
+          SelectedItemChanged="DriveTreeView_SelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding SubDirectories}">
-                    <TextBlock Text="{Binding Name}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/ImageAssets/drive-icon.png" Width="16" Height="16" Margin="5"/>
+                        <TextBlock Text="{Binding Name}" Foreground="White"/>
+                    </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
 
-        <!-- ListView to display folders in the selected drive -->
-        <ListView x:Name="FolderListView" Grid.Column="1" SelectionChanged="FolderListView_SelectionChanged">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Folder Name" DisplayMemberBinding="{Binding Name}" Width="300"/>
-                </GridView>
-            </ListView.View>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="2" Background="LightGray"/>
+
+        <ListView x:Name="FolderListView"
+                  Grid.Column="2" 
+                  SelectionChanged="FolderListView_SelectionChanged" 
+                  MouseDoubleClick="FolderListView_MouseDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/ImageAssets/folder-icon.png" Width="16" Height="16" Margin="5"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Buttons for selection and navigation -->
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Load" Width="100" Click="LoadBtnClick"/>
-            <Button Content="Back" Width="100" Click="BackButton_Click"/>
-            <Button Content="Select" Width="100" Click="SelectButton_Click"/>
-        </StackPanel>
+        <Grid Grid.Row="1" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Height="30" Text="{Binding CurrentPath}" 
+                     IsReadOnly="True" TextWrapping="Wrap" 
+                     Background="Transparent" Foreground="White"
+                     TextAlignment="Left" Padding="0,5,0,0"
+                     Margin="5" Grid.Column="0"/>
+            <Button Grid.Column="1" Content="Back" Click="BackButton_Click"/>
+            <Button Grid.Column="2" Content="Open" Click="SelectButton_Click"/>
+        </Grid>
     </Grid>
 </Window>

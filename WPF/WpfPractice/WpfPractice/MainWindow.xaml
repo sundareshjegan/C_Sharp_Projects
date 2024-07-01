@@ -31,7 +31,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <UserControls:LocationSelector HorizontalAlignment="Left" Height="126" Margin="80,69,0,0" VerticalAlignment="Top" Width="485"/>
+    <UserControls:LocationSelector HorizontalAlignment="Left" Height="109" Margin="80,69,0,0" VerticalAlignment="Top" Width="485"/>
 
 
 </Window>

@@ -32,23 +32,26 @@ namespace WpfPractice.UserControls
 
         private void BrowseFolderBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!dialogShown)
-            {
-                dialogShown = true;
-                var dialog = new OpenFileDialog
-                {
-                    CheckFileExists = false,
-                    CheckPathExists = true,
-                    Multiselect = false,
-                    Filter = "Folders|.",
-                    FileName = "Select Folder"
-                };
-                if (dialog.ShowDialog() == true)
-                {
-                    SelectedFolderPath = System.IO.Path.GetDirectoryName(dialog.FileName);
-                }
-                dialogShown = false;
-            }
+            //if (!dialogShown)
+            //{
+            //    dialogShown = true;
+            //    var dialog = new OpenFileDialog
+            //    {
+            //        CheckFileExists = false,
+            //        CheckPathExists = true,
+            //        Multiselect = false,
+            //        Filter = "Folders|.",
+            //        FileName = "Select Folder"
+            //    };
+            //    if (dialog.ShowDialog() == true)
+            //    {
+            //        SelectedFolderPath = System.IO.Path.GetDirectoryName(dialog.FileName);
+            //    }
+            //    dialogShown = false;
+            //}
+            FolderSelector folderSelector = new FolderSelector();
+            folderSelector.ShowDialog();
+            SelectedFolderPath = folderSelector.CurrentPath;
         }
 
         private void NextBtn_Click(object sender, RoutedEventArgs e)

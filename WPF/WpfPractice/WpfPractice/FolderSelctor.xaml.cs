@@ -1,122 +1,217 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WpfPractice
 {
-    /// <summary>
-    /// Interaction logic for FolderSelctor.xaml
-    /// </summary>
     public partial class FolderSelector : Window
     {
-        private string currentPath;
+        public static readonly DependencyProperty CurrentPathProperty = DependencyProperty.Register("CurrentPath", typeof(string), typeof(FolderSelector), new PropertyMetadata(string.Empty));
+
+        public string CurrentPath
+        {
+            get { return (string)GetValue(CurrentPathProperty); }
+            set { SetValue(CurrentPathProperty, value); }
+        }
+
         public FolderSelector()
         {
             InitializeComponent();
+            DataContext = this;
+            LoadDrives();
         }
+
         private void LoadDrives()
         {
+            Debug.WriteLine("LoadDrives method called.");
             var drives = Directory.GetLogicalDrives();
             var rootDirectories = new ObservableCollection<DirectoryItem>();
 
             foreach (var drive in drives)
             {
                 var item = new DirectoryItem { Name = drive, Path = drive };
-                item.SubDirectories = GetSubDirectories(item.Path);
+                item.SubDirectories.Add(new DirectoryItem { Name = "Loading...", Path = string.Empty });
                 rootDirectories.Add(item);
             }
 
             DriveTreeView.ItemsSource = rootDirectories;
         }
-        private ObservableCollection<DirectoryItem> GetSubDirectories(string path)
-        {
-            var directories = new ObservableCollection<DirectoryItem>();
 
-            try
-            {
-                var dirs = Directory.GetDirectories(path);
-                foreach (var dir in dirs)
-                {
-                    var item = new DirectoryItem { Name = Path.GetFileName(dir), Path = dir };
-                    item.SubDirectories = GetSubDirectories(item.Path);
-                    directories.Add(item);
-                }
-            }
-            catch { }
-
-            return directories;
-        }
         private void DriveTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (DriveTreeView.SelectedItem is DirectoryItem selectedDirectory)
             {
-                currentPath = selectedDirectory.Path;
-                LoadFolders(currentPath);
+                Debug.WriteLine($"DriveTreeView_SelectedItemChanged: {selectedDirectory.Path}");
+                CurrentPath = selectedDirectory.Path;
+                LoadFolders(CurrentPath);
             }
         }
+
         private void LoadFolders(string path)
         {
+            Debug.WriteLine($"LoadFolders method called with path: {path}");
             var folders = new ObservableCollection<DirectoryItem>();
-
             try
             {
-                var dirs = Directory.GetDirectories(path);
-                foreach (var dir in dirs)
+                if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
                 {
-                    folders.Add(new DirectoryItem { Name = Path.GetFileName(dir), Path = dir });
+                    var dirs = Directory.GetDirectories(path);
+                    foreach (var dir in dirs)
+                    {
+                        folders.Add(new DirectoryItem { Name = Path.GetFileName(dir), Path = dir });
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine($"Invalid or empty path: {path}");
                 }
             }
-            catch { }
-
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error loading folders for {path}: {ex.Message}");
+            }
             FolderListView.ItemsSource = folders;
         }
+
         private void FolderListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (FolderListView.SelectedItem is DirectoryItem selectedDirectory)
             {
-                currentPath = selectedDirectory.Path;
-                LoadFolders(currentPath);
+                Debug.WriteLine($"FolderListView_MouseDoubleClick: {selectedDirectory.Path}");
+                CurrentPath = selectedDirectory.Path;
+                LoadFolders(CurrentPath);
             }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(currentPath))
+            Debug.WriteLine($"BackButton_Click: CurrentPath before back is {CurrentPath}");
+            if (!string.IsNullOrEmpty(CurrentPath))
             {
-                var parentDirectory = Directory.GetParent(currentPath);
+                var parentDirectory = Directory.GetParent(CurrentPath);
                 if (parentDirectory != null)
                 {
-                    currentPath = parentDirectory.FullName;
-                    LoadFolders(currentPath);
+                    CurrentPath = parentDirectory.FullName;
+                    LoadFolders(CurrentPath);
                 }
             }
+            Debug.WriteLine($"BackButton_Click: CurrentPath after back is {CurrentPath}");
         }
 
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Selected Path: {currentPath}");
+            MessageBox.Show($"Selected Path: {CurrentPath}");
         }
 
         private void LoadBtnClick(object sender, RoutedEventArgs e)
         {
+            Debug.WriteLine("LoadBtnClick method called.");
             LoadDrives();
         }
 
-        private void FolderListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void FolderListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (FolderListView.SelectedItem is DirectoryItem selectedDirectory)
             {
-                currentPath = selectedDirectory.Path;
-                // Display the current path in the console for debugging purposes.
-                Console.WriteLine(currentPath);
+                Debug.WriteLine($"FolderListView_SelectionChanged: {selectedDirectory.Path}");
+                CurrentPath = selectedDirectory.Path;
             }
         }
+
+        private void TreeViewItem_Expanded(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource is TreeViewItem item && item.Header is DirectoryItem directoryItem)
+            {
+                Debug.WriteLine($"TreeViewItem_Expanded: {directoryItem.Path}");
+                if (directoryItem.SubDirectories.Count == 1 && directoryItem.SubDirectories[0].Path == string.Empty)
+                {
+                    directoryItem.SubDirectories.Clear();
+
+                    try
+                    {
+                        var subDirs = GetSubDirectories(directoryItem.Path);
+                        foreach (var subDir in subDirs)
+                        {
+                            directoryItem.SubDirectories.Add(subDir);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Error expanding tree view item for {directoryItem.Path}: {ex.Message}");
+                    }
+                }
+            }
+        }
+
+        private ObservableCollection<DirectoryItem> GetSubDirectories(string path)
+        {
+            Debug.WriteLine($"GetSubDirectories method called with path: {path}");
+            var directories = new ObservableCollection<DirectoryItem>();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
+                {
+                    var dirs = Directory.GetDirectories(path);
+                    foreach (var dir in dirs)
+                    {
+                        var item = new DirectoryItem { Name = Path.GetFileName(dir), Path = dir };
+                        item.SubDirectories.Add(new DirectoryItem { Name = "Loading...", Path = string.Empty });
+                        directories.Add(item);
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine($"Invalid or empty path: {path}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error getting subdirectories for {path}: {ex.Message}");
+            }
+
+            return directories;
+        }
     }
-    public class DirectoryItem
+    public class DirectoryItem : INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public string Path { get; set; }
-        public ObservableCollection<DirectoryItem> SubDirectories { get; set; }
+        private string _name;
+        private string _path;
+        private ObservableCollection<DirectoryItem> _subDirectories;
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; OnPropertyChanged(nameof(Name)); }
+        }
+
+        public string Path
+        {
+            get { return _path; }
+            set { _path = value; OnPropertyChanged(nameof(Path)); }
+        }
+
+        public ObservableCollection<DirectoryItem> SubDirectories
+        {
+            get { return _subDirectories; }
+            set { _subDirectories = value; OnPropertyChanged(nameof(SubDirectories)); }
+        }
+
+        public DirectoryItem()
+        {
+            SubDirectories = new ObservableCollection<DirectoryItem>();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
+
