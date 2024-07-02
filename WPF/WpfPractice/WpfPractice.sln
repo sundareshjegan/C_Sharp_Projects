@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfPractice", "WpfPractice\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherWatch", "WeatherWatch\WeatherWatch.csproj", "{881A3A90-6A6D-4385-9638-E7E9E906AE57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderSelectorControl", "FolderSelectorControl\FolderSelectorControl.csproj", "{4D7A7F3D-9B8E-48BD-BBF4-B52652D8451C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{881A3A90-6A6D-4385-9638-E7E9E906AE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{881A3A90-6A6D-4385-9638-E7E9E906AE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{881A3A90-6A6D-4385-9638-E7E9E906AE57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D7A7F3D-9B8E-48BD-BBF4-B52652D8451C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D7A7F3D-9B8E-48BD-BBF4-B52652D8451C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D7A7F3D-9B8E-48BD-BBF4-B52652D8451C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D7A7F3D-9B8E-48BD-BBF4-B52652D8451C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

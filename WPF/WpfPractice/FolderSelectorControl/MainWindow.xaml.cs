@@ -3,14 +3,26 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
-namespace WpfPractice
+namespace FolderSelectorControl
 {
-    public partial class FolderSelector : Window
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-        public static readonly DependencyProperty CurrentPathProperty = DependencyProperty.Register("CurrentPath", typeof(string), typeof(FolderSelector), new PropertyMetadata(string.Empty));
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = this;
+            LoadDrives();
+        }
+
+        public static readonly DependencyProperty CurrentPathProperty = DependencyProperty.Register("CurrentPath", typeof(string), typeof(MainWindow), new PropertyMetadata(string.Empty));
 
         public string CurrentPath
         {
@@ -18,13 +30,11 @@ namespace WpfPractice
             set { SetValue(CurrentPathProperty, value); }
         }
 
-        public FolderSelector()
-        {
-            InitializeComponent();
-            DataContext = this;
-            LoadDrives();
-        }
+        public event EventHandler<string> OnOpenClicked;
 
+        private bool _ignoreSelectionChanged;
+
+        //method to initially load the logical drives (c:, d:) into the tree view (DriveTreeView)
         private void LoadDrives()
         {
             Debug.WriteLine("LoadDrives method called.");
@@ -62,7 +72,7 @@ namespace WpfPractice
                     var dirs = Directory.GetDirectories(path);
                     foreach (var dir in dirs)
                     {
-                        folders.Add(new DirectoryItem { Name = Path.GetFileName(dir), Path = dir });
+                        folders.Add(new DirectoryItem { Name = System.IO.Path.GetFileName(dir), Path = dir });
                     }
                 }
                 else
@@ -83,6 +93,7 @@ namespace WpfPractice
             {
                 Debug.WriteLine($"FolderListView_MouseDoubleClick: {selectedDirectory.Path}");
                 CurrentPath = selectedDirectory.Path;
+                _ignoreSelectionChanged = true;
                 LoadFolders(CurrentPath);
             }
         }
@@ -105,16 +116,109 @@ namespace WpfPractice
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show($"Selected Path: {CurrentPath}");
+            OnOpenClicked?.Invoke(this, CurrentPath);
         }
 
-        private void LoadBtnClick(object sender, RoutedEventArgs e)
+        private void GoButtonClick(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("LoadBtnClick method called.");
-            LoadDrives();
+            Debug.WriteLine($"GoButtonClick: CurrentPath is {CurrentPath}");
+            if (Directory.Exists(CurrentPath))
+            {
+                LoadFolders(CurrentPath);
+                UpdateTreeView(CurrentPath);
+            }
+            else
+            {
+                MessageBox.Show("The path you entered is not valid. Please enter a valid path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void UpdateTreeView(string path)
+        {
+            Debug.WriteLine($"UpdateTreeView method called with path: {path}");
+            var parts = path.Split(new[] {Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length > 0)
+            {
+                var root = DriveTreeView.ItemsSource as ObservableCollection<DirectoryItem>;
+                var drive = root.FirstOrDefault(d => path.StartsWith(d.Path, StringComparison.OrdinalIgnoreCase));
+                if (drive != null)
+                {
+                    ExpandTreeViewItem(drive, parts, 1);
+                }
+            }
+        }
+
+        private void ExpandTreeViewItem(DirectoryItem currentItem, string[] parts, int index)
+        {
+            if (index >= parts.Length)
+            {
+                var treeViewItemFinal = GetTreeViewItemFromObject(DriveTreeView, currentItem);
+                if (treeViewItemFinal != null)
+                {
+                    treeViewItemFinal.IsSelected = true;
+                    treeViewItemFinal.BringIntoView();
+                }
+                return;
+            }
+
+            var treeViewItemCurrent = GetTreeViewItemFromObject(DriveTreeView, currentItem);
+            if (treeViewItemCurrent != null)
+            {
+                treeViewItemCurrent.IsExpanded = true;
+            }
+
+            var nextItem = currentItem.SubDirectories.FirstOrDefault(d => d.Name.Equals(parts[index], StringComparison.OrdinalIgnoreCase));
+            if (nextItem == null)
+            {
+                nextItem = new DirectoryItem
+                {
+                    Name = parts[index],
+                    Path = Path.Combine(currentItem.Path, parts[index]),
+                };
+                currentItem.SubDirectories.Add(nextItem);
+            }
+
+            ExpandTreeViewItem(nextItem, parts, index + 1);
+        }
+
+        private TreeViewItem GetTreeViewItemFromObject(ItemsControl parent, object item)
+        {
+            TreeViewItem foundTreeViewItem = null;
+            for (int i = 0; i < parent.Items.Count; i++)
+            {
+                var currentTreeViewItem = parent.ItemContainerGenerator.ContainerFromIndex(i) as TreeViewItem;
+                if (currentTreeViewItem == null)
+                {
+                    parent.UpdateLayout();
+                    currentTreeViewItem = parent.ItemContainerGenerator.ContainerFromIndex(i) as TreeViewItem;
+                }
+
+                if (currentTreeViewItem != null && currentTreeViewItem.DataContext == item)
+                {
+                    foundTreeViewItem = currentTreeViewItem;
+                    break;
+                }
+
+                if (currentTreeViewItem != null)
+                {
+                    foundTreeViewItem = GetTreeViewItemFromObject(currentTreeViewItem, item);
+                    if (foundTreeViewItem != null)
+                    {
+                        break;
+                    }
+                }
+            }
+            return foundTreeViewItem;
         }
 
         private void FolderListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (_ignoreSelectionChanged)
+            {
+                _ignoreSelectionChanged = false;
+                return;
+            }
+
             if (FolderListView.SelectedItem is DirectoryItem selectedDirectory)
             {
                 Debug.WriteLine($"FolderListView_SelectionChanged: {selectedDirectory.Path}");
@@ -214,4 +318,3 @@ namespace WpfPractice
         }
     }
 }
-
