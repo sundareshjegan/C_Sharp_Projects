@@ -103,5 +103,8 @@
   <ItemGroup>
     <Resource Include="icons8-file-explorer-new-70.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ImageAssets\file-explorer.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
