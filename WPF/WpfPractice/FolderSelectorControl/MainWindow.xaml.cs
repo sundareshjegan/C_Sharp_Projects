@@ -12,7 +12,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
 
 namespace FolderSelectorControl
 {
@@ -36,7 +35,7 @@ namespace FolderSelectorControl
 
         public static readonly DependencyProperty CurrentPathProperty = DependencyProperty.Register("CurrentPath", typeof(string), typeof(MainWindow), new PropertyMetadata(string.Empty));
 
-        public string CurrentPath
+        public string SelectedPath
         {
             get { return (string)GetValue(CurrentPathProperty); }
             set { SetValue(CurrentPathProperty, value); }
@@ -48,6 +47,8 @@ namespace FolderSelectorControl
 
         private bool _ignoreSelectionChanged, _isTyping;
 
+        #region Title bar and Resize
+
         private void TitleBar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
@@ -55,6 +56,117 @@ namespace FolderSelectorControl
                 this.DragMove();
             }
         }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Border_MouseMove(object sender, MouseEventArgs e)
+        {
+            const int resizeBorderThickness = 5;
+            Point mousePosition = e.GetPosition(this);
+
+            if (mousePosition.X <= resizeBorderThickness && mousePosition.Y <= resizeBorderThickness)
+            {
+                Cursor = Cursors.SizeNWSE;
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    ResizeWindow(ResizeDirection.TopLeft);
+                }
+            }
+            else if (mousePosition.X >= this.ActualWidth - resizeBorderThickness && mousePosition.Y <= resizeBorderThickness)
+            {
+                Cursor = Cursors.SizeNESW;
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    ResizeWindow(ResizeDirection.TopRight);
+                }
+            }
+            else if (mousePosition.X <= resizeBorderThickness && mousePosition.Y >= this.ActualHeight - resizeBorderThickness)
+            {
+                Cursor = Cursors.SizeNESW;
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    ResizeWindow(ResizeDirection.BottomLeft);
+                }
+            }
+            else if (mousePosition.X >= this.ActualWidth - resizeBorderThickness && mousePosition.Y >= this.ActualHeight - resizeBorderThickness)
+            {
+                Cursor = Cursors.SizeNWSE;
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    ResizeWindow(ResizeDirection.BottomRight);
+                }
+            }
+            else if (mousePosition.Y <= resizeBorderThickness)
+            {
+                Cursor = Cursors.SizeNS;
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    ResizeWindow(ResizeDirection.Top);
+                }
+            }
+            else if (mousePosition.Y >= this.ActualHeight - resizeBorderThickness)
+            {
+                Cursor = Cursors.SizeNS;
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    ResizeWindow(ResizeDirection.Bottom);
+                }
+            }
+            else if (mousePosition.X <= resizeBorderThickness)
+            {
+                Cursor = Cursors.SizeWE;
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    ResizeWindow(ResizeDirection.Left);
+                }
+            }
+            else if (mousePosition.X >= this.ActualWidth - resizeBorderThickness)
+            {
+                Cursor = Cursors.SizeWE;
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    ResizeWindow(ResizeDirection.Right);
+                }
+            }
+            else
+            {
+                Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void ResizeWindow(ResizeDirection direction)
+        {
+            HwndSource hwndSource = (HwndSource)PresentationSource.FromVisual(this);
+            if (hwndSource != null)
+            {
+                SendMessage(hwndSource.Handle, WM_SYSCOMMAND, (IntPtr)(SC_SIZE + direction), IntPtr.Zero);
+            }
+        }
+
+        private const int WM_SYSCOMMAND = 0x112;
+        private const int SC_SIZE = 0xF000;
+
+        private enum ResizeDirection
+        {
+            Left = 1,
+            Right = 2,
+            Top = 3,
+            TopLeft = 4,
+            TopRight = 5,
+            Bottom = 6,
+            BottomLeft = 7,
+            BottomRight = 8
+        }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        // Rest of your existing code
+
+        #endregion
 
         //method to initially load the logical drives (c:, d:) into the tree view (DriveTreeView)
         private void LoadDrives()
@@ -71,16 +183,6 @@ namespace FolderSelectorControl
             }
 
             DriveTreeView.ItemsSource = rootDirectories;
-        }
-
-        private void DriveTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (DriveTreeView.SelectedItem is DirectoryItem selectedDirectory)
-            {
-                Debug.WriteLine($"DriveTreeView_SelectedItemChanged: {selectedDirectory.Path}");
-                CurrentPath = selectedDirectory.Path;
-                LoadFolders(CurrentPath);
-            }
         }
 
         private void LoadFolders(string path)
@@ -109,55 +211,46 @@ namespace FolderSelectorControl
             FolderListView.ItemsSource = folders;
         }
 
-        private void FolderListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private ObservableCollection<DirectoryItem> GetSubDirectories(string path)
         {
-            _isTyping = false;
+            Debug.WriteLine($"GetSubDirectories method called with path: {path}");
+            var directories = new ObservableCollection<DirectoryItem>();
 
-            if (FolderListView.SelectedItem is DirectoryItem selectedDirectory)
+            try
             {
-                Debug.WriteLine($"FolderListView_MouseDoubleClick: {selectedDirectory.Path}");
-                CurrentPath = selectedDirectory.Path;
-                _ignoreSelectionChanged = true;
-                LoadFolders(CurrentPath);
-            }
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine($"BackButton_Click: CurrentPath before back is {CurrentPath}");
-            if (!string.IsNullOrEmpty(CurrentPath))
-            {
-                var parentDirectory = Directory.GetParent(CurrentPath);
-                if (parentDirectory != null)
+                if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
                 {
-                    CurrentPath = parentDirectory.FullName;
-                    LoadFolders(CurrentPath);
+                    var dirs = Directory.GetDirectories(path);
+                    foreach (var dir in dirs)
+                    {
+                        var item = new DirectoryItem { Name = Path.GetFileName(dir), Path = dir };
+                        item.SubDirectories.Add(new DirectoryItem { Name = "Loading...", Path = string.Empty });
+                        directories.Add(item);
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine($"Invalid or empty path: {path}");
                 }
             }
-            Debug.WriteLine($"BackButton_Click: CurrentPath after back is {CurrentPath}");
-        }
-
-        private void SelectButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show($"Selected Path: {CurrentPath}");
-            OnOpenClicked?.Invoke(this, CurrentPath);
-        }
-
-        private void GoButtonClick(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine($"GoButtonClick: CurrentPath is {CurrentPath}");
-            if (Directory.Exists(CurrentPath))
+            catch (Exception ex)
             {
-                LoadFolders(CurrentPath);
-                UpdateTreeView(CurrentPath);
+                Debug.WriteLine($"Error getting subdirectories for {path}: {ex.Message}");
             }
-            else
+
+            return directories;
+        }
+
+        private void DriveTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (DriveTreeView.SelectedItem is DirectoryItem selectedDirectory)
             {
-                //MessageBox.Show("The path you entered is not valid. Please enter a valid path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
-                MessageBox.Show("You can't open this location using this program. Please try a different location.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Debug.WriteLine($"DriveTreeView_SelectedItemChanged: {selectedDirectory.Path}");
+                SelectedPath = selectedDirectory.Path;
+                LoadFolders(SelectedPath);
             }
         }
-
+        
         private void UpdateTreeView(string path)
         {
             Debug.WriteLine($"UpdateTreeView method called with path: {path}");
@@ -236,23 +329,6 @@ namespace FolderSelectorControl
             return foundTreeViewItem;
         }
 
-        private void FolderListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            _isTyping = false;
-
-            if (_ignoreSelectionChanged)
-            {
-                _ignoreSelectionChanged = false;
-                return;
-            }
-
-            if (FolderListView.SelectedItem is DirectoryItem selectedDirectory)
-            {
-                Debug.WriteLine($"FolderListView_SelectionChanged: {selectedDirectory.Path}");
-                CurrentPath = selectedDirectory.Path;
-            }
-        }
-
         private void TreeViewItem_Expanded(object sender, RoutedEventArgs e)
         {
             if (e.OriginalSource is TreeViewItem item && item.Header is DirectoryItem directoryItem)
@@ -278,34 +354,34 @@ namespace FolderSelectorControl
             }
         }
 
-        private ObservableCollection<DirectoryItem> GetSubDirectories(string path)
+        private void FolderListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Debug.WriteLine($"GetSubDirectories method called with path: {path}");
-            var directories = new ObservableCollection<DirectoryItem>();
+            _isTyping = false;
 
-            try
+            if (FolderListView.SelectedItem is DirectoryItem selectedDirectory)
             {
-                if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
-                {
-                    var dirs = Directory.GetDirectories(path);
-                    foreach (var dir in dirs)
-                    {
-                        var item = new DirectoryItem { Name = Path.GetFileName(dir), Path = dir };
-                        item.SubDirectories.Add(new DirectoryItem { Name = "Loading...", Path = string.Empty });
-                        directories.Add(item);
-                    }
-                }
-                else
-                {
-                    Debug.WriteLine($"Invalid or empty path: {path}");
-                }
+                Debug.WriteLine($"FolderListView_MouseDoubleClick: {selectedDirectory.Path}");
+                SelectedPath = selectedDirectory.Path;
+                _ignoreSelectionChanged = true;
+                LoadFolders(SelectedPath);
             }
-            catch (Exception ex)
+        }
+
+        private void FolderListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _isTyping = false;
+
+            if (_ignoreSelectionChanged)
             {
-                Debug.WriteLine($"Error getting subdirectories for {path}: {ex.Message}");
+                _ignoreSelectionChanged = false;
+                return;
             }
 
-            return directories;
+            if (FolderListView.SelectedItem is DirectoryItem selectedDirectory)
+            {
+                Debug.WriteLine($"FolderListView_SelectionChanged: {selectedDirectory.Path}");
+                SelectedPath = selectedDirectory.Path;
+            }
         }
 
         private void PathTB_GotFocus(object sender, RoutedEventArgs e)
@@ -342,20 +418,30 @@ namespace FolderSelectorControl
             }
             else
             {
-                PathSuggestionsPopup.IsOpen = false;
+                PathSuggestions.Clear();
+                PathSuggestions.Add("No paths found");
+                //PathSuggestionsPopup.IsOpen = false;
             }
         }
-
+        
         private IEnumerable<string> GetPathSuggestions(string input)
         {
             var suggestions = new List<string>();
             try
             {
-                var directoryName = Path.GetDirectoryName(input);
-                if (Directory.Exists(directoryName))
+                if (input.Length == 2 && char.IsLetter(input[0]) && input[1] == ':')
                 {
-                    suggestions.AddRange(Directory.GetDirectories(directoryName)
+                    suggestions.AddRange(Directory.GetLogicalDrives()
                         .Where(d => d.StartsWith(input, StringComparison.OrdinalIgnoreCase)));
+                }
+                else
+                {
+                    var directoryName = Path.GetDirectoryName(input);
+                    if (Directory.Exists(directoryName))
+                    {
+                        suggestions.AddRange(Directory.GetDirectories(directoryName)
+                            .Where(d => d.StartsWith(input, StringComparison.OrdinalIgnoreCase)));
+                    }
                 }
             }
             catch (Exception ex)
@@ -367,16 +453,47 @@ namespace FolderSelectorControl
 
         private void PathSuggestionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (PathSuggestionsListBox.SelectedItem is string selectedPath)
+            if (PathSuggestionsListBox.SelectedItem is string selectedPath && PathSuggestionsListBox.SelectedItem.ToString() != "No paths found")
             {
                 PathTB.Text = selectedPath;
                 PathSuggestionsPopup.IsOpen = false;
             }
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void GoButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Debug.WriteLine($"GoButtonClick: CurrentPath is {SelectedPath}");
+            if (Directory.Exists(SelectedPath))
+            {
+                LoadFolders(SelectedPath);
+                UpdateTreeView(SelectedPath);
+            }
+            else
+            {
+                //MessageBox.Show("The path you entered is not valid. Please enter a valid path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("You can't open this location using this program. Please try a different location.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine($"BackButton_Click: CurrentPath before back is {SelectedPath}");
+            if (!string.IsNullOrEmpty(SelectedPath))
+            {
+                var parentDirectory = Directory.GetParent(SelectedPath);
+                if (parentDirectory != null)
+                {
+                    SelectedPath = parentDirectory.FullName;
+                    LoadFolders(SelectedPath);
+                }
+            }
+            Debug.WriteLine($"BackButton_Click: CurrentPath after back is {SelectedPath}");
+        }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"Selected Path: {SelectedPath}");
+            OnOpenClicked?.Invoke(this, SelectedPath);
         }
     }
     public class DirectoryItem : INotifyPropertyChanged

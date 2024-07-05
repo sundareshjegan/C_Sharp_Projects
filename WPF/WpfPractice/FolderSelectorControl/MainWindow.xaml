@@ -11,6 +11,7 @@
         Height="450" Width="800" Padding="2"
         Background="#2D2D30" Foreground="White"
         MinHeight="500" MinWidth="600">
+
     <Window.Resources>
 
         <local:PathToFolderNameConverter x:Key="PathToFolderNameConverter"/>
@@ -67,11 +68,11 @@
         </Style>-->
 
         <Style x:Key="{x:Type TreeView}"
-       TargetType="TreeView">
+               TargetType="TreeView">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TreeView">
@@ -309,6 +310,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="20"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -327,116 +330,119 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
     </Window.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!-- Custom Title Bar -->
-        <DockPanel x:Name="TitleBar" Background="#2D2D30" Grid.Row="0" Height="30">
-            <Image Source="ImageAssets\file-explorer.png" Width="15" Height="15" Margin="10,0,5,0"/>
-            <TextBlock Text="Folder Selector" Foreground="White" VerticalAlignment="Center" />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="&#xE921;" FontFamily="Segoe MDL2 Assets" Click="CloseButton_Click" Style="{StaticResource WindowButtonStyle}"/>
-                <Button Content="&#xE923;" FontFamily="Segoe MDL2 Assets" Click="CloseButton_Click" Style="{StaticResource WindowButtonStyle}"/>
-                <Button Content="&#xE8BB;" FontFamily="Segoe MDL2 Assets" Click="CloseButton_Click" Style="{StaticResource WindowButtonStyle}"/>
-            </StackPanel>
-        </DockPanel>
-
-        <!-- Main Content -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".3*"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <Border BorderBrush="#2D2D30" BorderThickness="5" MouseMove="Border_MouseMove">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TreeView x:Name="DriveTreeView" 
-                  Grid.Column="0"
-                  Grid.RowSpan="2"
-                  SelectedItemChanged="DriveTreeView_SelectedItemChanged">
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding SubDirectories}">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Image Width="16" Height="16" Margin="5">
-                                <Image.Style>
-                                    <Style TargetType="Image">
-                                        <Setter Property="Source" Value="/ImageAssets/folder-icon.png"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsDrive}" Value="True">
-                                                <Setter Property="Source" Value="/ImageAssets/drive-icon.png"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                            </Image>
-                            <Label VerticalContentAlignment="Center" Content="{Binding Name}" Foreground="White"/>
-                        </StackPanel>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
+            <!-- Custom Title Bar -->
+            <DockPanel x:Name="TitleBar" Background="#2D2D30" Grid.Row="0" Height="30">
+                <Image Source="ImageAssets\file-explorer.png" Width="15" Height="15" Margin="10,0,5,0"/>
+                <TextBlock Text="Folder Selector" Foreground="White" VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <!--<Button Content="&#xE921;" FontFamily="Segoe MDL2 Assets" Click="CloseButton_Click" Style="{StaticResource WindowButtonStyle}"/>
+                    <Button Content="&#xE923;" FontFamily="Segoe MDL2 Assets" Click="CloseButton_Click" Style="{StaticResource WindowButtonStyle}"/>-->
+                    <Button Content="&#xE8BB;" FontFamily="Segoe MDL2 Assets" Click="CloseButton_Click" Style="{StaticResource WindowButtonStyle}"/>
+                </StackPanel>
+            </DockPanel>
 
-            <GridSplitter Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" Width="2" Background="Gray"/>
-
-            <ListView x:Name="FolderListView"
-          Grid.Column="2" 
-          SelectionChanged="FolderListView_SelectionChanged" 
-          MouseDoubleClick="FolderListView_MouseDoubleClick">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/ImageAssets/folder-icon.png" Width="16" Height="16" Margin="5"/>
-                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Grid Grid.Row="1" Grid.Column="2">
+            <!-- Main Content -->
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBox x:Name="PathTB"
-                     Height="30"
-                     Text="{Binding CurrentPath, UpdateSourceTrigger=PropertyChanged}"
-                     TextChanged="PathTB_TextChanged"
-                     Background="Transparent"
-                     Foreground="White"
-                     TextAlignment="Left"
-                     Padding="0,5,0,0"
-                     Margin="5,5,0,5"
-                     Grid.Column="0"/>
+                <TreeView x:Name="DriveTreeView" 
+                      Grid.Column="0"
+                      Grid.RowSpan="2"
+                      SelectedItemChanged="DriveTreeView_SelectedItemChanged">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding SubDirectories}">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Width="16" Height="16" Margin="5">
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Setter Property="Source" Value="/ImageAssets/folder-icon.png"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsDrive}" Value="True">
+                                                    <Setter Property="Source" Value="/ImageAssets/drive-icon.png"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <Label ToolTip="{Binding Name}" ToolTipService.ShowDuration="3000" VerticalContentAlignment="Center" Content="{Binding Name}" Foreground="White"/>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
 
-                <Popup Name="PathSuggestionsPopup" 
-           PlacementTarget="{Binding ElementName=PathTB}" 
-           Placement="Bottom" 
-           StaysOpen="False" 
-           Width="{Binding ElementName=PathTB, Path=ActualWidth}">
-                    <Border Background="White" BorderBrush="Black" BorderThickness="1">
-                        <ListView x:Name="PathSuggestionsListBox" 
-                     SelectionChanged="PathSuggestionsListBox_SelectionChanged"/>
-                    </Border>
-                </Popup>
+                <GridSplitter Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" Width="2" Background="Gray"/>
 
-                <Button Grid.Column="1" Content="&#xEBE7;" FontFamily="Segoe MDL2 Assets" Click="GoButtonClick"/>
-                <Button Grid.Column="2" Content="Back" Click="BackButton_Click"/>
-                <Button Grid.Column="3" Content="Open" Click="SelectButton_Click"/>
+                <ListView x:Name="FolderListView"
+                          Grid.Column="2" 
+                          SelectionChanged="FolderListView_SelectionChanged" 
+                          MouseDoubleClick="FolderListView_MouseDoubleClick">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/ImageAssets/folder-icon.png" Width="16" Height="16" Margin="5"/>
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Grid Grid.Row="1" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox x:Name="PathTB"
+                             Height="30"
+                             Text="{Binding CurrentPath, UpdateSourceTrigger=PropertyChanged}"
+                             TextChanged="PathTB_TextChanged"
+                             Background="Transparent"
+                             Foreground="White"
+                             TextAlignment="Left"
+                             Padding="0,5,0,0"
+                             Margin="5,5,0,5"
+                             Grid.Column="0"/>
+
+                    <Popup Name="PathSuggestionsPopup" 
+                           PlacementTarget="{Binding ElementName=PathTB}" 
+                           Placement="Bottom" 
+                           StaysOpen="False" 
+                           Width="{Binding ElementName=PathTB, Path=ActualWidth}">
+                        <Border Background="White" BorderBrush="Black" BorderThickness="1">
+                            <ListView x:Name="PathSuggestionsListBox"
+                                      SelectionChanged="PathSuggestionsListBox_SelectionChanged"
+                                      MaxHeight="200">
+                            </ListView>
+                        </Border>
+                    </Popup>
+                    <Button Grid.Column="1" Content="&#xEBE7;" FontFamily="Segoe MDL2 Assets" Click="GoButtonClick"/>
+                    <Button Grid.Column="2" Content="Back" Click="BackButton_Click"/>
+                    <Button Grid.Column="3" Content="Open" Click="OpenButton_Click"/>
+                </Grid>
             </Grid>
         </Grid>
-    </Grid>
-        
+    </Border>
 </Window>

@@ -34,7 +34,7 @@ namespace WpfPractice
 
         private void AddCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            //System.Windows.Forms.FolderBrowserDialog
         }
 
         private void DeleteCustomerBtn_Click(object sender, RoutedEventArgs e)
