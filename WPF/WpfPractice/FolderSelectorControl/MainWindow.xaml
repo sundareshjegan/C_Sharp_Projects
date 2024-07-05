@@ -1,4 +1,5 @@
 ﻿<Window x:Class="FolderSelectorControl.MainWindow"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -66,8 +67,8 @@
             <EventSetter Event="Expanded" Handler="TreeViewItem_Expanded"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>-->
-
-        <Style x:Key="{x:Type TreeView}"
+        
+    <!--<Style x:Key="{x:Type TreeView}"
                TargetType="TreeView">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -258,11 +259,176 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>-->
+
+        <!-- Existing TreeView and TreeViewItem Styles -->
+        
+        <Style x:Key="{x:Type TreeView}" TargetType="TreeView">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TreeView">
+                        <Border Name="Border" CornerRadius="1" BorderThickness="1">
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource BorderMediumColor}" />
+                            </Border.BorderBrush>
+                            <Border.Background>
+                                <SolidColorBrush Color="{DynamicResource ControlLightColor}" />
+                            </Border.Background>
+                            <ScrollViewer Focusable="False" CanContentScroll="False" Padding="4">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
+        <Style x:Key="ExpandCollapseToggleStyle" TargetType="ToggleButton">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid Width="15" Height="13" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                           Storyboard.TargetName="Collapsed">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                           Storyboard.TargetName="Expanded">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked" />
+                                    <VisualState x:Name="Indeterminate" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Path x:Name="Collapsed" StrokeThickness="1.5" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                  Data="M 7 4 L 12 9 L 7 14">
+                                <Path.Stroke>
+                                    <SolidColorBrush Color="LightGray" />
+                                </Path.Stroke>
+                            </Path>
+                            <Path x:Name="Expanded" StrokeThickness="1.5" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                  Margin="-2" Data="M 17 4 L 12 9 L 7 4" Visibility="Hidden">
+                                <Path.Stroke>
+                                    <SolidColorBrush Color="LightGray" />
+                                </Path.Stroke>
+                            </Path>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TreeViewItemFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border>
+                            <Rectangle Margin="0,0,0,0" StrokeThickness="5" Stroke="Black" StrokeDashArray="1 2" Opacity="0" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="{x:Type TreeViewItem}" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Padding" Value="1,0,0,0" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}" />
+            <EventSetter Event="Expanded" Handler="TreeViewItem_Expanded"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="19" Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="DarkGray" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="SelectedInactive">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                                <EasingColorKeyFrame KeyTime="0" Value="DarkGray" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="ExpansionStates">
+                                    <VisualState x:Name="Expanded">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ItemsHost">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Collapsed" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ToggleButton x:Name="Expander" Style="{StaticResource ExpandCollapseToggleStyle}" ClickMode="Press" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Border x:Name="Bd" Grid.Column="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                            </Border>
+                            <ItemsPresenter x:Name="ItemsHost" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Collapsed" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
+                            </Trigger>
+                            <DataTrigger Binding="{Binding HasSubDirectories}" Value="False">
+                                <Setter TargetName="Expander" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="HasHeader" Value="false" />
+                                    <Condition Property="Width" Value="Auto" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="PART_Header" Property="MinWidth" Value="75" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="HasHeader" Value="false" />
+                                    <Condition Property="Height" Value="Auto" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="PART_Header" Property="MinHeight" Value="19" />
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Style TargetType="ListView">
             <Setter Property="Background" Value="#2D2D30"/>
-            <Setter Property="BorderBrush" Value="#3E3E42"/>
+            <!--<Setter Property="BorderBrush" Value="#3E3E42"/>-->
+            <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
         </Style>
 
@@ -362,38 +528,81 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                
+                <Grid Grid.Column="0" Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <TreeView x:Name="DriveTreeView" 
-                      Grid.Column="0"
-                      Grid.RowSpan="2"
-                      SelectedItemChanged="DriveTreeView_SelectedItemChanged">
-                    <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding SubDirectories}">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <Image Width="16" Height="16" Margin="5">
-                                    <Image.Style>
-                                        <Style TargetType="Image">
-                                            <Setter Property="Source" Value="/ImageAssets/folder-icon.png"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsDrive}" Value="True">
-                                                    <Setter Property="Source" Value="/ImageAssets/drive-icon.png"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <Label ToolTip="{Binding Name}" ToolTipService.ShowDuration="3000" VerticalContentAlignment="Center" Content="{Binding Name}" Foreground="White"/>
-                            </StackPanel>
-                        </HierarchicalDataTemplate>
-                    </TreeView.ItemTemplate>
-                </TreeView>
-
+                    <StackPanel Grid.Row="0">
+                        <ListView Cursor="Hand" x:Name="QuickAccessListView" 
+                                  SelectionChanged="QuickAccessListView_SelectionChanged"
+                                  LostFocus="QuickAccessListView_LostFocus">
+                            <ListViewItem x:Name="DesktopItem">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="ImageAssets/desktop-icon.png" Width="15" Height="15" Margin="5"/>
+                                    <TextBlock Text="Desktop" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="DownloadsItem">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="ImageAssets/download-icon.png" Width="15" Height="15" Margin="5"/>
+                                    <TextBlock Text="Downloads" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="PicturesItem">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="ImageAssets/documents-icon.png" Width="15" Height="15" Margin="5"/>
+                                    <TextBlock Text="Documents" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="DocumentsItem">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="ImageAssets/pictures-icon.png" Width="15" Height="15" Margin="5"/>
+                                    <TextBlock Text="Pictures" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem x:Name="VideosItem">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="ImageAssets/videos-icon.png" Width="15" Height="15" Margin="5"/>
+                                    <TextBlock Text="Videos" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ListViewItem>
+                        </ListView>
+                    </StackPanel>
+                    
+                    <TreeView x:Name="DriveTreeView" Grid.Row="1"
+                              SelectedItemChanged="DriveTreeView_SelectedItemChanged">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding SubDirectories}">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Width="16" Height="16" Margin="5">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Source" Value="/ImageAssets/folder-icon.png"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsDrive}" Value="True">
+                                                        <Setter Property="Source" Value="/ImageAssets/drive-icon.png"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                    <Label ToolTip="{Binding Name}" ToolTipService.ShowDuration="3000" VerticalContentAlignment="Center" Content="{Binding Name}" Foreground="White"/>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+                
                 <GridSplitter Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" Width="2" Background="Gray"/>
 
                 <ListView x:Name="FolderListView"
                           Grid.Column="2" 
                           SelectionChanged="FolderListView_SelectionChanged" 
-                          MouseDoubleClick="FolderListView_MouseDoubleClick">
+                          MouseDoubleClick="FolderListView_MouseDoubleClick"
+                          MinWidth="200">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -406,6 +615,7 @@
 
                 <Grid Grid.Row="1" Grid.Column="2">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="100"/>
@@ -415,32 +625,34 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
+                    <Button Grid.Column="0" Content="&#xEC52;" FontFamily="Segoe MDL2 Assets" Click="BackButton_Click"/>
                     <TextBox x:Name="PathTB"
                              Height="30"
                              Text="{Binding CurrentPath, UpdateSourceTrigger=PropertyChanged}"
                              TextChanged="PathTB_TextChanged"
-                             Background="Transparent"
+                             Background="#2D2D30"
                              Foreground="White"
                              TextAlignment="Left"
-                             Padding="0,5,0,0"
-                             Margin="5,5,0,5"
-                             Grid.Column="0"/>
+                             Padding="2"
+                             Margin="5"
+                             Grid.Column="1"/>
 
                     <Popup Name="PathSuggestionsPopup" 
                            PlacementTarget="{Binding ElementName=PathTB}" 
                            Placement="Bottom" 
                            StaysOpen="False" 
                            Width="{Binding ElementName=PathTB, Path=ActualWidth}">
-                        <Border Background="White" BorderBrush="Black" BorderThickness="1">
+                        <Border Background="Transparent" BorderBrush="Black" BorderThickness="1">
                             <ListView x:Name="PathSuggestionsListBox"
                                       SelectionChanged="PathSuggestionsListBox_SelectionChanged"
                                       MaxHeight="200">
                             </ListView>
                         </Border>
                     </Popup>
-                    <Button Grid.Column="1" Content="&#xEBE7;" FontFamily="Segoe MDL2 Assets" Click="GoButtonClick"/>
-                    <Button Grid.Column="2" Content="Back" Click="BackButton_Click"/>
-                    <Button Grid.Column="3" Content="Open" Click="OpenButton_Click"/>
+                    
+                    <Button Grid.Column="2" Content="&#xEBE7;" FontFamily="Segoe MDL2 Assets" Click="GoButtonClick"/>
+                    <Button Grid.Column="3" Content="Cancel" Click="CloseButton_Click"/>
+                    <Button Grid.Column="4" Content="Open" Click="OpenButton_Click"/>
                 </Grid>
             </Grid>
         </Grid>

@@ -22,7 +22,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.ColumnSpan = "3" Orientation="Horizontal" Background="#10FFFFFF">
+        <StackPanel Grid.ColumnSpan = "3" Orientation="Horizontal" Background="Orange">
             <Image Source="ImageAssets/wiredBrain.png" Height="90" Margin="5"/>
             <TextBlock Text="Coffee Customer" FontSize="30" FontWeight="Bold"
                        VerticalAlignment="Center" Foreground="White" Margin="5"/>

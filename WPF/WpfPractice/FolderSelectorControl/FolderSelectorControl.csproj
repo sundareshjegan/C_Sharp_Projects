@@ -98,13 +98,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ImageAssets\drive-icon.png" />
-    <Resource Include="ImageAssets\folder-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icons8-file-explorer-new-70.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ImageAssets\file-explorer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ImageAssets\desktop-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ImageAssets\documents-icon.png" />
+    <Resource Include="ImageAssets\download-icon.png" />
+    <Resource Include="ImageAssets\pictures-icon.png" />
+    <Resource Include="ImageAssets\videos-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ImageAssets\folder-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -31,6 +31,14 @@ namespace FolderSelectorControl
             PathTB.GotFocus += PathTB_GotFocus;
             PathTB.LostFocus += PathTB_LostFocus;
             TitleBar.MouseLeftButtonDown += TitleBar_MouseLeftButtonDown;
+
+            DesktopItem.Tag = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            DownloadsItem.Tag = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+            PicturesItem.Tag = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            DocumentsItem.Tag = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            VideosItem.Tag = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)+"\\Downloads");
         }
 
         public static readonly DependencyProperty CurrentPathProperty = DependencyProperty.Register("CurrentPath", typeof(string), typeof(MainWindow), new PropertyMetadata(string.Empty));
@@ -431,16 +439,14 @@ namespace FolderSelectorControl
             {
                 if (input.Length == 2 && char.IsLetter(input[0]) && input[1] == ':')
                 {
-                    suggestions.AddRange(Directory.GetLogicalDrives()
-                        .Where(d => d.StartsWith(input, StringComparison.OrdinalIgnoreCase)));
+                    suggestions.AddRange(Directory.GetLogicalDrives().Where(d => d.StartsWith(input, StringComparison.OrdinalIgnoreCase)));
                 }
                 else
                 {
                     var directoryName = Path.GetDirectoryName(input);
                     if (Directory.Exists(directoryName))
                     {
-                        suggestions.AddRange(Directory.GetDirectories(directoryName)
-                            .Where(d => d.StartsWith(input, StringComparison.OrdinalIgnoreCase)));
+                        suggestions.AddRange(Directory.GetDirectories(directoryName).Where(d => d.StartsWith(input, StringComparison.OrdinalIgnoreCase)));
                     }
                 }
             }
@@ -470,8 +476,8 @@ namespace FolderSelectorControl
             }
             else
             {
-                //MessageBox.Show("The path you entered is not valid. Please enter a valid path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
-                MessageBox.Show("You can't open this location using this program. Please try a different location.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("The path you entered is not valid. Please enter a valid path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //MessageBox.Show("You can't open this location using this program. Please try a different location.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -490,10 +496,48 @@ namespace FolderSelectorControl
             Debug.WriteLine($"BackButton_Click: CurrentPath after back is {SelectedPath}");
         }
 
+        private void QuickAccessListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (QuickAccessListView.SelectedItem is ListViewItem selectedItem)
+            {
+                string path = string.Empty;
+
+                // Get the tag value which contains the folder path
+                if (selectedItem.Tag is Environment.SpecialFolder specialFolder)
+                {
+                    path = Environment.GetFolderPath(specialFolder);
+                }
+                else if (selectedItem.Tag is string customPath)
+                {
+                    path = customPath;
+                }
+
+                if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
+                {
+                    SelectedPath = path;
+                    LoadFolders(SelectedPath);
+                }
+            }
+        }
+
+        private void QuickAccessListView_LostFocus(object sender, RoutedEventArgs e)
+        {
+            QuickAccessListView.SelectedItem = null;
+        }
+
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Selected Path: {SelectedPath}");
-            OnOpenClicked?.Invoke(this, SelectedPath);
+            Debug.WriteLine($"Open Button Clicked: CurrentPath is {SelectedPath}");
+            if (Directory.Exists(SelectedPath))
+            {
+                MessageBox.Show($"Selected Path: {SelectedPath}");
+                OnOpenClicked?.Invoke(this, SelectedPath);
+            }
+            else
+            {
+                //MessageBox.Show("The path you entered is not valid. Please enter a valid path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("You can't open this location using this program. Please try a different location.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
     public class DirectoryItem : INotifyPropertyChanged
