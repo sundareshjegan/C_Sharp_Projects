@@ -5,3 +5,10 @@ D:\Sundareshwaran\Projects-Visual Studio\Practice\ConsoleCalculator\obj\Debug\Co
 D:\Sundareshwaran\Projects-Visual Studio\Practice\ConsoleCalculator\obj\Debug\ConsoleCalculator.csproj.CoreCompileInputs.cache
 D:\Sundareshwaran\Projects-Visual Studio\Practice\ConsoleCalculator\obj\Debug\ConsoleCalculator.exe
 D:\Sundareshwaran\Projects-Visual Studio\Practice\ConsoleCalculator\obj\Debug\ConsoleCalculator.pdb
+D:\Sundareshwaran\C_Sharp_Projects\Practice\ConsoleCalculator\bin\Debug\ConsoleCalculator.exe.config
+D:\Sundareshwaran\C_Sharp_Projects\Practice\ConsoleCalculator\bin\Debug\ConsoleCalculator.exe
+D:\Sundareshwaran\C_Sharp_Projects\Practice\ConsoleCalculator\bin\Debug\ConsoleCalculator.pdb
+D:\Sundareshwaran\C_Sharp_Projects\Practice\ConsoleCalculator\obj\Debug\ConsoleCalculator.csprojAssemblyReference.cache
+D:\Sundareshwaran\C_Sharp_Projects\Practice\ConsoleCalculator\obj\Debug\ConsoleCalculator.csproj.CoreCompileInputs.cache
+D:\Sundareshwaran\C_Sharp_Projects\Practice\ConsoleCalculator\obj\Debug\ConsoleCalculator.exe
+D:\Sundareshwaran\C_Sharp_Projects\Practice\ConsoleCalculator\obj\Debug\ConsoleCalculator.pdb

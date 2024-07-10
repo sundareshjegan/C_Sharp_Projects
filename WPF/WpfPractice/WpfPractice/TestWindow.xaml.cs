@@ -26,9 +26,14 @@ namespace WpfPractice
 
         private void MoveBtn_Click(object sender, RoutedEventArgs e)
         {
-            int currentColumn = (int)CustomerListGrid.GetValue(Grid.ColumnProperty);
+            //int currentColumn = (int)CustomerListGrid.GetValue(Grid.ColumnProperty);
+            int currentColumn = Grid.GetColumn(CustomerListGrid);
+
             int newColumn = currentColumn == 0 ? 2 : 0;
-            CustomerListGrid.SetValue(Grid.ColumnProperty, newColumn);
+
+            //CustomerListGrid.SetValue(Grid.ColumnProperty, newColumn);
+            Grid.SetColumn(CustomerListGrid, newColumn);
+
             MoveBtn.Content = newColumn == 0 ? "\uE111" : "\uE112";
         }
 
