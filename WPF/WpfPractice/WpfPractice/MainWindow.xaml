@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WpfPractice" 
         xmlns:helpers="clr-namespace:WpfPractice"
         xmlns:UserControls="clr-namespace:WpfPractice.UserControls" x:Class="WpfPractice.MainWindow"
-        mc:Ignorable="d" TabIndex="2147483646" WindowStyle="ThreeDBorderWindow" Height="500" Width="674">
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d" TabIndex="2147483646" WindowStyle="ThreeDBorderWindow" Height="500" Width="674" Background="Black">
 
     <Window.Resources>
         <Color x:Key="SpotifyGreen">#1ED760</Color>
@@ -31,7 +32,8 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <UserControls:LocationSelector HorizontalAlignment="Left" Height="109" Margin="80,69,0,0" VerticalAlignment="Top" Width="485"/>
-
+    <!--<UserControls:LocationSelector HorizontalAlignment="Left" Height="109" Margin="80,69,0,0" VerticalAlignment="Top" Width="485"/>-->
+    <!--<ui:ToggleSwitch OffContent="Off" OnContent="On" Foreground="black"/>-->
+    <ui:ToggleSwitch OffContent="Off" OnContent="On"/>
 
 </Window>

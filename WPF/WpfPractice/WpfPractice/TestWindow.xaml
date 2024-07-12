@@ -52,13 +52,8 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-            
-            <ListView Grid.Row='1' Background="LightGray" BorderBrush="Transparent">
-                <ListViewItem>Sundar</ListViewItem>
-                <ListViewItem>Sharuk</ListViewItem>
-                <ListViewItem>Bharth</ListViewItem> 
-                <ListViewItem>Sukant</ListViewItem> 
-            </ListView>
+
+            <ListView x:Name="customerListView" Grid.Row='1' Background="LightGray" BorderBrush="Transparent"/>
         </Grid>
 
         <StackPanel Grid.Row="1" Grid.Column="1">

@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfPractice", "WpfPractice\WpfPractice.csproj", "{7D3AA9DE-AA98-4A33-975F-CBC7A698ACFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherWatch", "WeatherWatch\WeatherWatch.csproj", "{881A3A90-6A6D-4385-9638-E7E9E906AE57}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderSelectorControl", "FolderSelectorControl\FolderSelectorControl.csproj", "{4D7A7F3D-9B8E-48BD-BBF4-B52652D8451C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgeProcess", "EdgeProcess\EdgeProcess.csproj", "{B92A1677-FB79-40E8-805D-B222C6D30BE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegionManager", "RegionManager\RegionManager.csproj", "{FE022DCF-D8E1-49B6-9F97-C4897E7BF7B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderDialogTest", "FolderDialogTest\FolderDialogTest.csproj", "{58807225-19FB-43A5-A0AA-21A1B230F5DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +23,6 @@ Global
 		{7D3AA9DE-AA98-4A33-975F-CBC7A698ACFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D3AA9DE-AA98-4A33-975F-CBC7A698ACFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D3AA9DE-AA98-4A33-975F-CBC7A698ACFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{881A3A90-6A6D-4385-9638-E7E9E906AE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{881A3A90-6A6D-4385-9638-E7E9E906AE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{881A3A90-6A6D-4385-9638-E7E9E906AE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{881A3A90-6A6D-4385-9638-E7E9E906AE57}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4D7A7F3D-9B8E-48BD-BBF4-B52652D8451C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4D7A7F3D-9B8E-48BD-BBF4-B52652D8451C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D7A7F3D-9B8E-48BD-BBF4-B52652D8451C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +31,14 @@ Global
 		{B92A1677-FB79-40E8-805D-B222C6D30BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B92A1677-FB79-40E8-805D-B222C6D30BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B92A1677-FB79-40E8-805D-B222C6D30BE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE022DCF-D8E1-49B6-9F97-C4897E7BF7B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE022DCF-D8E1-49B6-9F97-C4897E7BF7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE022DCF-D8E1-49B6-9F97-C4897E7BF7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE022DCF-D8E1-49B6-9F97-C4897E7BF7B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58807225-19FB-43A5-A0AA-21A1B230F5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58807225-19FB-43A5-A0AA-21A1B230F5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58807225-19FB-43A5-A0AA-21A1B230F5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58807225-19FB-43A5-A0AA-21A1B230F5DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

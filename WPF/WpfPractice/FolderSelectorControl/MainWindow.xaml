@@ -10,7 +10,7 @@
         ResizeMode="CanResize"
         AllowsTransparency="True"
         Height="450" Width="800" Padding="2"
-        Background="#2D2D30" Foreground="White"
+        Background="Transparent" Foreground="White"
         MinHeight="500" MinWidth="600">
 
     <Window.Resources>
@@ -21,16 +21,16 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
 
-        <Style TargetType="Button">
+        <Style x:Key="DarkButton"  TargetType="Button">
             <Setter Property="Background" Value="#3E3E42"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#3E3E42"/>
-            <Setter Property="Padding" Value="5,2"/>
+            <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -67,8 +67,8 @@
             <EventSetter Event="Expanded" Handler="TreeViewItem_Expanded"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>-->
-        
-    <!--<Style x:Key="{x:Type TreeView}"
+
+        <!--<Style x:Key="{x:Type TreeView}"
                TargetType="TreeView">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -262,7 +262,7 @@
         </Style>-->
 
         <!-- Existing TreeView and TreeViewItem Styles -->
-        
+
         <Style x:Key="{x:Type TreeView}" TargetType="TreeView">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -424,7 +424,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style TargetType="ListView">
             <Setter Property="Background" Value="#2D2D30"/>
             <!--<Setter Property="BorderBrush" Value="#3E3E42"/>-->
@@ -497,7 +497,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
+        <!--<Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
             <Setter Property="Background" Value="#B2B2B2" />
             <Setter Property="Width" Value="15" />
             <Setter Property="MinHeight" Value="3" />
@@ -511,6 +511,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style TargetType="ScrollBar">
             <Setter Property="Width" Value="1" />
             <Setter Property="Background" Value="Transparent" />
@@ -539,13 +540,14 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
 
     </Window.Resources>
 
-    <Border BorderBrush="#2D2D30" BorderThickness="5" MouseMove="Border_MouseMove">
+    <Border BorderBrush="#2D2D30" BorderThickness="5" MouseMove="Border_MouseMove" CornerRadius="10" Background="#2D2D30">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -563,6 +565,47 @@
 
             <!-- Main Content -->
             <Grid Grid.Row="1">
+                <Grid Name="NavGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <!--<RowDefinition Height="5"/>-->
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource DarkButton}" Grid.Column="0" Content="&#xEC52;" FontFamily="Segoe MDL2 Assets" Click="BackButton_Click"/>
+                    <TextBox x:Name="PathTB"
+                            Height="25"
+                            Text="{Binding CurrentPath, UpdateSourceTrigger=PropertyChanged}"
+                            TextChanged="PathTB_TextChanged"
+                            Background="#2D2D30"
+                            Foreground="White"
+                            TextAlignment="Left"
+                            Padding="2"
+                            Margin="5"
+                            Grid.Column="1"/>
+
+                    <Popup Name="PathSuggestionsPopup" 
+                        PlacementTarget="{Binding ElementName=PathTB}" 
+                        Placement="Bottom" 
+                        StaysOpen="False" 
+                        Width="{Binding ElementName=PathTB, Path=ActualWidth}">
+                        <Border Background="Transparent" BorderBrush="Black" BorderThickness="1">
+                            <ListView x:Name="PathSuggestionsListBox"
+                                    SelectionChanged="PathSuggestionsListBox_SelectionChanged"
+                                    MaxHeight="200">
+                            </ListView>
+                        </Border>
+                    </Popup>
+                    <Button Style="{StaticResource DarkButton}" Grid.Column="2" Content="&#xEBE7;" FontFamily="Segoe MDL2 Assets" Click="GoButtonClick"/>
+                </Grid>
+            </Grid>
+             
+            <Line Grid.Row="2"  X1="0" Y1="0" X2="{Binding ActualWidth, ElementName=NavGrid}" Y2="0" Stroke="Gray" StrokeThickness="1" Margin="0,5,0,0"/>
+
+            <Grid Grid.Row="2" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width=".3*" MinWidth="150"/>
                     <ColumnDefinition Width="auto"/>
@@ -572,7 +615,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
+
                 <Grid Grid.Column="0" Grid.RowSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -616,7 +659,7 @@
                         </ListView>
                         <Line X1="0" Y1="0" X2="{Binding ActualWidth, ElementName=QuickAccessListView}" Y2="0" Stroke="Gray" StrokeThickness="2"/>
                     </StackPanel>
-                    
+
                     <TreeView x:Name="DriveTreeView" Grid.Row="1"
                               SelectedItemChanged="DriveTreeView_SelectedItemChanged">
                         <TreeView.ItemTemplate>
@@ -640,11 +683,10 @@
                         </TreeView.ItemTemplate>
                     </TreeView>
                 </Grid>
-                
-                <GridSplitter Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" Width="2" Background="Gray"/>
 
+                <GridSplitter Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" Width="2" Background="Gray"/>
                 <ListView x:Name="FolderListView"
-                          Grid.Column="2" 
+                              Grid.Column="2"
                           SelectionChanged="FolderListView_SelectionChanged" 
                           MouseDoubleClick="FolderListView_MouseDoubleClick"
                           MinWidth="200">
@@ -657,48 +699,11 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-                <Grid Grid.Row="1" Grid.Column="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="100"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Button Grid.Column="0" Content="&#xEC52;" FontFamily="Segoe MDL2 Assets" Click="BackButton_Click"/>
-                    <TextBox x:Name="PathTB"
-                             Height="30"
-                             Text="{Binding CurrentPath, UpdateSourceTrigger=PropertyChanged}"
-                             TextChanged="PathTB_TextChanged"
-                             Background="#2D2D30"
-                             Foreground="White"
-                             TextAlignment="Left"
-                             Padding="2"
-                             Margin="5"
-                             Grid.Column="1"/>
-
-                    <Popup Name="PathSuggestionsPopup" 
-                           PlacementTarget="{Binding ElementName=PathTB}" 
-                           Placement="Bottom" 
-                           StaysOpen="False" 
-                           Width="{Binding ElementName=PathTB, Path=ActualWidth}">
-                        <Border Background="Transparent" BorderBrush="Black" BorderThickness="1">
-                            <ListView x:Name="PathSuggestionsListBox"
-                                      SelectionChanged="PathSuggestionsListBox_SelectionChanged"
-                                      MaxHeight="200">
-                            </ListView>
-                        </Border>
-                    </Popup>
-                    
-                    <Button Grid.Column="2" Content="&#xEBE7;" FontFamily="Segoe MDL2 Assets" Click="GoButtonClick"/>
-                    <Button Grid.Column="3" Content="Cancel" Click="CloseButton_Click"/>
-                    <Button Grid.Column="4" Content="Open" Click="OpenButton_Click"/>
-                </Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                            Grid.Row="1" Grid.Column="2" >
+                    <Button Style="{StaticResource DarkButton}" Grid.Column="0" Width="80" Height="30" Content="Cancel" Click="CloseButton_Click"/>
+                    <Button Style="{StaticResource DarkButton}" Grid.Column="1" Width="80" Height="30" Content="Open" Click="OpenButton_Click"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>

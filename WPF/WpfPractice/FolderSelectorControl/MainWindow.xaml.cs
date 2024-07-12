@@ -1,4 +1,5 @@
-﻿using System;
+﻿#region usings
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,54 +13,62 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
+#endregion
 
 namespace FolderSelectorControl
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
+            InitializeQuickAccessTags();
             LoadDrives();
+
+            DataContext = this;
+
             PathSuggestions = new ObservableCollection<string>();
             PathSuggestionsListBox.ItemsSource = PathSuggestions;
 
             PathTB.GotFocus += PathTB_GotFocus;
             PathTB.LostFocus += PathTB_LostFocus;
             TitleBar.MouseLeftButtonDown += TitleBar_MouseLeftButtonDown;
+        }
 
+        private void InitializeQuickAccessTags()
+        {
             DesktopItem.Tag = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             DownloadsItem.Tag = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
             PicturesItem.Tag = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             DocumentsItem.Tag = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             VideosItem.Tag = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
 
-            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)+"\\Downloads");
+            //Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads");
         }
 
         public static readonly DependencyProperty CurrentPathProperty = DependencyProperty.Register("CurrentPath", typeof(string), typeof(MainWindow), new PropertyMetadata(string.Empty));
 
+        //path of the selected Directory
         public string SelectedPath
         {
             get { return (string)GetValue(CurrentPathProperty); }
             set { SetValue(CurrentPathProperty, value); }
         }
 
-        public event EventHandler<string> OnOpenClicked;
-
         public ObservableCollection<string> PathSuggestions { get; set; }
 
         private bool _ignoreSelectionChanged, _isTyping;
 
+        public event EventHandler<string> OnOpenClicked;
+
         #region Title bar and Resize
+
+        private const int WM_SYSCOMMAND = 0x112;
+        private const int SC_SIZE = 0xF000;
 
         private void TitleBar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+            if (e.ButtonState == MouseButtonState.Pressed)
             {
                 this.DragMove();
             }
@@ -67,6 +76,7 @@ namespace FolderSelectorControl
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            SelectedPath = "";
             this.Close();
         }
 
@@ -154,9 +164,6 @@ namespace FolderSelectorControl
             }
         }
 
-        private const int WM_SYSCOMMAND = 0x112;
-        private const int SC_SIZE = 0xF000;
-
         private enum ResizeDirection
         {
             Left = 1,
@@ -172,8 +179,6 @@ namespace FolderSelectorControl
         [DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
-        // Rest of your existing code
-
         #endregion
 
         //method to initially load the logical drives (c:, d:) into the tree view (DriveTreeView)
@@ -185,7 +190,7 @@ namespace FolderSelectorControl
 
             foreach (var drive in drives)
             {
-                var item = new DirectoryItem { Name = drive, Path = drive, IsDrive = true };
+                var item = new DirectoryItem { Name = "Local Disk : "+drive, Path = drive, IsDrive = true };
                 item.SubDirectories.Add(new DirectoryItem { Name = "Loading...", Path = string.Empty });
                 rootDirectories.Add(item);
             }
@@ -193,6 +198,7 @@ namespace FolderSelectorControl
             DriveTreeView.ItemsSource = rootDirectories;
         }
 
+        //method to load the directories present in the current path
         private void LoadFolders(string path)
         {
             Debug.WriteLine($"LoadFolders method called with path: {path}");
@@ -312,8 +318,8 @@ namespace FolderSelectorControl
             TreeViewItem foundTreeViewItem = null;
             for (int i = 0; i < parent.Items.Count; i++)
             {
-                var currentTreeViewItem = parent.ItemContainerGenerator.ContainerFromIndex(i) as TreeViewItem;
-                if (currentTreeViewItem == null)
+                //var currentTreeViewItem = parent.ItemContainerGenerator.ContainerFromIndex(i) as TreeViewItem;
+                if (!(parent.ItemContainerGenerator.ContainerFromIndex(i) is TreeViewItem currentTreeViewItem))
                 {
                     parent.UpdateLayout();
                     currentTreeViewItem = parent.ItemContainerGenerator.ContainerFromIndex(i) as TreeViewItem;
@@ -472,7 +478,7 @@ namespace FolderSelectorControl
             if (Directory.Exists(SelectedPath))
             {
                 LoadFolders(SelectedPath);
-                UpdateTreeView(SelectedPath);
+                //UpdateTreeView(SelectedPath);
             }
             else
             {
@@ -538,6 +544,7 @@ namespace FolderSelectorControl
                 //MessageBox.Show("The path you entered is not valid. Please enter a valid path.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
                 MessageBox.Show("You can't open this location using this program. Please try a different location.", "Invalid Path", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            Close();
         }
     }
     public class DirectoryItem : INotifyPropertyChanged
