@@ -372,8 +372,10 @@
 
     <!--Own-->
 
-    <Color x:Key="ScrollBarColor">#C8C8C8</Color>
-    <Color x:Key="ScrollBarBackgroundColor">#F5F0F9</Color>
+    <!--<Color x:Key="ScrollBarColor">#C8C8C8</Color>
+    <Color x:Key="ScrollBarBackgroundColor">#F5F0F9</Color>-->
+    <Color x:Key="ScrollBarColor">Gray</Color>
+    <Color x:Key="ScrollBarBackgroundColor">Gray</Color>
 
     <Style x:Key="ScrollBarInvisiblePageButton" TargetType="RepeatButton">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -464,13 +466,13 @@
         <Border>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="18"/>
+                    <RowDefinition Height="10"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="18"/>
+                    <RowDefinition Height="10"/>
 
                 </Grid.RowDefinitions>
                 <Border Grid.RowSpan="3"></Border>
-                <RepeatButton Grid.Row="0" Width="18" Style="{StaticResource ScrollBarButton}"   Command="ScrollBar.LineUpCommand" Content="M 0 4 L 8 4 L 4 0 Z">
+                <RepeatButton Grid.Row="0" Width="10" Style="{StaticResource ScrollBarButton}"   Command="ScrollBar.LineUpCommand" Content="M 0 4 L 8 4 L 4 0">
                 </RepeatButton>
                 <Track Grid.Row="1" x:Name="PART_Track" IsDirectionReversed="true">
                     <Track.DecreaseRepeatButton>
@@ -490,7 +492,7 @@
                         </RepeatButton>
                     </Track.IncreaseRepeatButton>
                 </Track>
-                <RepeatButton Grid.Row="2" Width="18" Style="{StaticResource ScrollBarButton}" Command="ScrollBar.LineDownCommand" Content="M 0 0 L 4 4 L 8 0 Z">
+                <RepeatButton Grid.Row="2" Width="10" Style="{StaticResource ScrollBarButton}" Command="ScrollBar.LineDownCommand" Content="M 0 0 L 4 4 L 8 0">
                 </RepeatButton>
             </Grid>
 
@@ -517,13 +519,13 @@
                 <Setter Property="Height" Value="8"/>
             </MultiTrigger>
             <Trigger Property="Orientation" Value="Horizontal">
-                <Setter Property="Height" Value="14"/>
+                <Setter Property="Height" Value="10"/>
                 <Setter Property="Width" Value="Auto"/>
                 <Setter Property="Template" Value="{StaticResource HorizontalScrollBarOwn}"/>
             </Trigger>
             <Trigger Property="Orientation" Value="Vertical" >
                 <Setter Property="Height" Value="Auto"/>
-                <Setter Property="Width" Value="14"/>
+                <Setter Property="Width" Value="10"/>
 
                 <Setter Property="Template" Value="{StaticResource VerticalScrollBarOwn}"/>
             </Trigger>

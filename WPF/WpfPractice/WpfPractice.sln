@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegionManager", "RegionMana
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderDialogTest", "FolderDialogTest\FolderDialogTest.csproj", "{58807225-19FB-43A5-A0AA-21A1B230F5DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyDeskClone", "AnyDeskClone\AnyDeskClone.csproj", "{2A519036-C019-4EA5-836D-0273C159F176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderExplorer", "FolderExplorer\FolderExplorer.csproj", "{37D64C1E-30F5-4709-A330-191151362623}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{58807225-19FB-43A5-A0AA-21A1B230F5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58807225-19FB-43A5-A0AA-21A1B230F5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58807225-19FB-43A5-A0AA-21A1B230F5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A519036-C019-4EA5-836D-0273C159F176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A519036-C019-4EA5-836D-0273C159F176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A519036-C019-4EA5-836D-0273C159F176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A519036-C019-4EA5-836D-0273C159F176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37D64C1E-30F5-4709-A330-191151362623}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D64C1E-30F5-4709-A330-191151362623}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D64C1E-30F5-4709-A330-191151362623}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D64C1E-30F5-4709-A330-191151362623}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
