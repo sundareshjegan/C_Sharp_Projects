@@ -8,7 +8,7 @@ namespace Evaluation1
 {
     public interface IRegion
     {
-        string Id { get; }
+        string Id { get;  }
         string Name { get; }
         int NoOfEdges { get; }
 

@@ -15,6 +15,9 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
+using System.Reflection;
+using System.Security.Principal;
+
 #endregion
 
 namespace FolderExplorer
@@ -49,6 +52,8 @@ namespace FolderExplorer
             SelectedPath = DesktopItem.Tag.ToString();
             LoadFolders(SelectedPath);
             QuickAccessListView.SelectedIndex = 0;
+
+            CurrentAccessLevel = $"FolderExplorer User - {Environment.UserName}";
         }
 
         public static readonly DependencyProperty CurrentPathProperty = DependencyProperty.Register("CurrentPath", typeof(string), typeof(FolderExplorerControl), new PropertyMetadata(string.Empty));
@@ -57,6 +62,13 @@ namespace FolderExplorer
         {
             get { return (string)GetValue(CurrentPathProperty); }
             set { SetValue(CurrentPathProperty, value); }
+        }
+
+        public static readonly DependencyProperty CurrentAccessLevelProperty = DependencyProperty.Register("CurrentAccessLevel", typeof(string), typeof(FolderExplorerControl), new PropertyMetadata(string.Empty));
+        public string CurrentAccessLevel
+        {
+            get { return (string)GetValue(CurrentAccessLevelProperty); }
+            set { SetValue(CurrentAccessLevelProperty, value); }
         }
 
         public ObservableCollection<string> PathSuggestions { get; set; }
@@ -602,6 +614,19 @@ namespace FolderExplorer
                 NewFolderBtn_Click(this, e);
                 e.Handled = true;
             }
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.C)
+            {
+                CopyFolder_Click(this, e);
+                e.Handled = true;
+            }
+
+            // Handle Ctrl+V key combination
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.V)
+            {
+                // Call the paste method
+                PasteFolder_Click(this, e);
+                e.Handled = true;
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -648,6 +673,34 @@ namespace FolderExplorer
             QuickAccessListView.SelectedItem = null;
         }
 
+        public bool IsRunningAsAdmin()
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        public void RestartAsAdmin(string path)
+        {
+            var exeName = Assembly.GetExecutingAssembly().Location;
+            var startInfo = new ProcessStartInfo(exeName)
+            {
+                UseShellExecute = true,
+                Verb = "runas",
+            };
+
+            try
+            {
+                Process.Start(startInfo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("This operation requires elevated privileges. Please run the application as an administrator.");
+            }
+
+            Application.Current.Shutdown();
+        }
+
         private void NewFolderBtn_Click(object sender, RoutedEventArgs e)
         {
             if (FolderListView.SelectedItem != null)
@@ -667,8 +720,28 @@ namespace FolderExplorer
                     newFolderPath = System.IO.Path.Combine(SelectedPath, newFolderName);
                 }
 
-                Directory.CreateDirectory(newFolderPath);
+                try
+                {
+                    Directory.CreateDirectory(newFolderPath);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    MessageBoxResult result = MessageBox.Show($"You need to be an administrator to proceed this operation!\n\n Proceeding will restart the application?", "Destination Access Denied", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        string currentPath = SelectedPath;
+                        if (!IsRunningAsAdmin())
+                        {
+                            RestartAsAdmin(currentPath);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
                 var newFolder = new DirectoryItem
                 {
                     Name = newFolderName,
@@ -838,6 +911,10 @@ namespace FolderExplorer
 
         private void PasteFolder_Click(object sender, RoutedEventArgs e)
         {
+            if (FolderListView.SelectedItem != null)
+            {
+                BackButton_Click(this, e);
+            }
             if (_clipboardItem != null && !string.IsNullOrEmpty(SelectedPath))
             {
                 string destinationPath = System.IO.Path.Combine(SelectedPath, _clipboardItem.Name);
@@ -945,7 +1022,22 @@ namespace FolderExplorer
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error deleting folder: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        //MessageBoxResult msg = MessageBox.Show($"You need to be an administrator to proceed this operation!\n\n Proceeding will restart the application?", "Destination Access Denied", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                        //if (msg == MessageBoxResult.Yes)
+                        //{
+                        //    string currentPath = SelectedPath;
+                        //    if (!IsRunningAsAdmin())
+                        //    {
+                        //        RestartAsAdmin(currentPath);
+                        //        return;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    return;
+                        //}
+                        MessageBox.Show("Error in Deleting Folder "+ ex.Message);
                     }
                 }
             }
